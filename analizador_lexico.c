@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include "header.h"
 
-int isespecialchar(char c) {
+int isspecialchar(char c) {
     if (c == '(' ||
         c == ')' ||
         c == '{' ||
