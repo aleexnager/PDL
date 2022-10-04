@@ -6,6 +6,7 @@
 
 int isespecialchar(char c) {
     if (c == '(' ||
+        c == ')' ||
         c == '{' ||
         c == '}' ||
         c == '[' ||
