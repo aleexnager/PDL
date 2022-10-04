@@ -1,5 +1,5 @@
-# PDL
-Proyecto Procesadores De Lenguaje (PDL)
+# PdL
+Proyecto Procesadores de Lenguaje (PdL)
 
 El grupo número 5 tiene asignadas las siguientes opciones de la práctica de JavaScript-PdL en el curso 2022-2023:
 
