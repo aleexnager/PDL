@@ -6,25 +6,22 @@
 #define OP_NEG 6
 #define OP_MOD_ASIG 7
 #define OP_ASIG 8
-#define COMMENT 9
-#define COMILLA 10
+#define COMA 9
+#define PUNTO_COMA 10
 #define PARENT_IZQ 11
 #define PARENT_DCH 12
 #define LLAVE_IZQ 13
 #define LLAVE_DCH 14
-#define CORCH_IZQ 15
-#define CORCH_DCH 16
-#define COMA 17
-#define PUNTO_COMA 18
-#define INT 19
-#define BOOLEAN 20
-#define STRING 21
-#define RETURN 22
-#define FOR 23
-#define INPUT 24
-#define PRINT 25
-#define FUNCTION 26
-#define IF 27
+#define BOOLEAN 15
+#define FOR 16
+#define FUNCTION 17
+#define IF 18
+#define INPUT 19
+#define INT 20
+#define LET 21
+#define PRINT 22
+#define RETURN 23
+#define STRING 24
 
 typedef struct transicion {
     int estado_siguiente;
