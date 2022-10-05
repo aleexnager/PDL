@@ -23,17 +23,20 @@
 #define RETURN 23
 #define STRING 24
 
+#define FILAS_M 10
+#define COLUMNAS_M 13
+
 typedef struct transicion {
     int estado_siguiente;
-    char accion;
-} transicion;
+    int accion;
+} transicion_t;
 
 typedef struct token_valor {
     int id_token;
     int valor;
-} token_valor;
+} token_valor_t;
 
 typedef struct token_lexema {
     int id_token;
     char *lexema;
-} token_lexema;
+} token_lexema_t;
