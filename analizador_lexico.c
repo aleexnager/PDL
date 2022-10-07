@@ -4,10 +4,7 @@
 #include <ctype.h>
 #include "header.h"
 
-transicion_t gen_transicion(int estado, int accion) {
-    transicion_t t = {estado, accion};
-    return t;
-}
+// FUNCIONES PARA DETERMINAR DE QUE TIPO ES EL CARÁCTER QUE SE HA LEÍDO
 
 int escaracterespecial(char c) {
     if (c == '(' ||
@@ -35,22 +32,10 @@ int esdel(char c) {
     return 0;
 }
 
-int col_matriz (char c) {
-    if (c == '/')               return 0;
-    if (c == '\'')              return 1;
-    if (isdigit(c))             return 2; // Es un digito {0-9}
-    if (isalpha(c))             return 3; // Es una letra {A-Z} U {a-z}
-    if (c == '_')               return 4;
-    if (c == '%')               return 5;
-    if (c == '!')               return 6;
-    if (c == '=')               return 7;
-    if (escaracterespecial(c))  return 8; // Es un caracter especial {(,),{,},[,]}
-    if (c == '\n')              return 9;
-    if (esdel(c))               return 10; // Es un delimitador
-    if (esc1(c))                return 11; // Es un caracter perteneciente al conjunto c1: c - {\n}
-    if (esc2(c))                return 12; // Es un caracter perteneciente al conjunto c2: c - {\'}
-    return -1;
-}
+// FIN DE LAS FUNCIONES DE CARÁCTER
+
+// FUNCIONES QUE A PARTIR DE UN ESTADO ACTUAL Y UN CARÁCTER LEÍDO, PERMITE DEVOLVER
+// EL ESTADO SIGUIENTE AL QUE SE DEBE TRANSITAR
 
 int mt_afd_estado(int estado_actual, char c) {
     int sig_estado;
@@ -113,57 +98,120 @@ int mt_afd_estado(int estado_actual, char c) {
     return sig_estado;
 }
 
-/* char mt_afd_accion(int estado_actual, char car) {
-char accion;
+int mt_afd_accion(int estado_actual, char c) {
+    int sig_accion;
     switch (estado_actual) {
     case 0:
-        if (c == '/')               return 1;
-        if (c == '\'')              return 1;
-        if (isdigit(c))             return 2; // Es un digito {0-9}
-        if (isalpha(c))             return 3; // Es una letra {A-Z} U {a-z}
-        if (c == '_')               return 4;
-        if (c == '%')               return 5;
-        if (c == '!')               return 6;
-        if (c == '=')               return 7;
-        if (escaracterespecial(c))  return 8; // Es un caracter especial {(,),{,},[,]}
-        if (c == '\n')              return 9;
-        if (esdel(c))               return 10; // Es un delimitador
-        if (esc1(c))                return 11; // Es un caracter perteneciente al conjunto c1: c - {\n}
-        if (esc2(c))
-        break;
+        if (c == '/')               sig_accion = 1; break;
+        if (c == '\'')              sig_accion = 3; break;
+        if (isdigit(c))             sig_accion = 4; break;
+        if (isalpha(c) || c == '_') sig_accion = 5; break;
+        if (c == '%')               sig_accion = 6; break;
+        if (c == '!')               sig_accion = 8; break;
+        if (c == '=')               sig_accion = 108; break;
+        if (escaracterespecial(c))  sig_accion = 109; break;
+        if (esdel(c) || c == '\n')  sig_accion = 0; break;
+        sig_accion = 50; break;
     case 1:
-        break;
+        if (c == '/')               sig_accion = 2; break;
+        sig_accion = 51; break;
     case 2:
-        break;
+        if (esc1(c))                sig_accion = 2; break;
+        if (c == '\n')              sig_accion = 0; break;
+        sig_accion = 52; break;
     case 3:
-        break;
+        if (esc2(c))                sig_accion = 3; break;
+        if (c == '\'')              sig_accion = 101; break;
+        sig_accion = 53; break;
     case 4:
-        break;
+        if (isdigit(c)) {
+            sig_accion = 4; break;
+        } else {
+            sig_accion = 102; break;
+        }
+        sig_accion = 54; break;
     case 5:
-        break;
+        if (isalpha(c) || isdigit(c) || c == '_') {
+            sig_accion = 5; break;
+        } else {
+            sig_accion = 103; break;
+        }
+        sig_accion = 55; break;
     case 6:
-        break;
+        if (c == '=') {
+            sig_accion = 7; break;
+        } else {
+            sig_accion = 104; break;
+        }
+        sig_accion = 56; break;
     case 7:
-        break;
+        sig_accion = 105; break;
     case 8:
-        break;
+        if (c == '=') {
+            sig_accion = 9; break;
+        } else {
+            sig_accion = 106; break;
+        }
+        sig_accion = 57; break;
     case 9:
+        sig_accion = 58; break;
+    }
+    return sig_accion;
+}
+
+// FUNCION QUE PERMITE GENERAR UN ERROR DEPENDIENDO DE UN PARÁMETRO DE ENTRADA QUE ES
+// EL CÓDIGO DE ERROR
+
+void gen_error(int cod_error) {
+    switch (cod_error) {
+        case 50:
+        break;
+        case 51:
+        break;
+        case 52:
+        break;
+        case 53:
+        break;
+        case 54:
+        break;
+        case 55:
+        break;
+        case 56:
+        break;
+        case 57:
+        break;
+        case 58:
         break;
     }
-    return accion;
-} */
+}
 
-void analizador_lexico(transicion_t **m_trans, FILE *fp, char c) {
+// FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
+// LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR
+
+void analizador_lexico(FILE *fp, char c) {
     int estado = 0;
+    int accion;
     char leido = c;
     while (estado < 10)
     {
-        
+        estado = mt_afd_estado(estado, leido);
+        accion = mt_afd_accion(estado, leido);
+
+        if (estado == -1) gen_error(accion);
+
+        switch (accion) {
+            case A:
+
+        }
     }
 }
 
 int main(int argc, char const *argv[])
 {
-    transicion_t **m_trans = ini_mat();
+    FILE *fp = fopen(argv[1], "r");
+    if (fp == NULL) exit(1);
+
+    analizador_lexico(fp, fgetc(fp)); 
+
     return 0;
 }

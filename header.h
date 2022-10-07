@@ -1,3 +1,6 @@
+
+// Definiciones para los tokens
+
 #define ID 1
 #define CTE_ENTERA 2
 #define CADENA 3
@@ -23,20 +26,11 @@
 #define RETURN 23
 #define STRING 24
 
-#define FILAS_M 10
-#define COLUMNAS_M 13
+// Definiciones para las acciones semánticas
 
-typedef struct transicion {
-    int estado_siguiente;
-    int accion;
-} transicion_t;
-
-typedef struct token_valor {
-    int id_token;
-    int valor;
-} token_valor_t;
-
-typedef struct token_lexema {
-    int id_token;
-    char *lexema;
-} token_lexema_t;
+#define A 1
+#define B 2
+#define C 3
+#define D 4
+#define E 5
+#define F 6
