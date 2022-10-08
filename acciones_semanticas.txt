@@ -1,0 +1,36 @@
+A: Lee
+B: lexema = \0; Lee
+C: lexema = lexema + c2; Lee
+D: if (lexema.length < 65) {
+    gen_token(CTE_ENTERA, lexema);
+   } else {
+    gen_error(59);
+   }
+E: valor = v_ascii(d); Lee
+F: valor = valor * 10 + v_ascii(d); Lee
+G: if (valor > -32768 && valor < 32768) {
+    gen_token(CTE_ENTERA, valor);
+   } else {
+    gen_error(60);
+   }
+H: lexema = l,_; Lee
+I: lexema = lexema + l,d,_; Lee
+J: if (lexema.palRes()) {
+    gen_token(lexema, -);
+   } else if ( (c = lexema.inTS()) ) {
+    gen_token(ID, c)
+   } else {
+    pos = lexema.insert();
+    gen_token(ID, pos);
+   }
+K: gen_token(OP_MODULO, -);
+L: gen_token(OP_MOD_ASIG, -);
+M: gen_token(OP_NEG, -);
+N: gen_token(OP_NEQ, -);
+O: Lee; gen_token(OP_ASIG, -);
+P: Lee; gen_token(PARENT_IZQ, -);
+Q: Lee; gen_token(PARENT_DCH, -);
+R: Lee; gen_token(LLAVE_IZQ, -);
+S: Lee; gen_token(LLAVE_DCH, -);
+T: Lee; gen_token(PUNTO_COMA, -);
+U: Lee; gen_token(COMA, -);
