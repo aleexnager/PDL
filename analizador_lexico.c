@@ -12,9 +12,12 @@ int escaracterespecial(char c) {
         c == '{' ||
         c == '}' ||
         c == ',' ||
-        c == ';'  )
-    return 1;
-    return 0;
+        c == ';'  ) {
+
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 int esc1(char c) {
@@ -48,7 +51,12 @@ int mt_afd_estado(int estado_actual, char c) {
         if (c == '%')               sig_estado = 6; break;
         if (c == '!')               sig_estado = 8; break;
         if (c == '=')               sig_estado = 108; break;
-        if (escaracterespecial(c))  sig_estado = 109; break;
+        if (c == '(')               sig_estado = 109; break;
+        if (c == ')')               sig_estado = 110; break;
+        if (c == '{')               sig_estado = 111; break;
+        if (c == '}')               sig_estado = 112; break;
+        if (c == ';')               sig_estado = 113; break;
+        if (c == ',')               sig_estado = 114; break;
         if (esdel(c) || c == '\n')  sig_estado = 0; break;
         sig_estado = -1; break;
     case 1:
@@ -102,59 +110,63 @@ int mt_afd_accion(int estado_actual, char c) {
     int sig_accion;
     switch (estado_actual) {
     case 0:
-        if (c == '/')               sig_accion = 1; break;
-        if (c == '\'')              sig_accion = 3; break;
-        if (isdigit(c))             sig_accion = 4; break;
-        if (isalpha(c) || c == '_') sig_accion = 5; break;
-        if (c == '%')               sig_accion = 6; break;
-        if (c == '!')               sig_accion = 8; break;
-        if (c == '=')               sig_accion = 108; break;
-        if (escaracterespecial(c))  sig_accion = 109; break;
-        if (esdel(c) || c == '\n')  sig_accion = 0; break;
+        if (c == '/')               sig_accion = A; break;
+        if (c == '%')               sig_accion = A; break;
+        if (c == '!')               sig_accion = A; break;
+        if (esdel(c) || c == '\n')  sig_accion = A; break;
+        if (c == '\'')              sig_accion = B; break;
+        if (isdigit(c))             sig_accion = E; break;
+        if (isalpha(c) || c == '_') sig_accion = H; break;
+        if (c == '=')               sig_accion = O; break;
+        if (c == '(')               sig_accion = P; break;
+        if (c == ')')               sig_accion = Q; break;
+        if (c == '{')               sig_accion = R; break;
+        if (c == '}')               sig_accion = S; break;
+        if (c == ';')               sig_accion = T; break;
+        if (c == ',')               sig_accion = U; break;
         sig_accion = 50; break;
     case 1:
-        if (c == '/')               sig_accion = 2; break;
+        if (c == '/')               sig_accion = A; break;
         sig_accion = 51; break;
     case 2:
-        if (esc1(c))                sig_accion = 2; break;
-        if (c == '\n')              sig_accion = 0; break;
+        if (esc1(c) || c == '\n')   sig_accion = A; break;
         sig_accion = 52; break;
     case 3:
-        if (esc2(c))                sig_accion = 3; break;
-        if (c == '\'')              sig_accion = 101; break;
+        if (esc2(c))                sig_accion = C; break;
+        if (c == '\'')              sig_accion = D; break;
         sig_accion = 53; break;
     case 4:
         if (isdigit(c)) {
-            sig_accion = 4; break;
+            sig_accion = F; break;
         } else {
-            sig_accion = 102; break;
+            sig_accion = G; break;
         }
         sig_accion = 54; break;
     case 5:
         if (isalpha(c) || isdigit(c) || c == '_') {
-            sig_accion = 5; break;
+            sig_accion = I; break;
         } else {
-            sig_accion = 103; break;
+            sig_accion = J; break;
         }
         sig_accion = 55; break;
     case 6:
         if (c == '=') {
-            sig_accion = 7; break;
+            sig_accion = A; break;
         } else {
-            sig_accion = 104; break;
+            sig_accion = K; break;
         }
         sig_accion = 56; break;
     case 7:
-        sig_accion = 105; break;
+        sig_accion = L; break;
     case 8:
         if (c == '=') {
-            sig_accion = 9; break;
+            sig_accion = A; break;
         } else {
-            sig_accion = 106; break;
+            sig_accion = M; break;
         }
         sig_accion = 57; break;
     case 9:
-        sig_accion = 58; break;
+        sig_accion = N; break;
     }
     return sig_accion;
 }
@@ -185,6 +197,10 @@ void gen_error(int cod_error) {
     }
 }
 
+int gen_pal_res(char* lexema) {
+    
+}
+
 // FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
 // LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR
 
@@ -192,6 +208,8 @@ void analizador_lexico(FILE *fp, char c) {
     int estado = 0;
     int accion;
     char leido = c;
+    char* lexema;
+    int valor;
     while (estado < 10)
     {
         estado = mt_afd_estado(estado, leido);
@@ -201,7 +219,85 @@ void analizador_lexico(FILE *fp, char c) {
 
         switch (accion) {
             case A:
-
+                c = fgetc(fp); break;
+            case B:
+                c = fgetc(fp);
+                break;
+            case C:
+                lexema = strncat(lexema, &c, 1);
+                c = fgetc(fp);
+                break;
+            case D:
+                if (strlen(lexema) < 65) {
+                    gen_token(CADENA, lexema); break;
+                } else {
+                    gen_error(59);
+                }
+            case E:
+                valor = c - '0';
+                c = fgetc(fp);
+                break;
+            case F:
+                valor += c - '0';
+            case G:
+                if (valor > -32768 && valor < 32768) {
+                    gen_token(CTE_ENTERA, valor);
+                } else {
+                    gen_error(60);
+                }
+            case H:
+                lexema = strncat(lexema, &c, 1);
+                c = fgetc(fp);
+                break;
+            case I:
+                lexema = strncat(lexema, &c, 1);
+                c = fgetc(fp);
+                break;
+            case J:
+                /* if (lexema.palRes()) {
+                    gen_token(lexema, -);
+                } else if ( (pos = lexema.enTS()) ) {
+                    gen_token(ID, pos);
+                } else {
+                    pos = lexema.insertar();
+                    gen_token(ID, pos);
+                } */
+            case K:
+                gen_token(OP_MODULO, NULL);
+            case L:
+                gen_token(OP_MOD_ASIG, NULL);
+            case M:
+                gen_token(OP_NEG, NULL);
+            case N:
+                gen_token(OP_NEQ, NULL);
+            case O:
+                c = fgetc(fp);
+                gen_token(OP_ASIG, NULL);
+                break;
+            case P:
+                c = fgetc(fp);
+                gen_token(PARENT_IZQ, NULL);
+                break;
+            case Q:
+                c = fgetc(fp);
+                gen_token(PARENT_DCH, NULL);
+                break;
+            case R:
+                c = fgetc(fp);
+                gen_token(LLAVE_IZQ, NULL);
+                break;
+            case S:
+                c = fgetc(fp);
+                gen_token(LLAVE_DCH, NULL);
+                break;
+            case T:
+                c = fgetc(fp);
+                gen_token(PUNTO_COMA, NULL);
+                break;
+            case U:
+                c = fgetc(fp);
+                gen_token(COMA, NULL);
+                break;
         }
     }
 }
