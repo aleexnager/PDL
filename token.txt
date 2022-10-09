@@ -1,0 +1,24 @@
+typedef struct token {
+	int id;
+	char* lexema;
+	int valor;
+} token_t;
+
+token_t gen_token_lexema(int id, char* lexema) {
+	token_t result;
+	result.id = id;
+	result.lexema = lexema;
+	result.valor = 32768;
+	
+	return result;
+}
+
+token_t gen_token_valor(int id, int valor) {
+	token_t result;
+	result.id = id;
+	result.lexema = NULL;
+	result.valor = valor;
+	
+	return result;
+}
+ 
