@@ -49,3 +49,13 @@
 #define S 19
 #define T 20
 #define U 21
+
+typedef struct token_lexema {
+    int id;
+    char* lexema;
+} token_lexema_t;
+
+typedef struct token_valor {
+    int id;
+    int valor;
+} token_valor_t;
