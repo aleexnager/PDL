@@ -59,3 +59,12 @@ typedef struct token_valor {
     int id;
     int valor;
 } token_valor_t;
+
+int esc1(char c);
+int esc2(char c);
+int esdel(char c);
+
+int mt_afd_estado(int estado_actual, char c);
+int mt_afd_accion(int estado_actual, char c);
+
+void gen_error(int cod_error);
