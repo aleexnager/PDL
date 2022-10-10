@@ -119,7 +119,7 @@ int main(int argc, char const *argv[])
                 {
                     token_lexema_t* token8 = malloc(sizeof(token_lexema_t *));
                     token8->id = OP_MODULO;
-                    token8->lexema = "-";
+                    token8->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token8->id, token8->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -128,7 +128,7 @@ int main(int argc, char const *argv[])
                 {
                     token_lexema_t* token9 = malloc(sizeof(token_lexema_t *));
                     token9->id = OP_MOD_ASIG;
-                    token9->lexema = "-";
+                    token9->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token9->id, token9->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -137,7 +137,7 @@ int main(int argc, char const *argv[])
                 {
                     token_lexema_t* token10 = malloc(sizeof(token_lexema_t *));
                     token10->id = OP_NEG;
-                    token10->lexema = "-";
+                    token10->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token10->id, token10->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -146,7 +146,7 @@ int main(int argc, char const *argv[])
                 {
                     token_lexema_t* token11 = malloc(sizeof(token_lexema_t *));
                     token11->id = OP_NEQ;
-                    token11->lexema = "-";
+                    token11->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token11->id, token11->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -156,7 +156,7 @@ int main(int argc, char const *argv[])
                     leido = fgetc(fp1);
                     token_lexema_t* token1 = malloc(sizeof(token_lexema_t *));
                     token1->id = OP_ASIG;
-                    token1->lexema = "-";
+                    token1->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token1->id, token1->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -166,7 +166,7 @@ int main(int argc, char const *argv[])
                     leido = fgetc(fp1);
                     token_lexema_t* token2 = malloc(sizeof(token_lexema_t *));
                     token2->id = PARENT_IZQ;
-                    token2->lexema = "-";
+                    token2->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token2->id, token2->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -176,7 +176,7 @@ int main(int argc, char const *argv[])
                     leido = fgetc(fp1);
                     token_lexema_t* token3 = malloc(sizeof(token_lexema_t *));
                     token3->id = PARENT_DCH;
-                    token3->lexema = "-";
+                    token3->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token3->id, token3->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -186,7 +186,7 @@ int main(int argc, char const *argv[])
                     leido = fgetc(fp1);
                     token_lexema_t* token4 = malloc(sizeof(token_lexema_t *));
                     token4->id = LLAVE_IZQ;
-                    token4->lexema = "-";
+                    token4->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token4->id, token4->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -196,7 +196,7 @@ int main(int argc, char const *argv[])
                     leido = fgetc(fp1);
                     token_lexema_t* token5 = malloc(sizeof(token_lexema_t *));
                     token5->id = LLAVE_DCH;
-                    token5->lexema = "-";
+                    token5->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token5->id, token5->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -206,7 +206,7 @@ int main(int argc, char const *argv[])
                     leido = fgetc(fp1);
                     token_lexema_t* token6 = malloc(sizeof(token_lexema_t *));
                     token6->id = PUNTO_COMA;
-                    token6->lexema = "-";
+                    token6->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token6->id, token6->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
@@ -216,7 +216,7 @@ int main(int argc, char const *argv[])
                     leido = fgetc(fp1);
                     token_lexema_t* token7 = malloc(sizeof(token_lexema_t *));
                     token7->id = COMA;
-                    token7->lexema = NULL;
+                    token7->lexema = "";
                     fprintf(fp2, "<%d, %s>\n", token7->id, token7->lexema);
                     fprintf(stderr, "La linea es %d\n", linea);
                     break;
