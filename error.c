@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "header.h"
 
-void gen_error(int cod_error) {
+void gen_error(int cod_error, int linea) {
     switch (cod_error) {
         case 50:
         break;
