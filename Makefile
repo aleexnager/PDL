@@ -1,6 +1,6 @@
 CC = gcc
 
-programa: main.o accion.o estado.o error.o pal_res.o header.h
+programa: main.o accion.o estado.o error.o pal_res.o header.o header.h
 	$(CC) -o programa main.o accion.o estado.o error.o pal_res.o header.o
 
 main: main.c header.h

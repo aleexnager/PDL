@@ -5,7 +5,7 @@ int mt_afd_accion(int estado_actual, char c) {
     int sig_accion;
     switch (estado_actual) {
     case 0:
-        if (c == '/' || c == '%' || c == '!' || esdel(c) || c == '\n') {
+        if (c == '/' || c == '%' || c == '!' || esdel(c) || c == '\n' || c == EOF) {
             sig_accion = A;
             break;   
         }

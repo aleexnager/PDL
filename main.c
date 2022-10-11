@@ -34,9 +34,15 @@ int main(int argc, char const *argv[])
             fprintf(stderr, "El siguiente estado es %d\n", estado);
 
             if (estado == -1) {
-                fp3 = gen_error(fp3, accion, linea, leido);
+                // Estado es -1 y acción 1, se ha leído un EOF
+                // por tanto, se entra al if de estado pero no llama
+                // a la función de generar error
+                if (accion >= 50) {
+                    fp3 = gen_error(fp3, accion, linea, leido);
+                }
                 leido = fgetc(fp1);
                 estado = 0;
+                break;
             } else {
                 switch (accion) {
                     case A:
@@ -107,12 +113,23 @@ int main(int argc, char const *argv[])
                     case I:
                     {
                         lexema = strncat(lexema, &leido, 1);
+                        fprintf(stderr, "%s\n", lexema);
                         leido = fgetc(fp1);
                         break;
                     }
                     case J:
                     {
-                        /* if (lexema.palRes()) {
+                        int id_pal_res = es_pal_res(lexema);
+                        if (id_pal_res > -1) {
+                            token_lexema_t* token_pal_res = malloc(sizeof(token_lexema_t *));
+                            token_pal_res->id = id_pal_res;
+                            token_pal_res->lexema = "";
+                            fprintf(fp2, "<%d, %s>\n", token_pal_res->id, token_pal_res->lexema);
+                            fprintf(stderr, "La linea es %d\n", linea);
+                        }
+                        break;
+                        /* int idPS = es_pal_res(lexema);
+                         * if idPS > 0 then gen_token
                             gen_token(lexema, -);
                         } else if ( (pos = lexema.enTS()) ) {
                             gen_token(ID, pos);
@@ -230,6 +247,7 @@ int main(int argc, char const *argv[])
                 }
             }
         }
+        fprintf(stderr, "He salido del bucle");
         memset(lexema, 0, 65);
     }
     return 0;
