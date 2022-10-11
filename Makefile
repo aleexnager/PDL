@@ -1,7 +1,7 @@
 CC = gcc
 
-programa: main.o accion.o estado.o error.o header.h
-	$(CC) -o programa main.o accion.o estado.o error.o header.o
+programa: main.o accion.o estado.o error.o pal_res.o header.h
+	$(CC) -o programa main.o accion.o estado.o error.o pal_res.o header.o
 
 main: main.c header.h
 	$(CC) -c main.c
@@ -14,6 +14,9 @@ estado: estado.c header.h
 
 error: error.c header.h
 	$(CC) -c error.c
+
+pal_res: pal_res.c header.h
+	$(CC) -c pal_res.c
 
 header: header.c header.h
 	$(CC) -c header.c
