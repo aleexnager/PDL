@@ -1,4 +1,4 @@
-
+#include <stdio.h>
 // Definiciones para los tokens
 
 #define ID 1
@@ -67,4 +67,6 @@ int esdel(char c);
 int mt_afd_estado(int estado_actual, char c);
 int mt_afd_accion(int estado_actual, char c);
 
-void gen_error(int cod_error);
+FILE* gen_error(FILE* fp, int cod_error, int linea, char leido);
+
+int es_pal_res(const char* lexema);
