@@ -3,25 +3,25 @@
 #include "header.h"
 
 int es_pal_res(const char* lexema) {
-    if (strcmp(lexema, "boolean")) {
+    if (!strcmp(lexema, "boolean")) {
         return BOOLEAN;
-    } else if (strcmp(lexema, "for")) {
+    } else if (!strcmp(lexema, "for")) {
         return FOR;
-    } else if (strcmp(lexema, "function")) {
+    } else if (!strcmp(lexema, "function")) {
         return FUNCTION;
-    } else if (strcmp(lexema, "if")) {
+    } else if (!strcmp(lexema, "if")) {
         return IF;
-    } else if (strcmp(lexema, "input")) {
+    } else if (!strcmp(lexema, "input")) {
         return INPUT;
-    } else if (strcmp(lexema, "int")) {
+    } else if (!strcmp(lexema, "int")) {
         return INT;
-    } else if (strcmp(lexema, "let")) {
+    } else if (!strcmp(lexema, "let")) {
         return LET;
-    } else if (strcmp(lexema, "print")) {
+    } else if (!strcmp(lexema, "print")) {
         return PRINT;
-    } else if (strcmp(lexema, "return")) {
+    } else if (!strcmp(lexema, "return")) {
         return RETURN;
-    } else if (strcmp(lexema, "string")) {
+    } else if (!strcmp(lexema, "string")) {
         return STRING;
     } else {
         return -1;
