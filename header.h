@@ -70,3 +70,6 @@ int mt_afd_accion(int estado_actual, char c);
 FILE* gen_error(FILE* fp, int cod_error, int linea, char leido);
 
 int es_pal_res(const char* lexema);
+
+int buscar_ts(const char* lexema);
+int insertar_ts(const char* lexema);
