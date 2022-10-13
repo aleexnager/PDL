@@ -248,7 +248,7 @@ int main(int argc, char const *argv[])
             }
         }
         fprintf(stderr, "He salido del bucle");
-        memset(lexema, 0, 65);
+        free(lexema);
     }
     return 0;
 }
