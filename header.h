@@ -50,6 +50,8 @@
 #define T 20
 #define U 21
 
+#define TAM_TS 50
+
 typedef struct token_lexema {
     int id;
     char* lexema;
@@ -71,5 +73,5 @@ FILE* gen_error(FILE* fp, int cod_error, int linea, char leido);
 
 int es_pal_res(const char* lexema);
 
-int buscar_ts(const char* lexema);
-int insertar_ts(const char* lexema);
+int buscar_ts(const char* lexema, item_ts_t* tabla_simb []);
+int insertar_ts(const char* lexema, item_ts_t* tabla_simb []);

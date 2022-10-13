@@ -9,13 +9,16 @@
 
 int main(int argc, char const *argv[])
 {
+    int top_ts = 0;
+    int suma_desp = 0;
+    item_ts_t* tabla_simb[TAM_TS];
+
     FILE *fp1 = fopen(argv[1], "r");
     FILE *fp2 = fopen("token.txt", "w");
     FILE *fp3 = fopen("error.txt", "w");
+    FILE *fp4 = fopen("tabla_simbolos.txt", "w");
 
     if (fp1 == NULL) exit(1);
-    if (fp2 == NULL) exit(1);
-    if (fp3 == NULL) exit(1);
 
     int estado;
     int accion;
@@ -25,6 +28,7 @@ int main(int argc, char const *argv[])
     {
         estado = 0;
         char* lexema = malloc(sizeof(char*));
+        memset(lexema, 0, sizeof(char*));
         int valor;
         while (estado < 10)
         {
@@ -119,6 +123,7 @@ int main(int argc, char const *argv[])
                     }
                     case J:
                     {
+                        int pos_ts;
                         int id_pal_res = es_pal_res(lexema);
                         if (id_pal_res > -1) {
                             token_lexema_t* token_pal_res = malloc(sizeof(token_lexema_t *));
@@ -126,17 +131,12 @@ int main(int argc, char const *argv[])
                             token_pal_res->lexema = "";
                             fprintf(fp2, "<%d, %s>\n", token_pal_res->id, token_pal_res->lexema);
                             fprintf(stderr, "La linea es %d\n", linea);
+                        } else if ( (pos_ts = buscar_ts(lexema, tabla_simb)) > -1) {
+                            // gen token (ID, pos_ts)
+                        } else {
+                            // insertarlo y gen token (ID, pos_ts)
                         }
                         break;
-                        /* int idPS = es_pal_res(lexema);
-                         * if idPS > 0 then gen_token
-                            gen_token(lexema, -);
-                        } else if ( (pos = lexema.enTS()) ) {
-                            gen_token(ID, pos);
-                        } else {
-                            pos = lexema.insertar();
-                            gen_token(ID, pos);
-                        } */
                     }
                     case K:
                     {
