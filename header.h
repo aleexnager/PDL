@@ -82,6 +82,5 @@ FILE* gen_error(FILE* fp, int cod_error, int linea, char leido);
 
 int es_pal_res(const char* lexema);
 
-int buscar_ts(const char* lexema, item_ts_t* tabla_simb []);
-int insertar_ts(int* top, const char* lexema, item_ts_t* tabla_simb []);
-/* int insertar_ts(int* top_ts, int* suma_desp, const char* lexema, int tipo_var, int desp, int num_param, int tipo_dev, const char* etiq, int tam, item_ts_t* tabla_simb []); */
+int buscar_ts(const char* lexema, int top_ts, item_ts_t tabla_simb []);
+int insertar_ts(int top_ts, const char* lexema, item_ts_t tabla_simb []);

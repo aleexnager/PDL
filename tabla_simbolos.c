@@ -8,11 +8,11 @@
 // POST: devuelve el indice de la tabla de símbolos si se encuentra (result >= 0)
 //       o -1 si no se encuentra.
 
-int buscar_ts (const char* lexema, item_ts_t* tabla_simb []) {
+int buscar_ts (const char* lexema, int top_ts, item_ts_t tabla_simb []) {
     int i;
     int resultado = -1;
-    for (i = 0; resultado == -1 && i < TAM_TS; ++i) {
-        if (!strcmp(tabla_simb[i]->lexema, lexema)) {
+    for (i = 0; resultado == -1 && i < top_ts; ++i) {
+        if (!strcmp(tabla_simb[i].lexema, lexema)) {
             resultado = i;
         }
     }
@@ -23,12 +23,11 @@ int buscar_ts (const char* lexema, item_ts_t* tabla_simb []) {
 // TODO: crear un struct item_ts_t e insertarlo en la tabla de símbolos
 // POST: devuelve el índice de la tabla de símbolos en la que se ha insertado
 
-int insertar_ts (int* top_ts, const char* lexema, item_ts_t* tabla_simb []) {
-    item_ts_t* item = (item_ts_t *) malloc(sizeof(item_ts_t *));
-    item->lexema = lexema;
-    tabla_simb[*top_ts] = item;
-
-    ++(*top_ts);
-
-    return (*top_ts) - 1;
+int insertar_ts (int top_ts, const char* lexema, item_ts_t tabla_simb []) {
+    tabla_simb[top_ts].lexema = (char *)malloc(sizeof(char *));
+    tabla_simb[top_ts].lexema = lexema;
+    top_ts += 1;
+    fprintf(stderr, "top es %d despues de sumar\n", top_ts);
+    fprintf(stderr, "top es %d\n", top_ts);
+    return top_ts;
 }
