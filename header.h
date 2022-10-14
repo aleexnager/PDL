@@ -63,13 +63,10 @@ typedef struct token_valor {
 } token_valor_t;
 
 typedef struct item_ts {
-    // Rellenar con los atributos de cada entrada de 
-    // la tabla de símbolos
     char* lexema;
     int tipo_var;
     int desp;
     int num_param;
-    // tipo, param
     int tipo_dev;
     char* etiq;
 } item_ts_t;

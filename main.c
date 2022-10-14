@@ -75,6 +75,7 @@ int main(int argc, char const *argv[])
                             token_lexema_t* token = malloc(sizeof(token_lexema_t *));
                             token->id = CADENA;
                             token->lexema = lexema;
+                            // strcpy(token->lexema, lexema);
                             fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
                             fprintf(stderr, "La linea es %d\n", linea);
                         } else {

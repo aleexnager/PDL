@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "header.h"
 
 // PRE: se pasa el nombre de la variable
@@ -24,17 +25,17 @@ int buscar_ts (const char* lexema, item_ts_t* tabla_simb []) {
 
 int insertar_ts (int* top_ts, int* suma_desp, const char* lexema, int tipo_var, int desp, int num_param, int tipo_dev, const char* etiq, int tam, item_ts_t* tabla_simb []) {
     item_ts_t* item = (item_ts_t *) malloc(sizeof(item_ts_t *));
-    item->lexema = lexema;
+    strcpy(item->lexema, lexema);
     item->tipo_var = tipo_var;
     item->desp = *suma_desp;
     item->num_param = num_param;
     item->tipo_dev = tipo_dev;
     item->etiq = etiq;
 
-    tabla_simb[top] = item;
+    tabla_simb[*top_ts] = item;
 
     ++(*top_ts);
-    (*sum_desp) += tam;
+    (*suma_desp) += tam;
 
-    return top - 1;
+    return (*top_ts) - 1;
 }
