@@ -62,6 +62,18 @@ typedef struct token_valor {
     int valor;
 } token_valor_t;
 
+typedef struct item_ts {
+    // Rellenar con los atributos de cada entrada de 
+    // la tabla de símbolos
+    char* lexema;
+    int tipo_var;
+    int desp;
+    int num_param;
+    // tipo, param
+    int tipo_dev;
+    char* etiq;
+} item_ts_t;
+
 int esc1(char c);
 int esc2(char c);
 int esdel(char c);
@@ -74,4 +86,4 @@ FILE* gen_error(FILE* fp, int cod_error, int linea, char leido);
 int es_pal_res(const char* lexema);
 
 int buscar_ts(const char* lexema, item_ts_t* tabla_simb []);
-int insertar_ts(int* top_ts, int* suma_desp, const char* lexema, int tipo_var, int desp, int num_param, tipo_dev, const char* etiq, int tam, item_ts_t* tabla_simb []);
+int insertar_ts(int* top_ts, int* suma_desp, const char* lexema, int tipo_var, int desp, int num_param, int tipo_dev, const char* etiq, int tam, item_ts_t* tabla_simb []);
