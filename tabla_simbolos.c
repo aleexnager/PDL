@@ -25,9 +25,7 @@ int buscar_ts (const char* lexema, int top_ts, item_ts_t tabla_simb []) {
 
 int insertar_ts (int top_ts, const char* lexema, item_ts_t tabla_simb []) {
     tabla_simb[top_ts].lexema = (char *)malloc(sizeof(char *));
-    tabla_simb[top_ts].lexema = lexema;
-    top_ts += 1;
-    fprintf(stderr, "top es %d despues de sumar\n", top_ts);
-    fprintf(stderr, "top es %d\n", top_ts);
+    strcpy(tabla_simb[top_ts].lexema, lexema);
+    ++top_ts;
     return top_ts;
 }

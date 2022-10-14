@@ -10,7 +10,6 @@
 int main(int argc, char const *argv[])
 {
     int top_ts = 0;
-    int* ptr_a_top = &top_ts;
     item_ts_t* tabla_simb = malloc(TAM_TS * sizeof(item_ts_t));
 
     FILE *fp1 = fopen(argv[1], "r");
@@ -127,21 +126,23 @@ int main(int argc, char const *argv[])
                     {
                         int pos_ts;
                         int id_pal_res = es_pal_res(lexema);
+
                         if (id_pal_res > -1) {
+                            /* Si es palabra reservada
+                            gen token (ID)*/
                             token_lexema_t* token_pal_res = malloc(sizeof(token_lexema_t *));
                             token_pal_res->id = id_pal_res;
                             token_pal_res->lexema = "";
                             fprintf(fp2, "<%d, %s>\n", token_pal_res->id, token_pal_res->lexema);
                             fprintf(stderr, "La linea es %d\n", linea);
-                        } else if ( (pos_ts = buscar_ts(lexema, ptr_a_top, tabla_simb)) > -1) {
-                            // gen token (ID, pos_ts)
+                        } else if ( (pos_ts = buscar_ts(lexema, top_ts, tabla_simb)) > -1) { /* he cambiado aqui a top_ts */
+                            /* Si está en la ts gen token (ID, pos_ts) */
                             token_valor_t* token_valor_1 = malloc(sizeof(token_valor_t *));
                             token_valor_1->id = ID;
                             token_valor_1->valor = pos_ts;
                             fprintf(fp2, "<%d, %d>\n", token_valor_1->id, token_valor_1->valor);         
                         } else {
-                            // insertarlo y gen token (ID, pos_ts)
-                            // no usamos la mayoria de las variables porque lo va a añadir el semantico
+                            /* si no está en la ts insertar() y gen token (ID, pos_ts) */
                             top_ts = insertar_ts(top_ts, lexema, tabla_simb);
                             pos_ts = top_ts - 1;
                             token_valor_t* token_valor_2 = malloc(sizeof(token_valor_t *));
