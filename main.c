@@ -143,12 +143,16 @@ int main(int argc, char const *argv[])
                             fprintf(fp2, "<%d, %d>\n", token_valor_1->id, token_valor_1->valor);        
                         } else {
                             /* si no está en la ts insertar() y gen token (ID, pos_ts) */
-                            top_ts = insertar_ts(top_ts, lexema, tabla_simb);
+                            top_ts = insertar_ts(top_ts, lexema, 0, 0, tabla_simb);
                             pos_ts = top_ts - 1;
                             token_valor_t* token_valor_2 = malloc(sizeof(token_valor_t *));
                             token_valor_2->id = ID;
                             token_valor_2->valor = pos_ts;
-                            fprintf(fp2, "<%d, %d>\n", token_valor_2->id, token_valor_2->valor);     
+
+                            fprintf(fp2, "<%d, %d>\n", token_valor_2->id, token_valor_2->valor);
+                           // fprintf(fp4, "<%d, %d>\n", token_valor_2->id, token_valor_2->valor);  
+                            imprimir_ts(fp4, tabla_simb, pos_ts, 0);
+
                         }
                         break;
                     }

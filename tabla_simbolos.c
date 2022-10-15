@@ -23,9 +23,17 @@ int buscar_ts (const char* lexema, int top_ts, item_ts_t tabla_simb []) {
 // TODO: crear un struct item_ts_t e insertarlo en la tabla de símbolos
 // POST: devuelve el índice de la tabla de símbolos en la que se ha insertado
 
-int insertar_ts (int top_ts, const char* lexema, item_ts_t tabla_simb []) {
+int insertar_ts (int top_ts, const char* lexema, int tipo_var, int desp, item_ts_t tabla_simb []) {
     tabla_simb[top_ts].lexema = (char *)malloc(sizeof(char *));
     strcpy(tabla_simb[top_ts].lexema, lexema);
+    tabla_simb[top_ts].tipo_var = tipo_var;
+    tabla_simb[top_ts].desp = desp;
     ++top_ts;
     return top_ts;
 }
+
+void imprimir_ts(FILE* fp4, item_ts_t tabla_simb[], int pos_ts, int num_tabla) {
+    if (pos_ts==0) fprintf(fp4, "Contenidos de la tabla # %d\n", num_tabla);
+    fprintf(fp4, "* LEXEMA : \'%s\'\n Atributos :\n +tipo:\'%d\'\n +despl: %d\n ------ \n", tabla_simb[pos_ts].lexema, 0, 0);
+    //fprintf(fp4, "* LEXEMA : \'%s\'\n Atributos :\n +tipo:\'%s\'\n +despl: %d\n ------ \n",num_tabla, tabla_simb[pos_ts].lexema, tabla_simb[pos_ts].tipo_var,tabla_simb[pos_ts].desp);
+    }
