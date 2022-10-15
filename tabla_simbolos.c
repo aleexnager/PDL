@@ -12,7 +12,7 @@ int buscar_ts (const char* lexema, int top_ts, item_ts_t tabla_simb []) {
     int i;
     int resultado = -1;
     for (i = 0; resultado == -1 && i < top_ts; ++i) {
-        if (!strcmp(tabla_simb[i].lexema, lexema)) {
+        if (strcmp(tabla_simb[i].lexema, lexema) == 0) {
             resultado = i;
         }
     }
@@ -32,8 +32,11 @@ int insertar_ts (int top_ts, const char* lexema, int tipo_var, int desp, item_ts
     return top_ts;
 }
 
-void imprimir_ts(FILE* fp4, item_ts_t tabla_simb[], int pos_ts, int num_tabla) {
-    if (pos_ts==0) fprintf(fp4, "Contenidos de la tabla # %d\n", num_tabla);
-    fprintf(fp4, "* LEXEMA : \'%s\'\n Atributos :\n +tipo:\'%d\'\n +despl: %d\n ------ \n", tabla_simb[pos_ts].lexema, 0, 0);
-    //fprintf(fp4, "* LEXEMA : \'%s\'\n Atributos :\n +tipo:\'%s\'\n +despl: %d\n ------ \n",num_tabla, tabla_simb[pos_ts].lexema, tabla_simb[pos_ts].tipo_var,tabla_simb[pos_ts].desp);
-    }
+FILE *imprimir_ts(FILE* fp4, item_ts_t tabla_simb[], int pos_ts, int num_tabla) {
+    if (pos_ts==0) fprintf(fp4, "#%d:\n", num_tabla);
+    fprintf(fp4, "*\'%s\'\n+tipo:\'%d\'\n+despl:%d\n",
+            tabla_simb[pos_ts].lexema,
+            tabla_simb[pos_ts].tipo_var,
+            tabla_simb[pos_ts].desp);
+    return fp4;
+}

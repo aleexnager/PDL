@@ -5,6 +5,7 @@ int mt_afd_accion(int estado_actual, char c) {
     int sig_accion;
     switch (estado_actual) {
     case 0:
+
         if (c == '/' || c == '%' || c == '!' || esdel(c) || c == '\n' || c == EOF) {
             sig_accion = A;
             break;   
@@ -57,7 +58,7 @@ int mt_afd_accion(int estado_actual, char c) {
         }
         sig_accion = 51; break;
     case 2:
-        if (esc1(c) || c == '\n') {
+        if (isascii(c)) {
             sig_accion = A;
             break;
         }
@@ -68,13 +69,14 @@ int mt_afd_accion(int estado_actual, char c) {
             break;
         }
         if (c == '\'') {
-            sig_accion = D; break;
+            sig_accion = D;
+            break;
         }
         sig_accion = 53; break;
     case 4:
         if (isdigit(c)) {
             sig_accion = F; break;
-        } else {
+        } else if (isspace(c) || c == ';') {
             sig_accion = G; break;
         }
         sig_accion = 54; break;

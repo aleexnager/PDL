@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
     FILE *fp3 = fopen("error.txt", "w");
     FILE *fp4 = fopen("tabla_simbolos.txt", "w");
 
-    if (fp1 == NULL) exit(1);
+    if (fp1 == NULL || fp2 == NULL || fp3 == NULL || fp4 == NULL) exit(1);
 
     int estado;
     int accion;
@@ -77,6 +77,7 @@ int main(int argc, char const *argv[])
                             // strcpy(token->lexema, lexema);
                             fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
                             fprintf(stderr, "La linea es %d\n", linea);
+                            free(token);
                         } else {
                             fp3 = gen_error(fp3, 59, linea, leido);
                         }
@@ -103,6 +104,7 @@ int main(int argc, char const *argv[])
                             token->valor = valor;
                             fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
                             fprintf(stderr, "La linea es %d\n", linea);
+                            free(token);
                         } else {
                             fp3 = gen_error(fp3, 60, linea, leido);
                         }
@@ -135,12 +137,14 @@ int main(int argc, char const *argv[])
                             token_pal_res->lexema = "";
                             fprintf(fp2, "<%d, %s>\n", token_pal_res->id, token_pal_res->lexema);
                             fprintf(stderr, "La linea es %d\n", linea);
+                            free(token_pal_res);
                         } else if ( (pos_ts = buscar_ts(lexema, top_ts, tabla_simb)) > -1) { /* he cambiado aqui a top_ts */
                             /* Si está en la ts gen token (ID, pos_ts) */
                             token_valor_t* token_valor_1 = malloc(sizeof(token_valor_t *));
                             token_valor_1->id = ID;
                             token_valor_1->valor = pos_ts;
-                            fprintf(fp2, "<%d, %d>\n", token_valor_1->id, token_valor_1->valor);        
+                            fprintf(fp2, "<%d, %d>\n", token_valor_1->id, token_valor_1->valor);    
+                            free(token_valor_1);    
                         } else {
                             /* si no está en la ts insertar() y gen token (ID, pos_ts) */
                             top_ts = insertar_ts(top_ts, lexema, 0, 0, tabla_simb);
@@ -150,9 +154,8 @@ int main(int argc, char const *argv[])
                             token_valor_2->valor = pos_ts;
 
                             fprintf(fp2, "<%d, %d>\n", token_valor_2->id, token_valor_2->valor);
-                           // fprintf(fp4, "<%d, %d>\n", token_valor_2->id, token_valor_2->valor);  
-                            imprimir_ts(fp4, tabla_simb, pos_ts, 0);
-
+                            fp4 = imprimir_ts(fp4, tabla_simb, pos_ts, 0);
+                            free(token_valor_2);
                         }
                         break;
                     }
@@ -163,6 +166,7 @@ int main(int argc, char const *argv[])
                         token8->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token8->id, token8->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token8);
                         break;
                     }
                     case L:
@@ -172,6 +176,7 @@ int main(int argc, char const *argv[])
                         token9->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token9->id, token9->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token9);
                         break;
                     }
                     case M:
@@ -181,6 +186,7 @@ int main(int argc, char const *argv[])
                         token10->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token10->id, token10->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token10);
                         break;
                     }
                     case N:
@@ -190,6 +196,7 @@ int main(int argc, char const *argv[])
                         token11->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token11->id, token11->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token11);
                         break;
                     }
                     case O:
@@ -200,6 +207,7 @@ int main(int argc, char const *argv[])
                         token1->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token1->id, token1->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token1);
                         break;
                     }
                     case P:
@@ -210,6 +218,7 @@ int main(int argc, char const *argv[])
                         token2->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token2->id, token2->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token2);
                         break;
                     }
                     case Q:
@@ -220,6 +229,7 @@ int main(int argc, char const *argv[])
                         token3->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token3->id, token3->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token3);
                         break;
                     }
                     case R:
@@ -230,6 +240,7 @@ int main(int argc, char const *argv[])
                         token4->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token4->id, token4->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token4);
                         break;
                     }
                     case S:
@@ -240,6 +251,7 @@ int main(int argc, char const *argv[])
                         token5->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token5->id, token5->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token5);
                         break;
                     }
                     case T:
@@ -250,6 +262,7 @@ int main(int argc, char const *argv[])
                         token6->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token6->id, token6->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token6);
                         break;
                     }
                     case U:
@@ -260,6 +273,7 @@ int main(int argc, char const *argv[])
                         token7->lexema = "";
                         fprintf(fp2, "<%d, %s>\n", token7->id, token7->lexema);
                         fprintf(stderr, "La linea es %d\n", linea);
+                        free(token7);
                         break;
                     }
                 }
