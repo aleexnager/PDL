@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
     while (!feof(fp1))
     {
         estado = 0;
-        char* lexema = malloc(65 * sizeof(char));
+        char* lexema = malloc(256 * sizeof(char));
         memset(lexema, 0, sizeof(char*));
         int valor;
         while (estado < 10)
@@ -72,7 +72,7 @@ int main(int argc, char const *argv[])
                             fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
                             free(token);
                         } else {
-                            fp3 = gen_error(fp3, 59, linea, leido);
+                            fp3 = gen_error_string(fp3, linea, lexema);
                         }
                         leido = fgetc(fp1);
                         break;
@@ -98,7 +98,7 @@ int main(int argc, char const *argv[])
                             fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
                             free(token);
                         } else {
-                            fp3 = gen_error(fp3, 60, linea, leido);
+                            fp3 = gen_error_int(fp3, linea, valor);
                         }
                         break;
                     }
