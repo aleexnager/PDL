@@ -94,7 +94,7 @@ int mt_afd_accion(int estado_actual, char c) {
             sig_accion = K; break;
         }
         sig_accion = 56; break;
-    case 7:
+    case 105:
         sig_accion = L; break;
     case 8:
         if (c == '=') {
@@ -103,7 +103,7 @@ int mt_afd_accion(int estado_actual, char c) {
             sig_accion = M; break;
         }
         sig_accion = 57; break;
-    case 9:
+    case 107:
         sig_accion = N; break;
     }
     return sig_accion;

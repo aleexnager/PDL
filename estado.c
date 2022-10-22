@@ -104,22 +104,18 @@ int mt_afd_estado(int estado_actual, char c) {
         sig_estado = -1; break;
     case 6:
         if (c == '=') {
-            sig_estado = 7; break;
+            sig_estado = 105; break;
         } else {
             sig_estado = 104; break;
         }
         sig_estado = -1; break;
-    case 7:
-        sig_estado = 105; break;
     case 8:
         if (c == '=') {
-            sig_estado = 9; break;
+            sig_estado = 107; break;
         } else {
             sig_estado = 106; break;
         }
         sig_estado = -1; break;
-    case 9:
-        sig_estado = 107; break;
     }
     return sig_estado;
 }
