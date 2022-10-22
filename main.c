@@ -32,9 +32,7 @@ int main(int argc, char const *argv[])
         while (estado < 10)
         {
             accion = mt_afd_accion(estado, leido);
-            fprintf(stderr, "La siguiente acción es %d\n", accion);
             estado = mt_afd_estado(estado, leido);
-            fprintf(stderr, "El siguiente estado es %d\n", estado);
 
             if (estado == -1) {
                 // Estado es -1 y acción 1, se ha leído un EOF
