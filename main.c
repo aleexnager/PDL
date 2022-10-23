@@ -115,7 +115,10 @@ int main(int argc, char const *argv[])
                     case I:
                     {
                         if (strlen(lexema) >= 64) { /*como solo una de cada 64 veces como mucho nos metemos en esta condicion, es mas eficiente 
-                                                      no usar una variable auxiliar para almacenar el length de lexema cada una de las iteraciones*/
+                                                      no usar una variable auxiliar para almacenar el length de lexema cada una de las iteraciones
+						      . lo he vuelto a pensar y no se si es verdad esto, lo unico que hace es hacer 1 operacion mas
+						      cada iteracion pero no crea espacio para una variable cada una de las veces asi que no se 
+						      que es mejor, queda mas bonito como antes pero weno*/
                             lexema = (char *) realloc(lexema, strlen(lexema) + (64 * sizeof(char)));
                         }
                         lexema = strncat(lexema, &leido, 1);
