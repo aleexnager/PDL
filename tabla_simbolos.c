@@ -24,7 +24,7 @@ int buscar_ts (const char* lexema, int top_ts, item_ts_t tabla_simb []) {
 // POST: devuelve el índice de la tabla de símbolos en la que se ha insertado
 
 int insertar_ts (int top_ts, const char* lexema, int tipo_var, int desp, item_ts_t tabla_simb []) {
-    tabla_simb[top_ts].lexema = (char *)malloc(sizeof(char *));
+    tabla_simb[top_ts].lexema = (char *)malloc((strlen(lexema) + 1) * sizeof(char *));
     strcpy(tabla_simb[top_ts].lexema, lexema);
     tabla_simb[top_ts].tipo_var = tipo_var;
     tabla_simb[top_ts].desp = desp;

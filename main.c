@@ -114,10 +114,10 @@ int main(int argc, char const *argv[])
                     }
                     case I:
                     {
-                        int len = strlen(lexema);		/*esto lo va a hacer al leer cada caracter y sola una de cada 64 veces como max se va a meter en el if
+                        int len2 = strlen(lexema);		/*esto lo va a hacer al leer cada caracter y sola una de cada 64 veces como max se va a meter en el if
 								  podemos meter strlen(lexema) en la condicion y otra vez en el lexema = " " */
-                        if (len >= 64) {
-                            lexema = (char *) realloc(lexema, len + (64 * sizeof(char)));
+                        if (len2 >= 64) {
+                            lexema = (char *) realloc(lexema, len2 + (64 * sizeof(char)));
                         }
                         lexema = strncat(lexema, &leido, 1);
                         leido = fgetc(fp1);
