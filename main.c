@@ -59,9 +59,9 @@ int main(int argc, char const *argv[])
                     }
                     case C:
                     {
-                        int len = strlen(lexema);
-                        if (len >= 64) {
-                            lexema = (char *) realloc(lexema, len + (64 * sizeof(char)));
+                        //int len = strlen(lexema);
+                        if (strlen(lexema) >= 64) {
+                            lexema = (char *) realloc(lexema, strlen(lexema) + (64 * sizeof(char)));
                         }
                         lexema = strncat(lexema, &leido, 1);
                         leido = fgetc(fp1);
@@ -114,10 +114,9 @@ int main(int argc, char const *argv[])
                     }
                     case I:
                     {
-                        int len2 = strlen(lexema);		/*esto lo va a hacer al leer cada caracter y sola una de cada 64 veces como max se va a meter en el if
-								  podemos meter strlen(lexema) en la condicion y otra vez en el lexema = " " */
-                        if (len2 >= 64) {
-                            lexema = (char *) realloc(lexema, len2 + (64 * sizeof(char)));
+                        if (strlen(lexema) >= 64) { /*como solo una de cada 64 veces como mucho nos metemos en esta condicion, es mas eficiente 
+                                                      no usar una variable auxiliar para almacenar el length de lexema cada una de las iteraciones*/
+                            lexema = (char *) realloc(lexema, strlen(lexema) + (64 * sizeof(char)));
                         }
                         lexema = strncat(lexema, &leido, 1);
                         leido = fgetc(fp1);
