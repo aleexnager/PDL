@@ -130,35 +130,35 @@ int mt_afd_accion(int estado_actual, char c) {
             sig_accion = D;
             break;
         }
-        sig_accion = 67; break;
+        sig_accion = 66; break;
     case 4:
         if (isdigit(c)) {
             sig_accion = F; break;
         } else if (isspace(c) || c == ';') {
             sig_accion = G; break;
         }
-        sig_accion = 68; break;
+        sig_accion = 66; break;
     case 5:
         if (isalpha(c) || isdigit(c) || c == '_') {
             sig_accion = I; break;
         } else {
             sig_accion = J; break;
         }
-        sig_accion = 69; break;
+        sig_accion = 66; break;
     case 6:
         if (c == '=') {
             sig_accion = L; break;
         } else {
             sig_accion = K; break;
         }
-        sig_accion = 70; break;
+        sig_accion = 66; break;
     case 7:
         if (c == '=') {
             sig_accion = N; break;
         } else {
             sig_accion = M; break;
         }
-        sig_accion = 71; break;
+        sig_accion = 66; break;
     }
     return sig_accion;
 }

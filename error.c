@@ -56,21 +56,6 @@ FILE* gen_error(FILE* fp, int cod_error, int linea, char c) {
     case 66:
         fprintf(fp, "Error Léxico %d. Línea %d: Este carácter no es aceptado por la gramática del lenguaje \'%c\'.\n", cod_error, linea, c);
         break;
-    case 67:
-        fprintf(fp, "Error Léxico %d. Línea %d: Este carácter no es aceptado por la gramática del lenguaje \'%c\'.\n", cod_error, linea, c);
-        break;
-    case 68:
-        fprintf(fp, "Error Léxico %d. Línea %d: Este carácter no es aceptado por la gramática del lenguaje \'%c\'.\n", cod_error, linea, c);
-        break;
-    case 69:
-        fprintf(fp, "Error Léxico %d. Línea %d: Este carácter no es aceptado por la gramática del lenguaje \'%c\'.\n", cod_error, linea, c);
-        break;
-    case 70:
-        fprintf(fp, "Error Léxico %d. Línea %d: Este carácter no es aceptado por la gramática del lenguaje \'%c\'.\n", cod_error, linea, c);
-        break;
-    case 71:
-        fprintf(fp, "Error Léxico %d. Línea %d: Este carácter no es aceptado por la gramática del lenguaje \'%c\'.\n", cod_error, linea, c);
-        break;
     }
     return fp;
 }
