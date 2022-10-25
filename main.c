@@ -23,7 +23,6 @@ int main(int argc, char const *argv[])
     int accion;
     int linea = 1;
     char leido = fgetc(fp1);
-    int hayError = 0;
     while (!feof(fp1))
     {
         estado = 0;
@@ -41,7 +40,6 @@ int main(int argc, char const *argv[])
                 a la función de generar error */
                 if (accion >= 50) {
                     fp3 = gen_error(fp3, accion, linea, leido);
-                    hayError = 1;
                 }
                 leido = fgetc(fp1);
                 estado = 0;
@@ -79,7 +77,6 @@ int main(int argc, char const *argv[])
                             free(token);
                         } else {
                             fp3 = gen_error_string(fp3, linea, lexema);
-                            hayError = 1;
                         }
                         leido = fgetc(fp1);
                         break;
@@ -106,7 +103,6 @@ int main(int argc, char const *argv[])
                             free(token);
                         } else {
                             fp3 = gen_error_int(fp3, linea, valor);
-                            hayError = 1;
                         }
                         break;
                     }
@@ -273,9 +269,6 @@ int main(int argc, char const *argv[])
             }
         }
         free(lexema);
-    }
-    if (hayError == 0) {
-        fp3 = no_errors(fp3);
     }
 
     free(tabla_simb);
