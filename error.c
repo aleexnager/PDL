@@ -53,9 +53,6 @@ FILE* gen_error(FILE* fp, int cod_error, int linea, char c) {
     case 65:
         fprintf(fp, "Error Léxico %d. Línea %d: Carácter \'%c\' no esperado, se esperaba el carácter \'/\'.\n", cod_error, linea, c);
         break;
-    case 66:
-        fprintf(fp, "Error Léxico %d. Línea %d: Este carácter no es aceptado por la gramática del lenguaje \'%c\'.\n", cod_error, linea, c);
-        break;
     }
     return fp;
 }
