@@ -4,8 +4,8 @@
 #include <ctype.h>
 #include "header.h"
 
-// FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
-// LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR
+/* FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
+   LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR */
 
 int main(int argc, char const *argv[])
 {
@@ -23,6 +23,7 @@ int main(int argc, char const *argv[])
     int accion;
     int linea = 1;
     char leido = fgetc(fp1);
+    int hayError = 0;
     while (!feof(fp1))
     {
         estado = 0;
@@ -35,11 +36,12 @@ int main(int argc, char const *argv[])
             estado = mt_afd_estado(estado, leido);
 
             if (estado == -1) {
-                // Estado es -1 y acción 1, se ha leído un EOF
-                // por tanto, se entra al if de estado pero no llama
-                // a la función de generar error
+                /* Estado es -1 y acción 1, se ha leído un EOF
+                por tanto, se entra al if de estado pero no llama
+                a la función de generar error */
                 if (accion >= 50) {
                     fp3 = gen_error(fp3, accion, linea, leido);
+                    hayError = 1;
                 }
                 leido = fgetc(fp1);
                 estado = 0;
@@ -59,7 +61,7 @@ int main(int argc, char const *argv[])
                     }
                     case C:
                     {
-                        //int len = strlen(lexema);
+                        /* int len = strlen(lexema); */
                         if (strlen(lexema) >= 64) {
                             lexema = (char *) realloc(lexema, strlen(lexema) + (64 * sizeof(char)));
                         }
@@ -77,6 +79,7 @@ int main(int argc, char const *argv[])
                             free(token);
                         } else {
                             fp3 = gen_error_string(fp3, linea, lexema);
+                            hayError = 1;
                         }
                         leido = fgetc(fp1);
                         break;
@@ -103,6 +106,7 @@ int main(int argc, char const *argv[])
                             free(token);
                         } else {
                             fp3 = gen_error_int(fp3, linea, valor);
+                            hayError = 1;
                         }
                         break;
                     }
@@ -114,11 +118,12 @@ int main(int argc, char const *argv[])
                     }
                     case I:
                     {
-                        if (strlen(lexema) >= 64) { /*como solo una de cada 64 veces como mucho nos metemos en esta condicion, es mas eficiente 
-                                                      no usar una variable auxiliar para almacenar el length de lexema cada una de las iteraciones
-						      . lo he vuelto a pensar y no se si es verdad esto, lo unico que hace es hacer 1 operacion mas
-						      cada iteracion pero no crea espacio para una variable cada una de las veces asi que no se 
-						      que es mejor, queda mas bonito como antes pero weno*/
+                        if (strlen(lexema) >= 64) { 
+                        /* Como solo una de cada 64 veces como mucho nos metemos en esta condicion, es mas eficiente 
+                        no usar una variable auxiliar para almacenar el length de lexema cada una de las iteraciones. 
+                        Lo he vuelto a pensar y no se si es verdad esto, lo unico que hace es hacer 1 operacion mas
+	                    cada iteracion pero no crea espacio para una variable cada una de las veces asi que no se 
+	                    que es mejor, queda mas bonito como antes pero weno */
                             lexema = (char *) realloc(lexema, strlen(lexema) + (64 * sizeof(char)));
                         }
                         lexema = strncat(lexema, &leido, 1);
@@ -136,7 +141,7 @@ int main(int argc, char const *argv[])
                             token_pal_res->lexema = "";
                             fprintf(fp2, "<%d, %s>\n", token_pal_res->id, token_pal_res->lexema);
                             free(token_pal_res);
-                        } else if ( (pos_ts = buscar_ts(lexema, top_ts, tabla_simb)) > -1) { /* he cambiado aqui a top_ts */
+                        } else if ( (pos_ts = buscar_ts(lexema, top_ts, tabla_simb)) > -1) {
                             /* Si está en la ts gen token (ID, pos_ts) */
                             token_valor_t* token_valor_1 = malloc(sizeof(token_valor_t *));
                             token_valor_1->id = ID;
@@ -269,6 +274,10 @@ int main(int argc, char const *argv[])
         }
         free(lexema);
     }
+    if (hayError == 0) {
+        fp3 = no_errors(fp3);
+    }
+
     free(tabla_simb);
 
     fclose(fp1);

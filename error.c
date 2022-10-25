@@ -19,11 +19,16 @@ FILE* gen_error(FILE* fp, int cod_error, int linea, char c) {
 }
 
 FILE* gen_error_int(FILE* fp, int linea, int c) {
-        fprintf(fp, "Error Léxico. Línea %d: El int \'%d\' tiene un valor que se sale del rango representable [-32767, 32767].\n", linea, c);
-        return fp;
+    fprintf(fp, "Error Léxico. Línea %d: El int \'%d\' tiene un valor que se sale del rango representable [-32767, 32767].\n", linea, c);
+    return fp;
 }
 
 FILE* gen_error_string(FILE* fp, int linea, char* c) {
-        fprintf(fp, "Error Léxico. Línea %d: La longitud del String \'%s\' supera el límite permitido de 64 carácteres.\n", linea, c);
-        return fp;
+    fprintf(fp, "Error Léxico. Línea %d: La longitud del String \'%s\' supera el límite permitido de 64 carácteres.\n", linea, c);
+    return fp;
+}
+
+FILE* no_errors(FILE* fp) {
+    fprintf(fp, "No se han detectado errores en el código\n");
+    return fp;
 }
