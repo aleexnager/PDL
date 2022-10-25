@@ -36,7 +36,7 @@ FILE* gen_error(FILE* fp, int cod_error, int linea, char c) {
         fprintf(fp, "Error Léxico %d. Línea %d: Carácter \'%c\' no esperado, se esperaba el carácter \'/\'.\n", cod_error, linea, c);
         break;
     case 60:
-        fprintf(fp, "Error Léxico %d. Línea %d: No se acepta un delimitador. Se esperada el carácter \'/\'.\n", cod_error, linea);
+        fprintf(fp, "Error Léxico %d. Línea %d: No se acepta un delimitador. Se esperaba el carácter \'/\'.\n", cod_error, linea);
         break;
     case 61:
         fprintf(fp, "Error Léxico %d. Línea %d: Carácter \'%c\' no esperado, se esperaba el carácter \'/\'.\n", cod_error, linea, c);
