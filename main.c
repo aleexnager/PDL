@@ -4,8 +4,8 @@
 #include <ctype.h>
 #include "header.h"
 
-/* FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
-   LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR */
+// FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
+// LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR
 
 int main(int argc, char const *argv[])
 {
@@ -35,9 +35,9 @@ int main(int argc, char const *argv[])
             estado = mt_afd_estado(estado, leido);
 
             if (estado == -1) {
-                /* Estado es -1 y acción 1, se ha leído un EOF
-                por tanto, se entra al if de estado pero no llama
-                a la función de generar error */
+                // Estado es -1 y acción 1, se ha leído un EOF
+                // por tanto, se entra al if de estado pero no llama
+                // a la función de generar error
                 if (accion >= 50) {
                     fp3 = gen_error(fp3, accion, linea, leido);
                 }
@@ -59,7 +59,6 @@ int main(int argc, char const *argv[])
                     }
                     case C:
                     {
-                        /* int len = strlen(lexema); */
                         if (strlen(lexema) >= 64) {
                             lexema = (char *) realloc(lexema, strlen(lexema) + (64 * sizeof(char)));
                         }
@@ -114,12 +113,7 @@ int main(int argc, char const *argv[])
                     }
                     case I:
                     {
-                        if (strlen(lexema) >= 64) { 
-                        /* Como solo una de cada 64 veces como mucho nos metemos en esta condicion, es mas eficiente 
-                        no usar una variable auxiliar para almacenar el length de lexema cada una de las iteraciones. 
-                        Lo he vuelto a pensar y no se si es verdad esto, lo unico que hace es hacer 1 operacion mas
-	                    cada iteracion pero no crea espacio para una variable cada una de las veces asi que no se 
-	                    que es mejor, queda mas bonito como antes pero weno */
+                        if (strlen(lexema) >= 64) {
                             lexema = (char *) realloc(lexema, strlen(lexema) + (64 * sizeof(char)));
                         }
                         lexema = strncat(lexema, &leido, 1);
@@ -132,6 +126,7 @@ int main(int argc, char const *argv[])
                         int id_pal_res = es_pal_res(lexema);
 
                         if (id_pal_res > -1) {
+                            /* Si es palabra reservada gen token (lexema, -) */
                             token_lexema_t* token_pal_res = malloc(sizeof(token_lexema_t *));
                             token_pal_res->id = id_pal_res;
                             token_pal_res->lexema = "";
@@ -270,7 +265,6 @@ int main(int argc, char const *argv[])
         }
         free(lexema);
     }
-
     free(tabla_simb);
 
     fclose(fp1);

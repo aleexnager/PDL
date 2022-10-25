@@ -57,7 +57,7 @@ int mt_afd_estado(int estado_actual, char c) {
             sig_estado = 114;
             break;
         }
-        if (esdel(c) || c == '\n') {
+        if (isspace(c)) {
             sig_estado = 0;
             break;
         }
