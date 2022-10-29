@@ -94,7 +94,7 @@ int main(int argc, char const *argv[])
                     }
                     case G:
                     {
-                        if (valor > -32768 && valor < 32768) {
+                        if (valor < 32768) {
                             token_valor_t* token = malloc(sizeof(token_valor_t *));
                             token->id = CTE_ENTERA;
                             token->valor = valor;
