@@ -1,0 +1,16 @@
+#0:
+*'a'
++tipo:'0'
++despl:0
+*'b'
++tipo:'0'
++despl:0
+*'aux'
++tipo:'0'
++despl:0
+*'true'
++tipo:'0'
++despl:0
+*'false'
++tipo:'0'
++despl:0

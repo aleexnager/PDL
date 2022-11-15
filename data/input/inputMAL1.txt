@@ -1,0 +1,8 @@
+let int a = h;
+let M int   = true;
+for (int i = 0; i < M; f++)
+print("mal");}
+
+/*mal comentario1*/
+/mal comentario2
+{)
