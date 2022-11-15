@@ -14,12 +14,18 @@
 - ***Tabla de Símbolos***
 
 ## Manual de usuario:
-1. git pull https://github.com/mciccale/pdl-project.git
-2. mkdir bin build
+```
+$ git pull https://github.com/mciccale/pdl-project.git
+$ mkdir bin build lib
+```
 
 ## Ejecución:
-1. ./bin/run ./data/input/[your-file]
-2. Para ver los resultados de la ejecución
-	1. cat ./data/output/token.txt
-	2. cat ./data/output/tabla_simbolos.txt
-	3. cat ./data/output/error.txt
+```
+$ ./bin/run ./data/input/[your-file]
+```
+## Ver los resultados de la ejecución
+```
+$ cat ./data/output/token.txt
+$ cat ./data/output/tabla_simbolos.txt
+$ cat ./data/output/error.txt
+```
