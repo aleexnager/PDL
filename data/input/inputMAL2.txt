@@ -1,0 +1,9 @@
+/* hsabdf lasb
+let mivar int = 0;
+
+let s1 string="test"
+let s2 string='test0123'
+let s3 string='test0123test'
+let s4 string='test % test'
+
+let div int = 2/1;

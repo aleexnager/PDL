@@ -1,0 +1,12 @@
+let int a = 34;
+let int b;
+let boolean aux = true;
+
+// buen comentario!
+
+for (b = 0; aux; b=b%b)
+{
+    aux = false;
+}
+
+return aux;
