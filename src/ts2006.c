@@ -1,13 +1,13 @@
-// Tabla de Símbolos 2006
-// Creada por Daniel Peña Vázquez
-// Supervisada por José Luis Fuertes Castro
+// Tabla de Sï¿½mbolos 2006
+// Creada por Daniel Peï¿½a Vï¿½zquez
+// Supervisada por Josï¿½ Luis Fuertes Castro
 
-// Este código es C estándar.
+// Este cï¿½digo es C estï¿½ndar.
 // Gracias a ello, se puede compilar correctamente y sin warnings 
 // al menos en los siguientes compiladores:
 // - GCC  ( probado en la version DJGPP 2.30 )
-// - BCC32 ( probado en la versión Borland C++ 5.5.1 )
-// - Microsoft Visual C++ ( probado en la versión 6.0 )
+// - BCC32 ( probado en la versiï¿½n Borland C++ 5.5.1 )
+// - Microsoft Visual C++ ( probado en la versiï¿½n 6.0 )
 
 // Nota: las cadenas que maneja esta tabla de simbolos son case-sensitive
 // (no es lo mismo mayusculas que minusculas)
@@ -78,7 +78,7 @@ typedef struct nodo_tabla_de_simbolos
 
 // variables globales (pero en principio el usuario no deberia tocarlas)
 tipo_tabla_de_simbolos *tablas_de_simbolos=NULL; // Lista de tablas de simbolos
-int ultimo_id_error = 0; // ID del último error que se ha producido
+int ultimo_id_error = 0; // ID del ï¿½ltimo error que se ha producido
 int contador_tablas = 0; // Contador de las tablas creadas
 
 // FUNCIONES PRIVADAS :
@@ -93,10 +93,10 @@ int funcion_hash(char *cadena)
   int resultado;
   char letra;
   int ascii_letra;
-  // no debería ocurrir que la cadena fuera NULL ,
+  // no deberï¿½a ocurrir que la cadena fuera NULL ,
   if (cadena == NULL)
   {
-    // pero en ese caso se devolverá 0
+    // pero en ese caso se devolverï¿½ 0
     resultado = 0;  
   }
   else
@@ -105,9 +105,9 @@ int funcion_hash(char *cadena)
     for (i=0; i<lon; i++ )
 	{
 	  letra = cadena[i];
-	  // Se convertirá cada letra a su valor entero ascii.
+	  // Se convertirï¿½ cada letra a su valor entero ascii.
 	  ascii_letra = (int) letra;
-	  // Se sumarán todos esos valores.
+	  // Se sumarï¿½n todos esos valores.
       suma_ascii = suma_ascii+ascii_letra; 
 	}
 	// Se hace modulo con cte_espacio_hash
@@ -119,14 +119,14 @@ int funcion_hash(char *cadena)
 // FUNCIONES PUBLICAS :
 
 
-// ************** Crear una tabla de símbolos ******************************************
+// ************** Crear una tabla de sï¿½mbolos ******************************************
 // Proceso DFD  : 1.1
 // ID Requisito : REQ04
 // Entrada      : <nada>
 //
-// Salida       : - Identificador de la tabla creada (número positivo) si se creó.
+// Salida       : - Identificador de la tabla creada (nï¿½mero positivo) si se creï¿½.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Crea una nueva tabla de símbolos y
+// Descripciï¿½n  : Crea una nueva tabla de sï¿½mbolos y
 //                 devuelve el identificador que se le ha asignado.
 // *************************************************************************************
 int crear_tabla()
@@ -171,15 +171,15 @@ int crear_tabla()
 }
 
 
-// ************** Destruir una tabla de símbolos ***************************************
+// ************** Destruir una tabla de sï¿½mbolos ***************************************
 // Proceso DFD  : 1.2
 // ID Requisito : REQ05
 // Cabecera     : int destruir_tabla(int id_tabla);
 // Entrada      : - Identificador de la tabla que se quiere destruir.
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Se destruye la tabla indicada.
+// Descripciï¿½n  : Se destruye la tabla indicada.
 // *************************************************************************************
 int destruir_tabla(int id_tabla) 
 {  
@@ -276,7 +276,7 @@ int destruir_tabla(int id_tabla)
 }
 
 
-// ************** Determinar la existencia de una tabla de símbolos ********************
+// ************** Determinar la existencia de una tabla de sï¿½mbolos ********************
 // Proceso DFD  : 1.3
 // ID Requisito : REQ15
 // Entrada      : - Identificador de la tabla que se quiere consultar.
@@ -284,7 +284,7 @@ int destruir_tabla(int id_tabla)
 // Salida       : - Devuelve 0 si existe.
 //                - Devuelve 1 si no existe. 
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Determina si una tabla existe 
+// Descripciï¿½n  : Determina si una tabla existe 
 //                 (ya fue creada y aun no ha sido destruida)
 // *************************************************************************************
 int existe_tabla(int id_tabla)
@@ -315,9 +315,9 @@ int existe_tabla(int id_tabla)
 // Entrada      : - Identificador de la tabla donde se quiere crear la entrada.
 //                - Lexema que se quiere insertar en la nueva entrada.
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Crea una nueva entrada en la tabla indicada
+// Descripciï¿½n  : Crea una nueva entrada en la tabla indicada
 //                 con el lexema indicado. 
 // *************************************************************************************
 int crear_entrada(int id_tabla, char *lexema)
@@ -390,7 +390,7 @@ int crear_entrada(int id_tabla, char *lexema)
 	  }
 	  while ((p_entrada != NULL) && (resultado == 0));
 	  if (resultado == 0) 
-	  { // si no existia el lexema ya, añadirlo a la lista de colisiones para esa entrada
+	  { // si no existia el lexema ya, aï¿½adirlo a la lista de colisiones para esa entrada
         nueva_entrada = (tipo_entrada *) malloc(sizeof(tipo_entrada));
 		if (nueva_entrada == NULL) // sin memoria para mas
 		{
@@ -433,13 +433,13 @@ int crear_entrada(int id_tabla, char *lexema)
 // ************** Asignar el tipo de entrada a una entrada *****************************
 // Proceso DFD  : 2.2
 // ID Requisito : REQ07
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //                - Tipo que se le quiere dar a la entrada.
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Asigna un tipo a una entrada existente.
+// Descripciï¿½n  : Asigna un tipo a una entrada existente.
 // *************************************************************************************
 int asignar_tipo_entrada(int id_tabla, char *lexema, char *tipo)
 { // Asigna tipo de entrada a una entrada
@@ -544,12 +544,12 @@ int asignar_tipo_entrada(int id_tabla, char *lexema, char *tipo)
 // ************** Consultar el tipo de entrada de una entrada **************************
 // Proceso DFD  : 2.3
 // ID Requisito : REQ08
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //
 // Salida       : - Devuelve tipo de la entrada si se ha definido uno y no hay errores.
 //                - Devuelve NULL si se produce un error.
-// Descripción  : Consulta el tipo de una entrada.
+// Descripciï¿½n  : Consulta el tipo de una entrada.
 // *************************************************************************************
 char* consultar_tipo_entrada(int id_tabla, char *lexema)
 { // Consulta tipo de entrada de una entrada
@@ -640,13 +640,13 @@ char* consultar_tipo_entrada(int id_tabla, char *lexema)
 // ************** Determinar la existencia de una entrada ******************************
 // Proceso DFD  : 2.4
 // ID Requisito : REQ16
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //
 // Salida       : - Devuelve 0 si existe.
 //                - Devuelve 1 si no existe.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Determina si una entrada existe 
+// Descripciï¿½n  : Determina si una entrada existe 
 //                 ( fue ya creada y aun no se ha destruido su tabla )
 // *************************************************************************************
 int existe_entrada(int id_tabla, char *lexema)
@@ -720,16 +720,16 @@ int existe_entrada(int id_tabla, char *lexema)
 // ************** Crear un atributo entero en una entrada ******************************
 // Proceso DFD  : 3.1
 // ID Requisito : REQ09
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //                - Alias del atributo (ejemplos: "desplazamiento", "ancho","tabla")
 //                - Valor inicial para el atributo que estamos 
 //                   creando (ejemplos: 16, 48, 3)
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Crea un nuevo atributo en la entrada, con el alias indicado. 
-//                 Este atributo solo podrá almacenar valores enteros (tipo int de C)
+// Descripciï¿½n  : Crea un nuevo atributo en la entrada, con el alias indicado. 
+//                 Este atributo solo podrï¿½ almacenar valores enteros (tipo int de C)
 // *************************************************************************************
 int crear_atributo_entero(int id_tabla, char *lexema, char *alias_at, int valor)
 { // Crea un nuevo atributo entero en la tabla indicada, en la entrada de lexema indicado
@@ -884,16 +884,16 @@ int crear_atributo_entero(int id_tabla, char *lexema, char *alias_at, int valor)
 // ************** Crear un atributo cadena en una entrada ******************************
 // Proceso DFD  : 3.2
 // ID Requisito : REQ10
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //                - Alias del atributo (ejemplos: "cadena", "real","cosa")
 //                - Valor inicial para el atributo que estamos 
 //                  creando (ejemplos: "algo", "12.345", "123abcd")
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Crea un nuevo atributo en la entrada, con el alias indicado. 
-//                 Este atributo solo podrá almacenar cadenas (tipo char* de C)
+// Descripciï¿½n  : Crea un nuevo atributo en la entrada, con el alias indicado. 
+//                 Este atributo solo podrï¿½ almacenar cadenas (tipo char* de C)
 // *************************************************************************************
 int crear_atributo_cadena(int id_tabla, char *lexema, char *alias_at, char *valor)
 { // Crea un nuevo atributo cadena en la tabla indicada, en la entrada de lexema indicado
@@ -1086,14 +1086,14 @@ int crear_atributo_cadena(int id_tabla, char *lexema, char *alias_at, char *valo
 // ************** Asignar el valor de un atributo entero *******************************
 // Proceso DFD  : 3.3
 // ID Requisito : REQ11
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //                - Alias del atributo.
 //                - Nuevo valor que se quiere escribir en ese atributo (un entero)
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Da un valor al atributo (entero) de alias indicado en la 
+// Descripciï¿½n  : Da un valor al atributo (entero) de alias indicado en la 
 //                 entrada indicada (sobrescribe el valor antiguo)
 // *************************************************************************************
 int asignar_valor_atributo_entero(int id_tabla, char *lexema, char *alias_at, int valor)
@@ -1218,14 +1218,14 @@ int asignar_valor_atributo_entero(int id_tabla, char *lexema, char *alias_at, in
 // ************** Asignar el valor de un atributo cadena *******************************
 // Proceso DFD  : 3.4
 // ID Requisito : REQ12
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //                - Alias del atributo.
 //                - Nuevo valor que se quiere escribir en ese atributo (una cadena)
 
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Da un valor al atributo (cadena) de alias indicado en la entrada 
+// Descripciï¿½n  : Da un valor al atributo (cadena) de alias indicado en la entrada 
 //                 indicada (sobrescribe el valor antiguo)
 // *************************************************************************************
 int asignar_valor_atributo_cadena(int id_tabla, char *lexema, char *alias_at, char *valor)
@@ -1385,13 +1385,13 @@ int asignar_valor_atributo_cadena(int id_tabla, char *lexema, char *alias_at, ch
 // ************** Consultar el valor de un atributo entero *****************************
 // Proceso DFD  : 3.5
 // ID Requisito : REQ13
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //                - Alias del atributo.
 //
 // Salida       : - Valor del atributo entero.
 //                - Devuelve 0 y genera un error si se produce error.
-// Descripción  : Consulta el valor de un atributo entero.
+// Descripciï¿½n  : Consulta el valor de un atributo entero.
 // *************************************************************************************
 int consultar_valor_atributo_entero(int id_tabla, char *lexema, char *alias_at)
 { // consulta un atributo entero
@@ -1521,13 +1521,13 @@ int consultar_valor_atributo_entero(int id_tabla, char *lexema, char *alias_at)
 // ************** Consultar el valor de un atributo cadena *****************************
 // Proceso DFD  : 3.6
 // ID Requisito : REQ14
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //                - Alias del atributo.
 //
 // Salida       : - Valor del atributo cadena.
 //                - Devuelve NULL y genera un error si se produce error.
-// Descripción  : Consulta el valor de un atributo cadena.
+// Descripciï¿½n  : Consulta el valor de un atributo cadena.
 // *************************************************************************************
 char* consultar_valor_atributo_cadena(int id_tabla, char *lexema, char *alias_at)
 {  // consulta un atributo cadena
@@ -1665,14 +1665,14 @@ char* consultar_valor_atributo_cadena(int id_tabla, char *lexema, char *alias_at
 // ************** Determinar la existencia de un atributo ******************************
 // Proceso DFD  : 3.7
 // ID Requisito : REQ17
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //                - Alias del atributo.
 //
 // Salida       : - Devuelve 0 si existe.
 //                - Devuelve 1 si no existe.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Determina si un atributo (con el alias indicado) existe en una 
+// Descripciï¿½n  : Determina si un atributo (con el alias indicado) existe en una 
 //                 determinada entrada (si existe la entrada y 
 //                 aun su tabla no se ha destruido)
 // *************************************************************************************
@@ -1790,15 +1790,15 @@ int existe_atributo(int id_tabla, char *lexema, char *alias_at)
 // ************** Escribir el contenido actual de una tabla en un fichero **************
 // Proceso DFD  : 4.1
 // ID Requisito : REQ18
-// Entrada      : - Identificador de la tabla de símbolos.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos.
 //                - Nombre del fichero donde se quiere escribir su contenido.
 
 //
 // Salida       : - Da una salida por fichero representando textualmente el 
 //                   contenido de la tabla indicada en el momento de la llamada.
-//                - Devuelve 0 si la operación se realizó correctamente.
+//                - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Refleja el contenido actual de una tabla de símbolos 
+// Descripciï¿½n  : Refleja el contenido actual de una tabla de sï¿½mbolos 
 //                 en un fichero, de forma textual.
 // *************************************************************************************
 int escribir_tabla(int id_tabla, char *nombre_fichero)
@@ -1813,7 +1813,7 @@ int escribir_tabla(int id_tabla, char *nombre_fichero)
    tipo_entrada *p_entrada; 
    tipo_atributo *p_atributo;
    tipo_atributo *p_atributo_a_escribir;
-   // Si la lista de tablas esta vacía, no seguir.
+   // Si la lista de tablas esta vacï¿½a, no seguir.
    // + No podemos aceptar un nombre "nulo" para el archivo
    if ((tablas_de_simbolos != NULL) && (nombre_fichero != NULL))
    {
@@ -1918,7 +1918,7 @@ int escribir_tabla(int id_tabla, char *nombre_fichero)
 	   fprintf(controlador,"---------------------------------------------------\n");
 	   if (escrito_algo == -1)
        {
-         fprintf(controlador,"  <la tabla esta vacía>\n");
+         fprintf(controlador,"  <la tabla esta vacÃ­a>\n");
 	   }
 	   fclose(controlador); // liberamos el controlador del fichero
 	 } 
@@ -1938,16 +1938,16 @@ int escribir_tabla(int id_tabla, char *nombre_fichero)
 }
 
 
-// ************** Consultar el ID del último error que se ha producido *****************
+// ************** Consultar el ID del ï¿½ltimo error que se ha producido *****************
 // Proceso DFD  : 5.1
 // ID Requisito : REQ19
 // Entrada      : <nada>
 //
 // Salida       : - Devuelve un entero positivo que representa el 
-//                   último error que se ha producido.
+//                   ï¿½ltimo error que se ha producido.
 //                - Devuelve 0 si de momento no han ocurrido errores.
-// Descripción  : Devuelve un valor numérico que identifica el
-//                 último error que se ha producido.
+// Descripciï¿½n  : Devuelve un valor numï¿½rico que identifica el
+//                 ï¿½ltimo error que se ha producido.
 // *************************************************************************************
 int consultar_id_ultimo_error()
 {  // Devuelve el ID del ultimo error que se ha producido
@@ -1958,16 +1958,16 @@ int consultar_id_ultimo_error()
 }
 
 
-// ************** Consultar la descripción del último error que se ha producido ********
+// ************** Consultar la descripciï¿½n del ï¿½ltimo error que se ha producido ********
 // Proceso DFD  : 5.2
 // ID Requisito : REQ20
 // Entrada      : <nada>
 //
-// Salida       : - Devuelve una cadena indicando la descripción del 
-//                   último error que se ha producido.
-//                - Devuelve la cadena vacía ("") si de momento no han ocurrido errores.
-// Descripción  : Devuelve una descripción textual en lenguaje natural 
-//                 del último error que se ha producido.
+// Salida       : - Devuelve una cadena indicando la descripciï¿½n del 
+//                   ï¿½ltimo error que se ha producido.
+//                - Devuelve la cadena vacï¿½a ("") si de momento no han ocurrido errores.
+// Descripciï¿½n  : Devuelve una descripciï¿½n textual en lenguaje natural 
+//                 del ï¿½ltimo error que se ha producido.
 // *************************************************************************************
 char* consultar_descripcion_ultimo_error()
 {  // Devuelve la descripcion del ultimo error que se ha producido
@@ -1987,25 +1987,25 @@ char* consultar_descripcion_ultimo_error()
 	   return "No existe una entrada con ese lexema en esa tabla";
 	   break;
 	 case cte_error_ya_existe_atributo :
-	   return "Ya existía el atributo. No se ha modificado";
+	   return "Ya existï¿½a el atributo. No se ha modificado";
 	   break;	
 	 case cte_error_no_existe_atributo :
 	   return "No existe una atributo con ese nombre en la entrada indicada";
 	   break;
 	 case cte_error_lexema_es_null :
-	   return "NULL no es una cadena válida para denominar un lexema";
+	   return "NULL no es una cadena vï¿½lida para denominar un lexema";
 	   break;
 	 case cte_error_alias_es_null :
-	   return "NULL no es una cadena válida para denominar un atributo";
+	   return "NULL no es una cadena vï¿½lida para denominar un atributo";
 	   break;		 
      case cte_error_fichero_es_null :
-	   return "NULL no es una cadena válida para denominar un fichero";
+	   return "NULL no es una cadena vï¿½lida para denominar un fichero";
 	   break;
      case cte_error_tipo_es_null :
-	   return "NULL no es una cadena válida para denominar un tipo de entrada";
+	   return "NULL no es una cadena vï¿½lida para denominar un tipo de entrada";
 	   break;
 	 case cte_error_creacion_fichero :
-	   return "El sistema no permitió crear el fichero";
+	   return "El sistema no permitiï¿½ crear el fichero";
 	   break;
 	 case cte_error_tipo_no_definido :
 	   return "Tipo de entrada no definido";
@@ -2017,7 +2017,7 @@ char* consultar_descripcion_ultimo_error()
 	   return "El atributo existe pero no almacena cadenas";
 	   break;
 	 case cte_error_tipo_entrada_no_definido :
-	   return "El tipo de entrada aún no se ha definido";
+	   return "El tipo de entrada aï¿½n no se ha definido";
 	   break;
 	 case cte_error_demasiadas_tablas :
 	   return "Se han creado demasiadas tablas";
@@ -2032,23 +2032,23 @@ char* consultar_descripcion_ultimo_error()
 	   return "No se permite almacenar cadenas NULL";
 	   break;
 	 case cte_error_posicion_es_null : 
-	   return "La posición indicada apunta a NULL";
+	   return "La posiciï¿½n indicada apunta a NULL";
 	   break;
      default : 
-	   return "Ocurrió un error por causas desconocidas";
+	   return "Ocurriï¿½ un error por causas desconocidas";
 	   break;
 	}
 }
 
 
-// ************** Resetear la variable que almacena el último error producido  *********
+// ************** Resetear la variable que almacena el ï¿½ltimo error producido  *********
 // Proceso DFD  : 5.3
 // ID Requisito : REQ32
 // Entrada      : <nada>
 //
 // Salida       : <nada>
-// Descripción  : Resetea la variable interna que indica el
-//                 último error que se ha producido.
+// Descripciï¿½n  : Resetea la variable interna que indica el
+//                 ï¿½ltimo error que se ha producido.
 // *************************************************************************************
 void resetear_ultimo_error()
 {
@@ -2062,9 +2062,9 @@ void resetear_ultimo_error()
 // Entrada      : - Posicion de la entrada
 //                - Tipo que se le quiere dar a la entrada.
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Asigna un tipo a una entrada existente.
+// Descripciï¿½n  : Asigna un tipo a una entrada existente.
 // *************************************************************************************
 int asignar_tipo_entrada2(int posicion, char *tipo)
 { // Asigna tipo de entrada a una entrada, por posicion
@@ -2114,7 +2114,7 @@ int asignar_tipo_entrada2(int posicion, char *tipo)
 //
 // Salida       : - Devuelve tipo de la entrada si se ha definido uno y no hay errores.
 //                - Devuelve NULL si se produce un error.
-// Descripción  : Consulta el tipo de una entrada.
+// Descripciï¿½n  : Consulta el tipo de una entrada.
 // *************************************************************************************
 char* consultar_tipo_entrada2(int posicion)
 { // Consulta tipo de entrada de una entrada, por posicion
@@ -2154,10 +2154,10 @@ char* consultar_tipo_entrada2(int posicion)
 //                - Valor inicial para el atributo que estamos 
 //                   creando (ejemplos: 16, 48, 3)
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Crea un nuevo atributo en la entrada, con el alias indicado. 
-//                 Este atributo solo podrá almacenar valores enteros (tipo int de C)
+// Descripciï¿½n  : Crea un nuevo atributo en la entrada, con el alias indicado. 
+//                 Este atributo solo podrï¿½ almacenar valores enteros (tipo int de C)
 // *************************************************************************************
 int crear_atributo_entero2(int posicion, char *alias_at, int valor)
 { // Crea un nuevo atributo entero en la entrada de posicion indicada
@@ -2268,10 +2268,10 @@ int crear_atributo_entero2(int posicion, char *alias_at, int valor)
 //                - Valor inicial para el atributo que estamos 
 //                  creando (ejemplos: "algo", "12.345", "123abcd")
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Crea un nuevo atributo en la entrada, con el alias indicado. 
-//                 Este atributo solo podrá almacenar cadenas (tipo char* de C)
+// Descripciï¿½n  : Crea un nuevo atributo en la entrada, con el alias indicado. 
+//                 Este atributo solo podrï¿½ almacenar cadenas (tipo char* de C)
 // *************************************************************************************
 int crear_atributo_cadena2(int posicion, char *alias_at, char *valor)
 { // Crea un nuevo atributo cadena en la entrada de posicion indicada
@@ -2417,9 +2417,9 @@ int crear_atributo_cadena2(int posicion, char *alias_at, char *valor)
 //                - Alias del atributo.
 //                - Nuevo valor que se quiere escribir en ese atributo (un entero)
 //
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Da un valor al atributo (entero) de alias indicado en la 
+// Descripciï¿½n  : Da un valor al atributo (entero) de alias indicado en la 
 //                 entrada indicada (sobrescribe el valor antiguo)
 // *************************************************************************************
 int asignar_valor_atributo_entero2(int posicion, char *alias_at, int valor)
@@ -2500,9 +2500,9 @@ int asignar_valor_atributo_entero2(int posicion, char *alias_at, int valor)
 //                - Alias del atributo.
 //                - Nuevo valor que se quiere escribir en ese atributo (una cadena)
 
-// Salida       : - Devuelve 0 si la operación se realizó correctamente.
+// Salida       : - Devuelve 0 si la operaciï¿½n se realizï¿½ correctamente.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Da un valor al atributo (cadena) de alias indicado en la entrada 
+// Descripciï¿½n  : Da un valor al atributo (cadena) de alias indicado en la entrada 
 //                 indicada (sobrescribe el valor antiguo)
 // *************************************************************************************
 int asignar_valor_atributo_cadena2(int posicion, char *alias_at, char *valor)
@@ -2612,7 +2612,7 @@ int asignar_valor_atributo_cadena2(int posicion, char *alias_at, char *valor)
 //
 // Salida       : - Valor del atributo entero.
 //                - Devuelve 0 y genera un error si se produce error.
-// Descripción  : Consulta el valor de un atributo entero.
+// Descripciï¿½n  : Consulta el valor de un atributo entero.
 // *************************************************************************************
 int consultar_valor_atributo_entero2(int posicion, char *alias_at)
 { // consulta un atributo entero , por posicion
@@ -2694,7 +2694,7 @@ int consultar_valor_atributo_entero2(int posicion, char *alias_at)
 //
 // Salida       : - Valor del atributo cadena.
 //                - Devuelve NULL y genera un error si se produce error.
-// Descripción  : Consulta el valor de un atributo cadena.
+// Descripciï¿½n  : Consulta el valor de un atributo cadena.
 // *************************************************************************************
 char* consultar_valor_atributo_cadena2(int posicion, char *alias_at)
 {  // consulta un atributo cadena, por posicion
@@ -2788,7 +2788,7 @@ char* consultar_valor_atributo_cadena2(int posicion, char *alias_at)
 // Salida       : - Devuelve 0 si existe.
 //                - Devuelve 1 si no existe.
 //                - Devuelve -1 si se produce un error.
-// Descripción  : Determina si un atributo (con el alias indicado) existe en una 
+// Descripciï¿½n  : Determina si un atributo (con el alias indicado) existe en una 
 //                 determinada entrada (si existe la entrada y 
 //                 aun su tabla no se ha destruido)
 // *************************************************************************************
@@ -2856,12 +2856,12 @@ int existe_atributo2(int posicion, char *alias_at)
 // ************** Buscar la posicion de una entrada ************************************
 // Proceso DFD  : 2.4
 // ID Requisito : REQ29
-// Entrada      : - Identificador de la tabla de símbolos de la entrada.
+// Entrada      : - Identificador de la tabla de sï¿½mbolos de la entrada.
 //                - Lexema de la entrada.
 //
 // Salida       : - Devuelve la posicion de la entrada (si existe)
 //                - Devuelve 0 si no existe una entrada con ese id_tabla y lexema
-// Descripción  : Busca la posicion de una entrada 
+// Descripciï¿½n  : Busca la posicion de una entrada 
 //                 ( si ya fue ya creada y aun no se ha destruido su tabla )
 // *************************************************************************************
 int buscar_posicion_entrada(int id_tabla, char *lexema)

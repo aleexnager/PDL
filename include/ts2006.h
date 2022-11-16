@@ -1,18 +1,18 @@
 //////////////////////////////////////
-// Interfaz de la tabla de símbolos //
+// Interfaz de la tabla de sï¿½mbolos //
 //////////////////////////////////////
 
-// impedir desastres si se incluye este código varias veces :
+// impedir desastres si se incluye este cï¿½digo varias veces :
 #ifndef _ts2006_h_incluido_
 #define _ts2006_h_incluido_
 
-// librerías necesarias:
+// librerÃ­as necesarias:
 #include <malloc.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-// 1. GESTIÓN DE TABLAS
+// 1. GESTIÃ³N DE TABLAS
 
 // Crear una tabla. Obtendremos un id
 int crear_tabla();
@@ -23,7 +23,7 @@ int destruir_tabla(int id_tabla);
 // Determinar la existencia de una tabla
 int existe_tabla(int id_tabla);
 
-// 2. GESTIÓN DE ENTRADAS
+// 2. GESTIÃ³N DE ENTRADAS
 
 // Crear una entrada en una tabla
 int crear_entrada(int id_tabla, char *lexema);
@@ -37,7 +37,7 @@ char* consultar_tipo_entrada(int id_tabla, char *lexema);
 // Determinar si existe una entrada
 int existe_entrada(int id_tabla, char *lexema);
 
-// 3. GESTIÓN DE ATRIBUTOS
+// 3. GESTIï¿½N DE ATRIBUTOS
 
 // Crear un atributo para almacenar enteros
 int crear_atributo_entero(int id_tabla, char *lexema, char *alias_at, int valor);
@@ -60,12 +60,12 @@ char* consultar_valor_atributo_cadena(int id_tabla, char *lexema, char *alias_at
 // Determinar si existe un atributo
 int existe_atributo(int id_tabla, char *lexema, char *alias_at);
 
-// 4. GESTIÓN DE FICHEROS
+// 4. GESTIï¿½N DE FICHEROS
 
 // Escribir el contenido de una tabla en fichero
 int escribir_tabla(int id_tabla, char *nombre_fichero);
 
-// 5. GESTIÓN DE ERRORES
+// 5. GESTIï¿½N DE ERRORES
 
 // Obtener el ID del ultimo error que ha ocurrido
 int consultar_id_ultimo_error();
@@ -74,50 +74,50 @@ int consultar_id_ultimo_error();
 char* consultar_descripcion_ultimo_error();
 
 // Resetear la variable interna que almacena
-// el último error que ha ocurrido
+// el ï¿½ltimo error que ha ocurrido
 void resetear_ultimo_error();
 
 // 6. FUNCIONES ALTERNATIVAS
 // Basicamente tienen la misma funcionalidad
-// pero manejan "posición"
+// pero manejan "posiciï¿½n"
 // en lugar de "id tabla" + "lexema"
 // Son mas eficientes, pero solo para usuarios avanzados.
-// El usuario solo introduce y recibe enteros, pero aón así,
-// ahora habrá que tener mucho más cuidado de no consultar
+// El usuario solo introduce y recibe enteros, pero aï¿½n asï¿½,
+// ahora habrï¿½ que tener mucho mï¿½s cuidado de no consultar
 // posiciones de memoria incorrectas
-// Además, sería extremadamente peligroso intentar liberar 
+// Ademï¿½s, serï¿½a extremadamente peligroso intentar liberar 
 // o destruir la memoria
 // de estas posiciones de forma directa.
 
-// Asignar el tipo de entrada a una entrada (por posición)
+// Asignar el tipo de entrada a una entrada (por posiciï¿½n)
 int asignar_tipo_entrada2(int posicion, char *tipo);
 
-// Consultar el tipo de entrada de una entrada (por posición)
+// Consultar el tipo de entrada de una entrada (por posiciï¿½n)
 char* consultar_tipo_entrada2(int posicion);
 
-// Crear un atributo para almacenar enteros (por posición)
+// Crear un atributo para almacenar enteros (por posiciï¿½n)
 int crear_atributo_entero2(int posicion, char *alias_at, int valor);
 
-// Crear un atributo para almacenar cadenas (por posición)
+// Crear un atributo para almacenar cadenas (por posiciï¿½n)
 int crear_atributo_cadena2(int posicion, char *alias_at, char *valor);
 
-// Asignar un nuevo valor a un atributo entero (por posición)
+// Asignar un nuevo valor a un atributo entero (por posiciï¿½n)
 int asignar_valor_atributo_entero2(int posicion, char *alias_at, int valor);
 
-// Asignar un nuevo valor a un atributo cadena (por posición)
+// Asignar un nuevo valor a un atributo cadena (por posiciï¿½n)
 int asignar_valor_atributo_cadena2(int posicion, char *alias_at, char *valor);
 
-// Consultar el valor de un atributo entero (por posición)
+// Consultar el valor de un atributo entero (por posiciï¿½n)
 int consultar_valor_atributo_entero2(int posicion, char *alias_at);
 
-// Consultar el valor de un atributo cadena (por posición)
+// Consultar el valor de un atributo cadena (por posiciï¿½n)
 char* consultar_valor_atributo_cadena2(int posicion, char *alias_at);
 
-// Determinar si existe un atributo (por posición)
+// Determinar si existe un atributo (por posiciï¿½n)
 int existe_atributo2(int posicion, char *alias_at);
 
-// Buscar la posición de una entrada
-// (devuelve la posición si existe,y sino 0)
+// Buscar la posiciï¿½n de una entrada
+// (devuelve la posiciï¿½n si existe,y sino 0)
 int buscar_posicion_entrada(int id_tabla, char *lexema);
 
 
