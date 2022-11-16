@@ -1,0 +1,15 @@
+Error Léxico 65. Línea 1:
+
+Carácter '*' no esperado, se esperaba el carácter '/'.
+Error Léxico 50. Línea 4:
+
+Este carácter no es aceptado por la gramática del lenguaje '"'.
+Error Léxico 50. Línea 4:
+
+Este carácter no es aceptado por la gramática del lenguaje '"'.
+Error Léxico 67. Línea 5:
+
+
+let div int = 2/1;
+�
+Este carácter no es aceptado por la gramática del lenguaje '�'.
