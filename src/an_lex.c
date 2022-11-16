@@ -3,9 +3,24 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "header.h"
+#include "ts2006.h"
 
 // FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
 // LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR
+
+// INTERACCIÓN CON LA TABLA DE SÍMBOLOS GLOBAL
+// - Crear las entradas en la tabla global si se
+//   se encuentra un token identificador, a la vez
+//   que recuperar su posición en la tabla para
+//   generar el token correspondiente.
+//
+// Funciones necesarias:
+//
+// crear_entrada(int id_tabla, char *lexema)
+//     -> 0 (correcto) || -1 (error)
+//
+// buscar_posicion_entrada(int id_tabla, char *lexema)
+//     -> pos (existe) || 0 (no existe)
 
 int an_lex(const char *inputfile)
 {
