@@ -7,7 +7,6 @@
 #define _ts2006_h_incluido_
 
 // librerías necesarias:
-#include <malloc.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
