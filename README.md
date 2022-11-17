@@ -20,12 +20,14 @@ $ mkdir bin build lib
 ```
 
 ## Ejecución:
+Con el script program.sh podemos ejecutar el programa con cualquier fichero del directorio `./data/input`
 ```
-$ ./bin/run ./data/input/[your-file]
+$ ./program.sh file
 ```
 ## Ver los resultados de la ejecución
+Con el script cat.sh podremos ver cualquiera de los ficheros del directorio `./data/output/`
 ```
-$ cat ./data/output/token.txt
-$ cat ./data/output/tabla_simbolos.txt
-$ cat ./data/output/error.txt
+$ ./cat.sh token.txt
+$ ./cat.sh tabla_simbolos.txt
+$ ./cat.sh error.txt
 ```
