@@ -28,6 +28,6 @@ $ ./program.sh file
 Con el script cat.sh podremos ver cualquiera de los ficheros del directorio `./data/output/`
 ```
 $ ./cat.sh token.txt
-$ ./cat.sh tabla_simbolos.txt
+$ ./cat.sh ts.txt
 $ ./cat.sh error.txt
 ```
