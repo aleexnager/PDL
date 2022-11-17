@@ -23,7 +23,7 @@
 //     -> pos (existe) || 0 (no existe)
 
 char *token_file = "./data/output/token.txt";
-char *ts_file = "./data/output/tabla_simbolos.txt";
+char *ts_file = "./data/output/ts.txt";
 char *error_file = "./data/output/error.txt";
 
 int an_lex(const char *input_file, int id_tabla)
