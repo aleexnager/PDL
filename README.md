@@ -16,7 +16,6 @@
 ## Manual de usuario:
 [Manual de usuario](/docs/TS2006%20-%20Manual%20de%20usuario.pdf)
 ```
-$ git pull https://github.com/mciccale/pdl-project.git
 $ mkdir bin build lib
 ```
 
