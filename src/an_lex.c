@@ -8,20 +8,6 @@
 // FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
 // LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR
 
-// INTERACCIÓN CON LA TABLA DE SÍMBOLOS GLOBAL
-// - Crear las entradas en la tabla global si se
-//   se encuentra un token identificador, a la vez
-//   que recuperar su posición en la tabla para
-//   generar el token correspondiente.
-//
-// Funciones necesarias:
-//
-// crear_entrada(int id_tabla, char *lexema)
-//     -> 0 (correcto) || -1 (error)
-//
-// buscar_posicion_entrada(int id_tabla, char *lexema)
-//     -> pos (existe) || 0 (no existe)
-
 //* Ideas:
 //* - an_lex deberá devolver el [FILE *] del fichero fuente
 //* - cuando se transiciona con otro carácter, hay que mover hacia atrás
@@ -48,7 +34,8 @@
 
     Espero que se entienda :)
 */
-//! FILE *an_lex(FILE *fd_input_file, int id_tabla)
+
+//! FILE *an_lex(FILE *fd_input_file, int id_tabla, token_t *token)
 
 //? PARAMS:
 //? - FILE *fd_input_file: puntero al fichero fuente desde el que empezará a leer

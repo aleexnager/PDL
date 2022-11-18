@@ -1,4 +1,0 @@
-Error Léxico 50. Línea 1:
-
-Este carácter no es aceptado por la gramática del lenguaje '<'.
-

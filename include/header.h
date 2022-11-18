@@ -88,15 +88,11 @@ int esdel(char c);
 int mt_afd_estado(int estado_actual, char c);
 int mt_afd_accion(int estado_actual, char c);
 
-FILE* gen_error(FILE* fp, int cod_error, int linea, char leido, char *buf_linea);
-FILE* gen_error_int(FILE* fp, int linea, int c, char *buf_linea);
-FILE* gen_error_string(FILE* fp, int linea, char *lexema, char *buf_linea);
+FILE *gen_error(FILE *fp, int cod_error, int linea, char leido, char *buf_linea);
+FILE *gen_error_int(FILE *fp, int linea, int c, char *buf_linea);
+FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea);
 
 int es_pal_res(const char* lexema);
-
-int buscar_ts(const char* lexema, int top_ts, item_ts_t tabla_simb []);
-int insertar_ts(int top_ts, const char* lexema, int tipo_var, int desp, item_ts_t tabla_simb []);
-FILE* imprimir_ts(FILE* fp4, item_ts_t tabla_simb[], int pos_ts, int num_tabla);
 
 FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token);
 
