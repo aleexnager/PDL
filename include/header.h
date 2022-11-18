@@ -55,6 +55,13 @@
 
 #define TAM_TS 50
 
+typedef struct token {
+    int type;
+    int id;
+    int valor;
+    char *lexema;
+} token_t;
+
 typedef struct token_lexema {
     int id;
     char* lexema;
@@ -91,6 +98,6 @@ int buscar_ts(const char* lexema, int top_ts, item_ts_t tabla_simb []);
 int insertar_ts(int top_ts, const char* lexema, int tipo_var, int desp, item_ts_t tabla_simb []);
 FILE* imprimir_ts(FILE* fp4, item_ts_t tabla_simb[], int pos_ts, int num_tabla);
 
-int an_lex(const char *inputfile, int id_tabla);
+FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token);
 
 #endif
