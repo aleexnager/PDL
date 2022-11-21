@@ -1,0 +1,26 @@
+Error Léxico 50. Línea 1:
+
+Este carácter no es aceptado por la gramática del lenguaje '+'.
+Error Léxico 50. Línea 1:
++
+Este carácter no es aceptado por la gramática del lenguaje '+'.
+Error Léxico 50. Línea 1:
+
+Este carácter no es aceptado por la gramática del lenguaje '"'.
+Error Léxico 50. Línea 1:
+
+Este carácter no es aceptado por la gramática del lenguaje '"'.
+Error Léxico 65. Línea 3:
+*
+Carácter '*' no esperado, se esperaba el carácter '/'.
+Error Léxico 50. Línea 1:
+
+Este carácter no es aceptado por la gramática del lenguaje '*'.
+Error Léxico 60. Línea 1:
+/
+
+No se acepta un delimitador. Se esperada el carácter '/'.
+Error Léxico 62. Línea 1:
+/
+/m
+Carácter 'm' no esperado, se esperaba el carácter '/'.

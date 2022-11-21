@@ -4,7 +4,8 @@
 #include "ts2006.h"
 
 int id_tabla_global;
-const char *file_token = "./data/output/token.txt";
+const char *token_file_path = "./data/output/token.txt";
+const char *error_file_path = "./data/output/error.txt";
 
 int main(int argc, char *argv[])
 {
@@ -16,7 +17,8 @@ int main(int argc, char *argv[])
 
     FILE *fp = fopen(argv[1], "r");
     // Necesario para truncar el fichero tokens
-    truncate(file_token, 0);
+    truncate(token_file_path, 0);
+    truncate(error_file_path, 0);
     
     while(fp != NULL)
         fp = an_lex(fp, id_tabla_global, token);

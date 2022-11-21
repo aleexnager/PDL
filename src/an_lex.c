@@ -52,7 +52,7 @@ char *error_file = "./data/output/error.txt";
 FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
 {
     FILE *fp2 = fopen(token_file, "a");
-    FILE *fp3 = fopen(error_file, "w");
+    FILE *fp3 = fopen(error_file, "a");
 
     if (fp2 == NULL || fp3 == NULL)
         exit(1);
@@ -81,13 +81,15 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                 // a la función de generar error
                 if (accion >= 50) {
                     fp3 = gen_error(fp3, accion, linea, leido, buf_linea);
-                    fseek(input_file, -1, SEEK_CUR);
-                    return input_file;
+                    // fseek(input_file, -1, SEEK_CUR);
+                    // return input_file;
+                    fprintf(stderr, "%c\n", leido);
+                    leido = fgetc(input_file);
+                    strncat(buf_linea, &leido, 1);
+                    estado = 0;
+                } else {
+                    break;
                 }
-                leido = fgetc(input_file);
-                strncat(buf_linea, &leido, 1);
-                estado = 0;
-                break;
             } else {
                 switch (accion) {
                     case A:
