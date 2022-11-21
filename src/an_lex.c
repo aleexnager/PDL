@@ -49,7 +49,7 @@ char *token_file = "./data/output/token.txt";
 char *ts_file = "./data/output/ts.txt";
 char *error_file = "./data/output/error.txt";
 
-FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
+FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *buf, int *index)
 {
     FILE *fp2 = fopen(token_file, "a");
     FILE *fp3 = fopen(error_file, "a");
@@ -59,15 +59,14 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
 
     int estado;
     int accion;
-    int linea = 1;
     char leido = fgetc(input_file);
+    buf[*index] = leido;
+    ++(*index);
     if (!feof(input_file))
     {
         estado = 0;
         char *lexema = (char *) malloc(65 * sizeof(char));
         memset(lexema, 0, 65);
-        char *buf_linea = (char *) malloc(1024 * sizeof(char));
-        memset(buf_linea, 0, 1024);
         int valor;
         int lexema_length;
         while (estado < 10)
@@ -80,12 +79,10 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                 // por tanto, se entra al if de estado pero no llama
                 // a la función de generar error
                 if (accion >= 50) {
-                    fp3 = gen_error(fp3, accion, linea, leido, buf_linea);
-                    // fseek(input_file, -1, SEEK_CUR);
-                    // return input_file;
-                    fprintf(stderr, "%c\n", leido);
+                    fp3 = gen_error(fp3, accion, *linea, leido, buf);
                     leido = fgetc(input_file);
-                    strncat(buf_linea, &leido, 1);
+                    buf[*index] = leido;
+                    ++(*index);
                     estado = 0;
                 } else {
                     break;
@@ -95,12 +92,16 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                     case A:
                     {
                         if (leido == '\n') {
-                            ++linea;
-                            memset(buf_linea, 0, 1024);
+                            *linea = *linea + 1;
+                            *index = 0;
+                            memset(buf, 0, 1024);
                             leido = fgetc(input_file);
+                            buf[*index] = leido;
+                            ++(*index);
                         } else {
                             leido = fgetc(input_file);
-                            strncat(buf_linea, &leido, 1);
+                            buf[*index] = leido;
+                            ++(*index);
                         }
                         break;
                     }
@@ -108,7 +109,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                     {
                         lexema_length = 0;
                         leido = fgetc(input_file);
-                        strncat(buf_linea, &leido, 1);
+                        buf[*index] = leido;
+                        ++(*index);
                         break;
                     }
                     case C:
@@ -119,7 +121,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                         strncat(lexema, &leido, 1);
                         lexema_length++;
                         leido = fgetc(input_file);
-                        strncat(buf_linea, &leido, 1);
+                        buf[*index] = leido;
+                        ++(*index);
                         break;
                     }
                     case D:
@@ -131,23 +134,24 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                             token->valor = -1;
                             fprintf(fp2, "<%d, \'%s\'>\n", token->id, token->lexema);
                         } else {
-                            fp3 = gen_error_string(fp3, linea, lexema, buf_linea);
+                            fp3 = gen_error_string(fp3, *linea, lexema, buf);
                         }
-                        strncat(buf_linea, &leido, 1);
                         return input_file;
                     }
                     case E:
                     {
                         valor = leido - '0';
                         leido = fgetc(input_file);
-                        strncat(buf_linea, &leido, 1);
+                        buf[*index] = leido;
+                        ++(*index);
                         break;
                     }
                     case F:
                     {
                         valor = (valor * 10) + (leido - '0');
                         leido = fgetc(input_file);
-                        strncat(buf_linea, &leido, 1);
+                        buf[*index] = leido;
+                        ++(*index);
                         break;
                     }
                     case G:
@@ -159,7 +163,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                             token->lexema = NULL;
                             fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
                         } else {
-                            fp3 = gen_error_int(fp3, linea, valor, buf_linea);
+                            fp3 = gen_error_int(fp3, *linea, valor, buf);
                         }
                         fseek(input_file, -1, SEEK_CUR);
                         return input_file;
@@ -168,7 +172,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                     {
                         strncat(lexema, &leido, 1);
                         leido = fgetc(input_file);
-                        strncat(buf_linea, &leido, 1);
+                        buf[*index] = leido;
+                        ++(*index);
                         break;
                     }
                     case I:
@@ -179,7 +184,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                         strncat(lexema, &leido, 1);
                         lexema_length++;
                         leido = fgetc(input_file);
-                        strncat(buf_linea, &leido, 1);
+                        buf[*index] = leido;
+                        ++(*index);
                         break;
                     }
                     case J:
@@ -227,6 +233,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token)
                     case L:
                     {
                         leido = fgetc(input_file);
+                        buf[*index] = leido;
+                        ++(*index);
                         token->type = 0;
                         token->id = OP_MOD_ASIG;
                         token->lexema = "";

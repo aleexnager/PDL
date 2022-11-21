@@ -94,6 +94,6 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea);
 
 int es_pal_res(const char* lexema);
 
-FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token);
+FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *buf, int *index);
 
 #endif
