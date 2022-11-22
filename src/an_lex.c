@@ -5,46 +5,6 @@
 #include "header.h"
 #include "ts2006.h"
 
-// FUNCION QUE IMPLEMENTA EL FUNCIONAMIENTO DE ANALIZADOR LÉXICO, SU FUNCIÓN ES LEER DESDE UN FP, HABIENDO
-// LEIDO YA UN CARÁCTER Y GENERAR UN TOKEN O GENERAR UN ERROR
-
-//* Ideas:
-//* - an_lex deberá devolver el [FILE *] del fichero fuente
-//* - cuando se transiciona con otro carácter, hay que mover hacia atrás
-//*   el file pointer, para que cuando vuelva a entrar en el método se
-//*   encuentre con el mismo carácter, ya que al principio del método
-//*   siempre leemos.
-//* - fseek(input_file, -1, SEEK_CUR);
-
-/*
-    EJEMPLO:
-    let a int = 457;
-
-    Cuando encuentre el token let, tiene que leer el siguiente carácter, entonces cuando
-    vuelva a entrar en el método, lo primero que hace es leer el siguiente. Este caso está
-    cubierto.
-
-    Siguiendo la misma lógica, cuando se transiciona con otro carácter, por ejemplo en 457;
-    Cuando lee el ; genera el token 457, pero tiene que volver a entrar al método con el ;
-    Sin embargo, como ya lo ha leído antes, el puntero estará apuntando al carácter siguiente
-    a ;
-
-    Por ello, usamos fseek(input_file, -1, SEEK_CUR) retrocedemos el puntero para que cuando lea
-    vuelva a encontrarse el ;
-
-    Espero que se entienda :)
-*/
-
-//! FILE *an_lex(FILE *fd_input_file, int id_tabla, token_t *token)
-
-//? PARAMS:
-//? - FILE *fd_input_file: puntero al fichero fuente desde el que empezará a leer
-//? - int id_tabla: id de la tabla de símbolos a rellenar
-//? - token
-
-//? RETURN:
-//? - FILE *: Devuelve el fd_input_file, modificado, para volver a llamar
-
 char *token_file = "./data/output/token.txt";
 char *ts_file = "./data/output/ts.txt";
 char *error_file = "./data/output/error.txt";

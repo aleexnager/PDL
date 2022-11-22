@@ -1,7 +1,6 @@
 #ifndef _header_h_incluido_
 #define _header_h_incluido_
 
-#include <stdio.h>
 // Definiciones para los tokens
 
 #define ID 1
@@ -53,33 +52,12 @@
 #define T 20
 #define U 21
 
-#define TAM_TS 50
-
 typedef struct token {
     int type;
     int id;
     int valor;
     char *lexema;
 } token_t;
-
-typedef struct token_lexema {
-    int id;
-    char* lexema;
-} token_lexema_t;
-
-typedef struct token_valor {
-    int id;
-    int valor;
-} token_valor_t;
-
-typedef struct item_ts {
-    char* lexema;
-    int tipo_var;
-    int desp;
-    int num_param;
-    int tipo_dev;
-    char* etiq;
-} item_ts_t;
 
 int esc1(char c);
 int esc2(char c);
@@ -95,5 +73,7 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea);
 int es_pal_res(const char* lexema);
 
 FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *buf, int *index);
+
+int an_st();
 
 #endif
