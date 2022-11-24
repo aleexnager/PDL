@@ -80,7 +80,7 @@
 #define _U 17
 #define _V 18
 #define _J 19
-#define _EOF 20
+#define _$ 20
 
 typedef struct token {
     int type; // VALOR_T || CADENA_T
@@ -106,6 +106,6 @@ FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *bu
 
 int an_st(char *cadena);
 
-int tabla_LL1(int s, int token);
+int *tabla_LL1(int s, int token);
 
 #endif

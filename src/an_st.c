@@ -9,8 +9,11 @@
 
 int an_st(char *cadena)
 {
-    push(_EOF);
+    // PSEUDOCÓDIGO PARA EL ALGORITMO
+    // INICIALMENTE:
+    // - La pila tiene '$' (fin de fichero) y 'P' (axioma de la gramñatica)
+    // - La cadena
+    push(_$);
     push(_P);
-    print();
     return 0;
 }
