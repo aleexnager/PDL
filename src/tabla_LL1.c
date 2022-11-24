@@ -269,8 +269,8 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		    return NULL;
-	        } 
+		return NULL;
+	    } 
         }
         case _F:
         {
@@ -281,8 +281,8 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		        return NULL;
-	        } 
+		return NULL;
+	    } 
         }
         case _H:
         {
@@ -307,8 +307,8 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		        return NULL;
-	        }     
+	        return NULL;
+	    }     
         }
         case _A:
         {
@@ -333,8 +333,8 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		        return NULL;
-	        }     
+	        return NULL;
+	    }     
         }
         case _K:
         {
@@ -349,8 +349,8 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		        return NULL;
-	        }    
+	        return NULL;
+	    }    
         }
         case _C:
         {
@@ -424,15 +424,15 @@ int *tabla_LL1(int s, int token)
             {
                 int res[3] = { _Y, _R, -1 };
                 return res;
-	        }
+	    }
             else
             {
-		        return NULL;
-	        }    
+	        return NULL;
+	    }    
         }
         case _Y:
         {
-	        if (token == OP_NEQ)
+	    if (token == OP_NEQ)
             {
                 int res[4] = { _Y, _R, OP_NEQ, -1 };
                 return res;
@@ -451,12 +451,12 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		        return NULL;
-	        }
+		return NULL;
+	    }
         }
         case _R:
         {
-	        if (token == OP_NEG)
+	    if (token == OP_NEG)
             {
                 int res[3] = { _Z, _U, -1 };
                 return res;
@@ -480,15 +480,15 @@ int *tabla_LL1(int s, int token)
             {
                 int res[3] = { _Z, _U, -1 };
                 return res;
-	        }
+	    }
             else
             {
-		        return NULL;
-	        }
+		return NULL;
+	    }
         }
         case _Z:
         {
-	        if (token == OP_NEQ)
+	    if (token == OP_NEQ)
             {
                	// retrun lambda;
             }
@@ -511,12 +511,12 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		        return NULL;
-	        }
+	        return NULL;
+	    }
         }
         case _U:
         {
-	        if (token == OP_NEG)
+	    if (token == OP_NEG)
             {
                 int res[3] = { _V, OP_NEG, -1 };
                 return res;
@@ -543,8 +543,8 @@ int *tabla_LL1(int s, int token)
 	        }
             else
             {
-		        return NULL;
-	        }
+		return NULL;
+	    }
         }
         case _V:
         {
@@ -602,8 +602,8 @@ int *tabla_LL1(int s, int token)
 	        }
             else
             {
-		    return NULL;
-	        } 
+		return NULL;
+	    } 
         }
         default:
         {
