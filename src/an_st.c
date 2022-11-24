@@ -7,7 +7,10 @@
 // provienen de la librería lifo.h. Modelan una estructura de datos
 // LIFO para implementar la pila de trabajo del analiador sintáctico.
 
-int an_st(void)
+int an_st(char *cadena)
 {
+    push(_EOF);
+    push(_P);
+    print();
     return 0;
 }

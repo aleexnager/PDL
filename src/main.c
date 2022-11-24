@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Mal número de argumentos, se esperaba 1 argumento.\n");
 
     id_tabla_global = crear_tabla();
-    token_t *token = (token_t *)malloc(sizeof(token_t));
+    token_t *token = (token_t *) malloc(sizeof(token_t));
     int linea = 1;
     char buf[1024];
     int index = 0;
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
    /*while(fp != NULL)
         fp = an_lex(fp, id_tabla_global, token, &linea, buf, &index);
 */
-    an_st();
+    an_st(NULL);
     destruir_tabla(id_tabla_global);
     return 0;
 }

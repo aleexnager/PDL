@@ -1,13 +1,13 @@
 #ifndef _lifo_included_
 
 struct lifo {
-    char data;
+    int data;
     struct lifo *next;
 };
 
-void push(char c);
-char pop();
-char peek();
+void push(int data);
+int pop();
+int peek();
 void print();
 
 #endif

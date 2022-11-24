@@ -4,10 +4,10 @@
 
 struct lifo *top = NULL;
 
-void push(char c)
+void push(int data)
 {
     struct lifo *new = (struct lifo *) malloc(sizeof(struct lifo));
-    new->data = c;
+    new->data = data;
     new->next = top;
     if (top == NULL)
         new->next = NULL;
@@ -17,19 +17,19 @@ void push(char c)
     top = new;
 }
 
-char pop()
+int pop()
 {
     if (top == NULL)
         exit(-1);
     
     struct lifo *item = top;
-    char data = top->data;
+    int data = top->data;
     top = top->next;
     free(item);
     return data;
 }
 
-char peek()
+int peek()
 {
     return top->data;
 }
@@ -41,7 +41,7 @@ void print()
     printf("Stack:\n");
     while (cur != NULL)
     {
-        printf("%c\n-\n", cur->data);
+        printf("%d\n-\n", cur->data);
         cur = cur->next;
     }
     printf("\n");

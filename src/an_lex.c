@@ -88,7 +88,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     case D:
                     {
                         if (lexema_length < 65) {
-                            token->type = 0;
+                            token->type = CADENA_T;
                             token->id = CADENA;
                             token->lexema = lexema;
                             token->valor = -1;
@@ -117,7 +117,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     case G:
                     {
                         if (valor < 32768) {
-                            token->type = 1;
+                            token->type = VALOR_T;
                             token->id = CTE_ENTERA;
                             token->valor = valor;
                             token->lexema = NULL;
@@ -155,14 +155,14 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
 
                         if (id_pal_res > -1) {
                             /* Si es palabra reservada gen token (lexema, -) */
-                            token->type = 0;
+                            token->type = CADENA_T;
                             token->id = id_pal_res;
                             token->lexema = "";
                             token->valor = -1;
                             fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
                         } else if ( (pos_ts = buscar_posicion_entrada(id_tabla, lexema)) != 0) {
                             /* Si está en la ts gen token (ID, pos_ts) */
-                            token->type = 1;
+                            token->type = VALOR_T;
                             token->id = ID;
                             token->valor = pos_ts;
                             token->lexema = NULL;
@@ -170,7 +170,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         } else {
                             /* si no está en la ts insertar() y gen token (ID, pos_ts) */
                             crear_entrada(id_tabla, lexema);
-                            token->type = 1;
+                            token->type = VALOR_T;
                             token->id = ID;
                             token->valor = buscar_posicion_entrada(id_tabla, lexema);
                             token->lexema = NULL;
@@ -182,7 +182,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case K:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = OP_MODULO;
                         token->lexema = "";
                         token->valor = -1;
@@ -195,7 +195,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         leido = fgetc(input_file);
                         buf[*index] = leido;
                         ++(*index);
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = OP_MOD_ASIG;
                         token->lexema = "";
                         token->valor = -1;
@@ -204,7 +204,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case M:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = OP_NEG;
                         token->lexema = "";
                         token->valor = -1;
@@ -214,7 +214,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case N:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = OP_NEQ;
                         token->lexema = "";
                         token->valor = -1;
@@ -223,7 +223,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case O:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = OP_ASIG;
                         token->lexema = "";
                         token->valor = -1;
@@ -232,7 +232,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case P:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = PARENT_IZQ;
                         token->lexema = "";
                         token->valor = -1;
@@ -241,7 +241,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case Q:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = PARENT_DCH;
                         token->lexema = "";
                         token->valor = -1;
@@ -250,7 +250,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case R:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = LLAVE_IZQ;
                         token->lexema = "";
                         token->valor = -1;
@@ -259,7 +259,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case S:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = LLAVE_DCH;
                         token->lexema = "";
                         token->valor = -1;
@@ -268,7 +268,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case T:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = PUNTO_COMA;
                         token->lexema = "";
                         token->valor = -1;
@@ -277,7 +277,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case U:
                     {
-                        token->type = 0;
+                        token->type = CADENA_T;
                         token->id = COMA;
                         token->lexema = "";
                         token->valor = -1;
