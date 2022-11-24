@@ -23,6 +23,7 @@
 
 int *tabla_LL1(int s, int token)
 {
+    int lambda[1] = { -1 };
     switch (s)
     {
         case _P:
@@ -69,7 +70,7 @@ int *tabla_LL1(int s, int token)
             }
             else if (token == _$)
             {
-                // return lambda;
+                return lambda;
             }
             else
             {
@@ -198,7 +199,7 @@ int *tabla_LL1(int s, int token)
             }
             else if (token == PARENT_DCH)
             {
-                // return lambda               
+                return lambda;         
             }
             else if (token == CADENA)
             {
@@ -224,7 +225,7 @@ int *tabla_LL1(int s, int token)
         {
             if (token == PARENT_DCH)
             {
-                // return lambda
+                return lambda;
             }
             else if (token == COMA)
             {
@@ -250,7 +251,7 @@ int *tabla_LL1(int s, int token)
             }
 	        else if (token == PUNTO_COMA)
             {
-                // retrun lambda;
+                return lambda;
             }
 	        else if (token == CADENA)
             {
@@ -269,8 +270,8 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		return NULL;
-	    } 
+		        return NULL;
+	        } 
         }
         case _F:
         {
@@ -281,14 +282,14 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-		return NULL;
-	    } 
+		        return NULL;
+	        } 
         }
         case _H:
         {
             if (token == PARENT_IZQ)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == BOOLEAN)
             {
@@ -307,14 +308,14 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-	        return NULL;
-	    }     
+	            return NULL;
+	        }     
         }
         case _A:
         {
             if (token == PARENT_DCH)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == BOOLEAN)
             {
@@ -333,14 +334,14 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-	        return NULL;
-	    }     
+	            return NULL;
+	        }     
         }
         case _K:
         {
             if (token == PARENT_DCH)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == COMA)
             {
@@ -349,8 +350,8 @@ int *tabla_LL1(int s, int token)
             }
             else
             {
-	        return NULL;
-	    }    
+	            return NULL;
+	        }    
         }
         case _C:
         {
@@ -391,7 +392,7 @@ int *tabla_LL1(int s, int token)
             }
             else if (token == LLAVE_DCH)
             {
-                // return lambda;
+                return lambda;
             }
             else
             {
@@ -424,39 +425,39 @@ int *tabla_LL1(int s, int token)
             {
                 int res[3] = { _Y, _R, -1 };
                 return res;
-	    }
+	        }
             else
             {
-	        return NULL;
-	    }    
+	            return NULL;
+	        }    
         }
         case _Y:
         {
-	    if (token == OP_NEQ)
+	        if (token == OP_NEQ)
             {
                 int res[4] = { _Y, _R, OP_NEQ, -1 };
                 return res;
             }
             else if (token == PARENT_DCH)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == COMA)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == PUNTO_COMA)
             {
-                // retrun lambda;
+                return lambda;
             }
             else
             {
-		return NULL;
-	    }
+		        return NULL;
+	        }
         }
         case _R:
         {
-	    if (token == OP_NEG)
+	        if (token == OP_NEG)
             {
                 int res[3] = { _Z, _U, -1 };
                 return res;
@@ -480,17 +481,17 @@ int *tabla_LL1(int s, int token)
             {
                 int res[3] = { _Z, _U, -1 };
                 return res;
-	    }
+	        }
             else
             {
-		return NULL;
-	    }
+		        return NULL;
+	        }
         }
         case _Z:
         {
-	    if (token == OP_NEQ)
+	        if (token == OP_NEQ)
             {
-               	// retrun lambda;
+               	return lambda;
             }
             else if (token == OP_MODULO)
             {
@@ -499,24 +500,24 @@ int *tabla_LL1(int s, int token)
             }
             else if (token == PARENT_DCH)
             {
-                // retrun lambda;
+                return lambda;
             }
 	        else if (token == COMA)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == PUNTO_COMA)
             {
-                // retrun lambda;
+                return lambda;
             }
             else
             {
-	        return NULL;
-	    }
+	            return NULL;
+	        }
         }
         case _U:
         {
-	    if (token == OP_NEG)
+	        if (token == OP_NEG)
             {
                 int res[3] = { _V, OP_NEG, -1 };
                 return res;
@@ -543,8 +544,8 @@ int *tabla_LL1(int s, int token)
 	        }
             else
             {
-		return NULL;
-	    }
+		        return NULL;
+	        }
         }
         case _V:
         {
@@ -577,11 +578,11 @@ int *tabla_LL1(int s, int token)
         {
             if (token == OP_NEQ)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == OP_MODULO)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == PARENT_IZQ)
             {
@@ -590,20 +591,20 @@ int *tabla_LL1(int s, int token)
             }
             else if (token == PARENT_DCH)
             {
-                // retrun lambda;
+                return lambda;
             }
             else if (token == COMA)
             {
-                // retrun lambda;
+                return lambda;
 	        }
 	        else if (token == PUNTO_COMA)
             {
-                // retrun lambda;
+                return lambda;
 	        }
             else
             {
-		return NULL;
-	    } 
+		        return NULL;
+	        }
         }
         default:
         {
