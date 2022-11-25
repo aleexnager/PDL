@@ -60,27 +60,27 @@
 //* terminales de la gramática de contexto
 //* libre.
 
-#define _P 0
-#define _B 1
-#define _T 2
-#define _S 3
-#define _W 4
-#define _L 5
-#define _Q 6
-#define _X 7
-#define _F 8
-#define _H 9
-#define _A 10
-#define _K 11
-#define _C 12
-#define _E 13
-#define _Y 14
-#define _R 15
-#define _Z 16
-#define _U 17
-#define _V 18
-#define _J 19
-#define _$ 20
+#define _P 25
+#define _B 26
+#define _T 27
+#define _S 28
+#define _W 29
+#define _L 30
+#define _Q 31
+#define _X 32
+#define _F 33
+#define _H 34
+#define _A 35
+#define _K 36
+#define _C 37
+#define _E 38
+#define _Y 39
+#define _R 40
+#define _Z 41
+#define _U 42
+#define _V 43
+#define _J 44
+#define _$ 45
 
 typedef struct token {
     int type; // VALOR_T || CADENA_T
@@ -104,8 +104,10 @@ int es_pal_res(const char* lexema);
 
 FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *buf, int *index);
 
-int an_st(char *cadena);
+int an_st(FILE *input_file, int id_table);
 
 int *tabla_LL1(int s, int token);
+
+int es_terminal(int simb);
 
 #endif

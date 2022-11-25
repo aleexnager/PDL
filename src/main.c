@@ -24,10 +24,9 @@ int main(int argc, char *argv[])
     truncate(token_file_path, 0);
     truncate(error_file_path, 0);
     
-   /*while(fp != NULL)
-        fp = an_lex(fp, id_tabla_global, token, &linea, buf, &index);
-*/
-    an_st(NULL);
+    /*while(fp != NULL)
+        fp = an_lex(fp, id_tabla_global, token, &linea, buf, &index);*/
+    an_st(fp, id_tabla_global);
     destruir_tabla(id_tabla_global);
     return 0;
 }
