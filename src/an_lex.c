@@ -45,7 +45,12 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     ++(*index);
                     estado = 0;
                 } else {
-                    break;
+                    printf("Fin del fichero\n");
+                    token->id = _$;
+                    token->lexema = NULL;
+                    token->valor = -1;
+                    token->type = -1;
+                    return NULL;
                 }
             } else {
                 switch (accion) {

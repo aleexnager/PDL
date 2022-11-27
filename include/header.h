@@ -80,7 +80,8 @@
 #define _U 42
 #define _V 43
 #define _J 44
-#define _$ 45
+#define _N 45
+#define _$ 46
 
 typedef struct token {
     int type; // VALOR_T || CADENA_T

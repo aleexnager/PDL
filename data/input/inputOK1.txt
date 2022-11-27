@@ -1,12 +1,14 @@
-let int a = 34;
-let int b;
-let boolean aux;
+let a int;
+let b int;
+let aux boolean;
 
 // buen comentario!
 
+if (!b%b) print b;
+
 for (b = 0; aux; b=b%b)
 {
-    aux != aux;
+    aux = aux != aux;
 }
 
 return aux;
