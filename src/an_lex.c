@@ -33,32 +33,32 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
             accion = mt_afd_accion(estado, leido);
             estado = mt_afd_estado(estado, leido);
 
-            if (estado == -1) {
-                // Estado es -1 y acción 1, se ha leído un EOF
-                // por tanto, se entra al if de estado pero no llama
-                // a la función de generar error
-                if (accion >= 50) {
+            if (estado == -1)
+            {
+                if (accion >= 50)
+                {
                     fp3 = gen_error(fp3, accion, *linea, leido, buf);
                     leido = fgetc(input_file);
                     buf[i] = leido;
                     ++i;
                     estado = 0;
-                } else {
-                    token->id = _$;
-                    token->lexema = NULL;
-                    token->valor = -1;
-                    return NULL;
                 }
-            } else {
-                switch (accion) {
+            }
+            else
+            {
+                switch (accion)
+                {
                     case A:
                     {
-                        if (leido == '\n') {
+                        if (leido == '\n')
+                        {
                             *linea = *linea + 1;
                             leido = fgetc(input_file);
                             buf[i] = leido;
                             ++i;
-                        } else {
+                        }
+                        else
+                        {
                             leido = fgetc(input_file);
                             buf[i] = leido;
                             ++i;
@@ -87,12 +87,15 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case D:
                     {
-                        if (lexema_length < 65) {
+                        if (lexema_length < 65)
+                        {
                             token->id = CADENA;
                             token->lexema = lexema;
                             token->valor = -1;
                             fprintf(fp2, "<%d, \'%s\'>\n", token->id, token->lexema);
-                        } else {
+                        }
+                        else
+                        {
                             fp3 = gen_error_string(fp3, *linea, lexema, buf);
                         }
                         memset(buf, 0, 1024);
@@ -116,12 +119,15 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case G:
                     {
-                        if (valor < 32768) {
+                        if (valor < 32768)
+                        {
                             token->id = CTE_ENTERA;
                             token->valor = valor;
                             token->lexema = NULL;
                             fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
-                        } else {
+                        }
+                        else
+                        {
                             fp3 = gen_error_int(fp3, *linea, valor, buf);
                         }
                         memset(buf, 0, 1024);
@@ -138,7 +144,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case I:
                     {
-                        if (lexema_length >= 64) {
+                        if (lexema_length >= 64)
+                        {
                             lexema = (char *) realloc(lexema, lexema_length + (64 * sizeof(char)));
                         }
                         strncat(lexema, &leido, 1);
@@ -153,19 +160,24 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         int pos_ts;
                         int id_pal_res = es_pal_res(lexema);
 
-                        if (id_pal_res > -1) {
+                        if (id_pal_res > -1)
+                        {
                             /* Si es palabra reservada gen token (lexema, -) */
                             token->id = id_pal_res;
                             token->lexema = "";
                             token->valor = -1;
                             fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
-                        } else if ( (pos_ts = buscar_posicion_entrada(id_tabla, lexema)) != 0) {
+                        }
+                        else if ( (pos_ts = buscar_posicion_entrada(id_tabla, lexema)) != 0)
+                        {
                             /* Si está en la ts gen token (ID, pos_ts) */
                             token->id = ID;
                             token->valor = pos_ts;
                             token->lexema = NULL;
                             fprintf(fp2, "<%d, %d>\n", token->id, token->valor);    
-                        } else {
+                        }
+                        else
+                        {
                             /* si no está en la ts insertar() y gen token (ID, pos_ts) */
                             crear_entrada(id_tabla, lexema);
                             token->id = ID;
@@ -190,9 +202,6 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     }
                     case L:
                     {
-                        leido = fgetc(input_file);
-                        buf[i] = leido;
-                        ++i;
                         token->id = OP_MOD_ASIG;
                         token->lexema = "";
                         token->valor = -1;
@@ -288,7 +297,13 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
         free(lexema);
         fclose(fp2);
         fclose(fp3);
-    } else {
+    }
+    else
+    {
+        //* Se genera el indicador de que ha terminado el fichero
+        token->id = _$;            
+        token->lexema = NULL;
+        token->valor = -1;
         fclose(input_file);
         fclose(fp2);
         fclose(fp3);

@@ -36,6 +36,7 @@ int an_st(FILE *input_file, int id_tabla)
                 printf("Son iguales!!\n");
                 pop();
                 fp = an_lex(fp, id_tabla, token, &linea, buf);
+                printf("%d: \n", token->id);
                 printf("n_tokens leidos: %d\n", n_tokens);
                 ++n_tokens;
             }

@@ -1,4 +1,4 @@
-int _miVar1 boolean;
+let _miVar1 boolean;
 let VAR_2 string = 'Esta es mi variable 2';
 
 if (_miVar1)

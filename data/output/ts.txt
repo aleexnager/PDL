@@ -1,10 +1,14 @@
 CONTENIDO ACTUAL DE LA TABLA # 1 :
 ---------------------------------------------------
-* LEXEMA : 'aux' (tipo de entrada no definido)
+* LEXEMA : 'x' (tipo de entrada no definido)
   ATRIBUTOS :
    <no se han definido atributos para este lexema>
 ---------------------------------------------------
-* LEXEMA : 'a' (tipo de entrada no definido)
+* LEXEMA : 'y' (tipo de entrada no definido)
+  ATRIBUTOS :
+   <no se han definido atributos para este lexema>
+---------------------------------------------------
+* LEXEMA : 'z' (tipo de entrada no definido)
   ATRIBUTOS :
    <no se han definido atributos para este lexema>
 ---------------------------------------------------
