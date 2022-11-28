@@ -8,25 +8,6 @@
 // y así se podrá generar error desde el
 // analizador
 
-// Devolvemos los símbolos del consecuente en orden
-// inverso, además ponemos un -1 en el final del array
-// para poder iterar con facilidad en la función del analizador
-// sintáctico
-//
-// Ejemplo:
-//   int c;
-// - while ((c = res[i]) != -1)
-//   {
-//       push(c);
-//       ++i;
-//   }
-
-// HAY QUE REVISAR EL FOR
-// Estructura del FOR:
-// for ( S E ; id (%)= E)
-// Seguramente podamos reutilizar la regla W para simplificar la
-// actualización del bucle
-
 int es_terminal(int simb)
 {
     if (simb == _P || simb == _B || simb == _T || simb == _S || simb == _W ||
@@ -39,7 +20,10 @@ int es_terminal(int simb)
         return 1;
 }
 
-int *tabla_LL1(int s, int token)
+//* La variale aux nos permite guardar en la dirección de memoria a la que apunta aux
+//* la regla que se ha aplicado, para posteriormente generar el parse
+
+int *tabla_LL1(int s, int token, int *aux)
 {
     static int lambda[1] = { -1 };
     switch (s)

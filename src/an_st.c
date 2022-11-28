@@ -14,10 +14,13 @@ int an_st(FILE *input_file, int id_tabla)
     // - La pila tiene '$' (fin de fichero) y 'P' (axioma de la gramñatica)
     // - La cadena
     FILE *fp = input_file;
+    FILE *parse = fopen("./data/output/parse.txt", "w");
+    int aux;
+    fprintf(parse, "Descendente LL(1) ");
     int linea = 1;
     char buf[1024];
     int index = 0;
-    int *res = (int *) malloc (16*sizeof(int));
+    int *res = (int *) malloc(16*sizeof(int));
     token_t *token = (token_t *) malloc(sizeof(token_t));
     fp = an_lex(fp, id_tabla, token, &linea, buf, &index);
     push(_$);
@@ -47,9 +50,10 @@ int an_st(FILE *input_file, int id_tabla)
         else
         {
             printf("token: %d\n", token->id);
-            if ((res = tabla_LL1(simb, token->id)) != NULL)
+            if ((res = tabla_LL1(simb, token->id, &aux)) != NULL)
             {
                 // extraer simb de la pila y meter res en la pila
+                // fprintf(parse, "%d ", aux);
                 print();
                 pop();
                 int i = 0;

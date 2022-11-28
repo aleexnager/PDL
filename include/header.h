@@ -107,7 +107,7 @@ FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *bu
 
 int an_st(FILE *input_file, int id_table);
 
-int *tabla_LL1(int s, int token);
+int *tabla_LL1(int s, int token, int *aux);
 
 int es_terminal(int simb);
 
