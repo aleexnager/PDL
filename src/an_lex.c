@@ -43,6 +43,13 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     ++i;
                     estado = 0;
                 }
+                else
+                {
+                    token->id = _$;
+                    token->lexema = NULL;
+                    token->valor = -1;
+                    return NULL;
+                }
             }
             else
             {
@@ -301,7 +308,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
     else
     {
         //* Se genera el indicador de que ha terminado el fichero
-        token->id = _$;            
+        token->id = _$;
         token->lexema = NULL;
         token->valor = -1;
         fclose(input_file);

@@ -1,7 +1,5 @@
 let _miVar1 boolean;
-let VAR_2 string = 'Esta es mi variable 2';
+let VAR_2 string;
+VAR_2 = 'Esta es mi variable 2';
 
-if (_miVar1)
-{
-    print VAR_2;
-}
+if (_miVar1) print VAR_2;

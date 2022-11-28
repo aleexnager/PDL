@@ -1,18 +1,10 @@
 CONTENIDO ACTUAL DE LA TABLA # 1 :
 ---------------------------------------------------
-* LEXEMA : 'x' (tipo de entrada no definido)
+* LEXEMA : 'VAR_2' (tipo de entrada no definido)
   ATRIBUTOS :
    <no se han definido atributos para este lexema>
 ---------------------------------------------------
-* LEXEMA : 'y' (tipo de entrada no definido)
-  ATRIBUTOS :
-   <no se han definido atributos para este lexema>
----------------------------------------------------
-* LEXEMA : 'z' (tipo de entrada no definido)
-  ATRIBUTOS :
-   <no se han definido atributos para este lexema>
----------------------------------------------------
-* LEXEMA : 'b' (tipo de entrada no definido)
+* LEXEMA : '_miVar1' (tipo de entrada no definido)
   ATRIBUTOS :
    <no se han definido atributos para este lexema>
 ---------------------------------------------------
