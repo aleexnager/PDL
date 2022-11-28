@@ -19,8 +19,11 @@ int main(int argc, char *argv[])
 
     FILE *fp = fopen(argv[1], "r");
     // Necesario para truncar el fichero tokens
-    truncate(token_file_path, 0);
-    truncate(error_file_path, 0);
+    //truncate(token_file_path, 0);
+    //truncate(error_file_path, 0);
+
+    remove(token_file_path);
+    remove(error_file_path);
 
     an_st(fp, id_tabla_global);
     destruir_tabla(id_tabla_global);
