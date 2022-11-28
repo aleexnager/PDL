@@ -43,7 +43,7 @@ int an_st(FILE *input_file, int id_tabla)
             else
             {
                 //! gen_error()
-                fprintf(stderr, "Fallo en terminal\n");
+                fprintf(stderr, "Error Sintáctico en la línea %d: Fallo; No coinciden el símbolo colocado encima de la pila y el del token\n", linea);
                 break;
             }
         }
@@ -70,7 +70,7 @@ int an_st(FILE *input_file, int id_tabla)
             else
             {
                 //! gen_error()
-                fprintf(stderr, "Fallo en else (res)\n");
+                fprintf(stderr, "Error Sintáctico en la línea %d: Fallo; El símbolo no terminal de la cima de la pila no es correcto\n", linea);
                 break;
             }
         }

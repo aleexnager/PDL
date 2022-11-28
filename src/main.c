@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     token_t *token = (token_t *) malloc(sizeof(token_t));
     int linea = 1;
 
+
     FILE *fp = fopen(argv[1], "r");
     // Necesario para truncar el fichero tokens
     //truncate(token_file_path, 0);
