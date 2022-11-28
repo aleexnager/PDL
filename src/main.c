@@ -16,16 +16,12 @@ int main(int argc, char *argv[])
     id_tabla_global = crear_tabla();
     token_t *token = (token_t *) malloc(sizeof(token_t));
     int linea = 1;
-    char buf[1024];
-    int index = 0;
 
     FILE *fp = fopen(argv[1], "r");
     // Necesario para truncar el fichero tokens
     truncate(token_file_path, 0);
     truncate(error_file_path, 0);
-    
-    /*while(fp != NULL)
-        fp = an_lex(fp, id_tabla_global, token, &linea, buf, &index);*/
+
     an_st(fp, id_tabla_global);
     destruir_tabla(id_tabla_global);
     return 0;

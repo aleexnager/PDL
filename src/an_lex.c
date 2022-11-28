@@ -9,7 +9,7 @@ char *token_file = "./data/output/token.txt";
 char *ts_file = "./data/output/ts.txt";
 char *error_file = "./data/output/error.txt";
 
-FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *buf, int *index)
+FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *buf)
 {
     FILE *fp2 = fopen(token_file, "a");
     FILE *fp3 = fopen(error_file, "a");
@@ -17,11 +17,10 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
     if (fp2 == NULL || fp3 == NULL)
         exit(1);
 
-    int estado;
-    int accion;
+    int estado, accion, i = 0;
     char leido = fgetc(input_file);
-    buf[*index] = leido;
-    ++(*index);
+    buf[i] = leido;
+    ++i;
     if (!feof(input_file))
     {
         estado = 0;
@@ -41,15 +40,13 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                 if (accion >= 50) {
                     fp3 = gen_error(fp3, accion, *linea, leido, buf);
                     leido = fgetc(input_file);
-                    buf[*index] = leido;
-                    ++(*index);
+                    buf[i] = leido;
+                    ++i;
                     estado = 0;
                 } else {
-                    printf("Fin del fichero\n");
                     token->id = _$;
                     token->lexema = NULL;
                     token->valor = -1;
-                    token->type = -1;
                     return NULL;
                 }
             } else {
@@ -58,15 +55,13 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     {
                         if (leido == '\n') {
                             *linea = *linea + 1;
-                            *index = 0;
-                            memset(buf, 0, 1024);
                             leido = fgetc(input_file);
-                            buf[*index] = leido;
-                            ++(*index);
+                            buf[i] = leido;
+                            ++i;
                         } else {
                             leido = fgetc(input_file);
-                            buf[*index] = leido;
-                            ++(*index);
+                            buf[i] = leido;
+                            ++i;
                         }
                         break;
                     }
@@ -74,8 +69,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     {
                         lexema_length = 0;
                         leido = fgetc(input_file);
-                        buf[*index] = leido;
-                        ++(*index);
+                        buf[i] = leido;
+                        ++i;
                         break;
                     }
                     case C:
@@ -86,14 +81,13 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         strncat(lexema, &leido, 1);
                         lexema_length++;
                         leido = fgetc(input_file);
-                        buf[*index] = leido;
-                        ++(*index);
+                        buf[i] = leido;
+                        ++i;
                         break;
                     }
                     case D:
                     {
                         if (lexema_length < 65) {
-                            token->type = CADENA_T;
                             token->id = CADENA;
                             token->lexema = lexema;
                             token->valor = -1;
@@ -101,28 +95,28 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         } else {
                             fp3 = gen_error_string(fp3, *linea, lexema, buf);
                         }
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case E:
                     {
                         valor = leido - '0';
                         leido = fgetc(input_file);
-                        buf[*index] = leido;
-                        ++(*index);
+                        buf[i] = leido;
+                        ++i;
                         break;
                     }
                     case F:
                     {
                         valor = (valor * 10) + (leido - '0');
                         leido = fgetc(input_file);
-                        buf[*index] = leido;
-                        ++(*index);
+                        buf[i] = leido;
+                        ++i;
                         break;
                     }
                     case G:
                     {
                         if (valor < 32768) {
-                            token->type = VALOR_T;
                             token->id = CTE_ENTERA;
                             token->valor = valor;
                             token->lexema = NULL;
@@ -130,6 +124,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         } else {
                             fp3 = gen_error_int(fp3, *linea, valor, buf);
                         }
+                        memset(buf, 0, 1024);
                         fseek(input_file, -1, SEEK_CUR);
                         return input_file;
                     }
@@ -137,8 +132,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     {
                         strncat(lexema, &leido, 1);
                         leido = fgetc(input_file);
-                        buf[*index] = leido;
-                        ++(*index);
+                        buf[i] = leido;
+                        ++i;
                         break;
                     }
                     case I:
@@ -149,8 +144,8 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         strncat(lexema, &leido, 1);
                         lexema_length++;
                         leido = fgetc(input_file);
-                        buf[*index] = leido;
-                        ++(*index);
+                        buf[i] = leido;
+                        ++i;
                         break;
                     }
                     case J:
@@ -160,14 +155,12 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
 
                         if (id_pal_res > -1) {
                             /* Si es palabra reservada gen token (lexema, -) */
-                            token->type = CADENA_T;
                             token->id = id_pal_res;
                             token->lexema = "";
                             token->valor = -1;
                             fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
                         } else if ( (pos_ts = buscar_posicion_entrada(id_tabla, lexema)) != 0) {
                             /* Si está en la ts gen token (ID, pos_ts) */
-                            token->type = VALOR_T;
                             token->id = ID;
                             token->valor = pos_ts;
                             token->lexema = NULL;
@@ -175,118 +168,118 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         } else {
                             /* si no está en la ts insertar() y gen token (ID, pos_ts) */
                             crear_entrada(id_tabla, lexema);
-                            token->type = VALOR_T;
                             token->id = ID;
                             token->valor = buscar_posicion_entrada(id_tabla, lexema);
                             token->lexema = NULL;
                             fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
                             escribir_tabla(id_tabla, ts_file);
                         }
+                        memset(buf, 0, 1024);
                         fseek(input_file, -1, SEEK_CUR);
                         return input_file;
                     }
                     case K:
                     {
-                        token->type = CADENA_T;
                         token->id = OP_MODULO;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         fseek(input_file, -1, SEEK_CUR);
                         return input_file;
                     }
                     case L:
                     {
                         leido = fgetc(input_file);
-                        buf[*index] = leido;
-                        ++(*index);
-                        token->type = CADENA_T;
+                        buf[i] = leido;
+                        ++i;
                         token->id = OP_MOD_ASIG;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case M:
                     {
-                        token->type = CADENA_T;
                         token->id = OP_NEG;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         fseek(input_file, -1, SEEK_CUR);
                         return input_file;
                     }
                     case N:
                     {
-                        token->type = CADENA_T;
                         token->id = OP_NEQ;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case O:
                     {
-                        token->type = CADENA_T;
                         token->id = OP_ASIG;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case P:
                     {
-                        token->type = CADENA_T;
                         token->id = PARENT_IZQ;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case Q:
                     {
-                        token->type = CADENA_T;
                         token->id = PARENT_DCH;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case R:
                     {
-                        token->type = CADENA_T;
                         token->id = LLAVE_IZQ;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case S:
                     {
-                        token->type = CADENA_T;
                         token->id = LLAVE_DCH;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case T:
                     {
-                        token->type = CADENA_T;
                         token->id = PUNTO_COMA;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                     case U:
                     {
-                        token->type = CADENA_T;
                         token->id = COMA;
                         token->lexema = "";
                         token->valor = -1;
                         fprintf(fp2, "<%d, %s>\n", token->id, token->lexema);
+                        memset(buf, 0, 1024);
                         return input_file;
                     }
                 }

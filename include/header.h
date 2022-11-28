@@ -2,6 +2,7 @@
 #define _header_h_incluido_
 
 #include <stdio.h>
+
 // Definiciones para los tokens
 
 #define ID 1
@@ -53,9 +54,6 @@
 #define T 20
 #define U 21
 
-#define VALOR_T 1
-#define CADENA_T 0
-
 //* Definiciones para los símbolos no
 //* terminales de la gramática de contexto
 //* libre.
@@ -84,7 +82,6 @@
 #define _$ 46
 
 typedef struct token {
-    int type; // VALOR_T || CADENA_T
     int id;
     int valor;
     char *lexema;
@@ -103,8 +100,7 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea);
 
 int es_pal_res(const char* lexema);
 
-FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *buf, int *index);
-
+FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *buf);
 int an_st(FILE *input_file, int id_table);
 
 int *tabla_LL1(int s, int token, int *aux);
