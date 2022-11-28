@@ -1,0 +1,4 @@
+Error Sintáctico en la línea 1: La secuencia de tokens no es aceptada por la gramática
+Error Sintáctico en la línea 1: La secuencia de tokens no es aceptada por la gramática
+Error Sintáctico en la línea 1: La secuencia de tokens no es aceptada por la gramática
+Error Sintáctico en la línea 1: La secuencia de tokens no es aceptada por la gramática

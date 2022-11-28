@@ -15,6 +15,7 @@ int an_st(FILE *input_file, int id_tabla)
     // - La cadena
     FILE *fp = input_file;
     FILE *parse = fopen("./data/output/parse.txt", "w");
+    FILE *fp_error = fopen("./data/output/error.txt", "a");
     int aux;
     fprintf(parse, "Descendente ");
     int linea = 1;
@@ -43,8 +44,11 @@ int an_st(FILE *input_file, int id_tabla)
             else
             {
                 //! gen_error()
-                fprintf(stderr, "Error Sintáctico en la línea %d: Fallo; No coinciden el símbolo colocado encima de la pila y el del token\n", linea);
-                break;
+                gen_error_sintactico(fp_error, linea);
+                fprintf(stderr, "hola soy mr.error1 en la linea %d\n", linea);
+                pop();
+                fp = an_lex(fp, id_tabla, token, &linea, buf);
+                continue;
             }
         }
         else
@@ -70,8 +74,10 @@ int an_st(FILE *input_file, int id_tabla)
             else
             {
                 //! gen_error()
-                fprintf(stderr, "Error Sintáctico en la línea %d: Fallo; El símbolo no terminal de la cima de la pila no es correcto\n", linea);
-                break;
+                gen_error_sintactico(fp_error, linea);
+                fprintf(stderr, "hola soy mr.error2 en la linea %d\n", linea);
+                pop();
+                continue;
             }
         }
     }

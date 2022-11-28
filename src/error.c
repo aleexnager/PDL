@@ -84,3 +84,8 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea) {
         fprintf(fp, "Error Léxico. Línea %d:\n%s\nLa longitud del String \'%s\' supera el límite permitido de 64 carácteres.\n\n", linea, buf_linea, lexema);
         return fp;
 }
+
+FILE *gen_error_sintactico(FILE *fp, int linea){
+        fprintf(fp, "Error Sintáctico en la línea %d: La secuencia de tokens no es aceptada por la gramática\n", linea);
+}
+
