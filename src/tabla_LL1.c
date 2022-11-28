@@ -416,7 +416,7 @@ int *tabla_LL1(int s, int token, int *aux)
             else if (token == COMA)
             {
                 *aux = 30;
-                static int res[5] = { K, ID, _T, COMA, -1 };
+                static int res[5] = { _K, ID, _T, COMA, -1 };
                 return res;
             }
             else
