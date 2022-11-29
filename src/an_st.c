@@ -12,18 +12,18 @@ int an_st(FILE *input_file, int id_tabla)
     FILE *fp = input_file;
     FILE *parse = fopen("./data/output/parse.txt", "w");
     FILE *fp_error = fopen("./data/output/error.txt", "a");
-    int regla;
-    fprintf(parse, "Descendente ");
-    int linea = 1;
+    int regla, simb, i, linea = 1;
     char buf[1024];
-    memset(buf, 0, 1024);
     int *res = (int *) malloc(16*sizeof(int));
     token_t *token = (token_t *) malloc(sizeof(token_t));
+
+    fprintf(parse, "Descendente ");
+    memset(buf, 0, 1024);
     fp = an_lex(fp, id_tabla, token, &linea, buf);
+
     push(_$);
     push(_P);
 
-    int simb;
     while ((simb = peek()) != _$)
     {
         if (es_terminal(simb))
@@ -46,7 +46,7 @@ int an_st(FILE *input_file, int id_tabla)
                 // extraer simb de la pila y meter res en la pila
                 fprintf(parse, "%d ", regla);
                 pop();
-                int i = 0;
+                i = 0;
                 while (res[i] != -1)
                 {
                     push(res[i]);

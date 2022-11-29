@@ -14,14 +14,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Mal número de argumentos, se esperaba 1 argumento.\n");
 
     id_tabla_global = crear_tabla();
-    token_t *token = (token_t *) malloc(sizeof(token_t));
-    int linea = 1;
-
-
     FILE *fp = fopen(argv[1], "r");
-    // Necesario para truncar el fichero tokens
-    //truncate(token_file_path, 0);
-    //truncate(error_file_path, 0);
 
     remove(token_file_path);
     remove(error_file_path);
