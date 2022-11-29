@@ -20,10 +20,10 @@ int es_terminal(int simb)
         return 1;
 }
 
-//* La variale aux nos permite guardar en la dirección de memoria a la que apunta aux
+//* La variale regla nos permite guardar en la dirección de memoria a la que apunta regla
 //* la regla que se ha aplicado, para posteriormente generar el parse
 
-int *tabla_LL1(int s, int token, int *aux)
+int *tabla_LL1(int s, int token, int *regla)
 {
     static int lambda[1] = { -1 };
     switch (s)
@@ -32,55 +32,55 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == FOR)
             {
-                *aux = 1;
+                *regla = 1;
                 static int res[3] = { _P, _B, -1 };
                 return res;
             }
             else if (token == FUNCTION)
             {
-                *aux = 2;
+                *regla = 2;
                 static int res[3] = { _P, _F, -1 };
                 return res;
             }
             else if (token == ID)
             {
-                *aux = 1;
+                *regla = 1;
                 static int res[3] = { _P, _B, -1 };
                 return res;
             }
             else if (token == IF)
             {
-                *aux = 1;
+                *regla = 1;
                 static int res[3] = { _P, _B, -1 };
                 return res;
             }
             else if (token == INPUT)
             {
-                *aux = 1;
+                *regla = 1;
                 static int res[3] = { _P, _B, -1 };
                 return res;
             }
             else if (token == LET)
             {
-                *aux = 1;
+                *regla = 1;
                 static int res[3] = { _P, _B, -1 };
                 return res;
             }
             else if (token == PRINT)
             {
-                *aux = 1;
+                *regla = 1;
                 static int res[3] = { _P, _B, -1 };
                 return res;
             }
             else if (token == RETURN)
             {
-                *aux = 1;
+                *regla = 1;
                 static int res[3] = { _P, _B, -1 };
                 return res;               
             }
             else if (token == _$)
             {
-                *aux = 3;
+                *regla = 3;
                 return lambda;
             }
             else
@@ -92,43 +92,43 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == FOR)
             {
-                *aux = 6;
+                *regla = 6;
                 static int res[13] = { LLAVE_DCH, _C, LLAVE_IZQ, PARENT_DCH, _E, _N, ID, PUNTO_COMA, _E, _S, PARENT_IZQ, FOR, -1 };
                 return res;
             }
             else if (token == ID)
             {
-                *aux = 7;
+                *regla = 7;
                 static int res[2] = { _S, -1 };
                 return res;
             }
             else if (token == IF)
             {
-                *aux = 4;
+                *regla = 4;
                 static int res[6] = { _S, PARENT_DCH, _E, PARENT_IZQ, IF, -1 };
                 return res;
             }
             else if (token == INPUT)
             {
-                *aux = 7;
+                *regla = 7;
                 static int res[2] = { _S, -1 };
                 return res;
             }
             else if (token == LET)
             {
-                *aux = 5;
+                *regla = 5;
                 static int res[5] = { PUNTO_COMA, _T, ID, LET, -1 };
                 return res;
             }
             else if (token == PRINT)
             {
-                *aux = 7;
+                *regla = 7;
                 static int res[2] = { _S, -1 };
                 return res;
             }
             else if (token == RETURN)
             {
-                *aux = 7;
+                *regla = 7;
                 static int res[2] = { _S, -1 };
                 return res;
             }
@@ -141,13 +141,13 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == OP_MOD_ASIG)
             {
-                *aux = 8;
+                *regla = 8;
                 static int res[2] = { OP_MOD_ASIG, -1 };
                 return res;
             }
             else if (token == OP_ASIG)
             {
-                *aux = 9;
+                *regla = 9;
                 static int res[2] = { OP_ASIG, -1 };
                 return res;
             }
@@ -160,19 +160,19 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == BOOLEAN)
             {
-                *aux = 11;
+                *regla = 11;
                 static int res[2] = { BOOLEAN, -1 };
                 return res;              
             }
             else if (token == INT)
             {
-                *aux = 10;
+                *regla = 10;
                 static int res[2] = { INT, -1 };
                 return res;
             }
             else if (token == STRING)
             {
-                *aux = 12;
+                *regla = 12;
                 static int res[2] = { STRING, -1 };
                 return res;
             }
@@ -185,25 +185,25 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == ID)
             {
-                *aux = 16;
+                *regla = 16;
                 static int res[3] = { _W, ID, -1 };
                 return res;
             }
             else if (token == INPUT)
             {
-                *aux = 14;
+                *regla = 14;
                 static int res[4] = { PUNTO_COMA, ID, INPUT, -1 };
                 return res;
             }
             else if (token == PRINT)
             {
-                *aux = 13;
+                *regla = 13;
                 static int res[4] = { PUNTO_COMA, _E, PRINT, -1 };
                 return res;
             }
             else if (token == RETURN)
             {
-                *aux = 15;
+                *regla = 15;
                 static int res[4] = { PUNTO_COMA, _X, RETURN, -1 };
                 return res;
             }
@@ -216,13 +216,13 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == OP_MOD_ASIG)
             {
-                *aux = 18;
+                *regla = 18;
                 static int res[5] = { PUNTO_COMA, _E, OP_MOD_ASIG, -1 };
                 return res;
             }
             else if (token == OP_ASIG)
             {
-                *aux = 17;
+                *regla = 17;
                 static int res[4] = { PUNTO_COMA, _E, OP_ASIG, -1 };
                 return res;                
             }
@@ -235,36 +235,36 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == OP_NEG)
             {
-                *aux = 19;
+                *regla = 19;
                 static int res[3] = { _Q, _E, -1 };
                 return res;
             }
             else if (token == PARENT_IZQ)
             {
-                *aux = 19;
+                *regla = 19;
                 static int res[3] = { _Q, _E, -1 };
                 return res;                
             }
             else if (token == PARENT_DCH)
             {
-                *aux = 20;
+                *regla = 20;
                 return lambda;         
             }
             else if (token == CADENA)
             {
-                *aux = 19;
+                *regla = 19;
                 static int res[3] = { _Q, _E, -1 };
                 return res;                
             }
             else if (token == CTE_ENTERA)
             {
-                *aux = 19;
+                *regla = 19;
                 static int res[3] = { _Q, _E, -1 };
                 return res;                
             }
             else if (token == ID)
             {
-                *aux = 19;
+                *regla = 19;
                 static int res[3] = { _Q, _E, -1 };
                 return res;
             }
@@ -277,12 +277,12 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == PARENT_DCH)
             {
-                *aux = 22;
+                *regla = 22;
                 return lambda;
             }
             else if (token == COMA)
             {
-                *aux = 21;
+                *regla = 21;
                 static int res[4] = { _Q, _E, COMA, -1 };
                 return res;
             }
@@ -295,36 +295,36 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == OP_NEG)
             {
-                *aux = 23;
+                *regla = 23;
                 static int res[2] = { _E, -1 };
                 return res;
             }
             else if (token == PARENT_IZQ)
             {
-                *aux = 23;
+                *regla = 23;
                 static int res[2] = { _E, -1 };
                 return res;
             }
 	        else if (token == PUNTO_COMA)
             {
-                *aux = 24;
+                *regla = 24;
                 return lambda;
             }
 	        else if (token == CADENA)
             {
-                *aux = 23;
+                *regla = 23;
                 static int res[2] = { _E, -1 };
                 return res;
             }
             else if (token == CTE_ENTERA)
             {
-                *aux = 23;
+                *regla = 23;
                 static int res[2] = { _E, -1 };
                 return res;
             }
 	        else if (token == ID)
             {
-                *aux = 23;
+                *regla = 23;
                 static int res[2] = { _E, -1 };
                 return res;
             }
@@ -337,7 +337,7 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == FUNCTION)
             {
-                *aux = 25;
+                *regla = 25;
                 static int res[10] = { LLAVE_DCH, _C, LLAVE_IZQ, PARENT_DCH, _A, PARENT_IZQ, _H, ID, FUNCTION, -1 };
                 return res;
             }
@@ -350,24 +350,24 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == PARENT_IZQ)
             {
-                *aux = 27;
+                *regla = 27;
                 return lambda;
             }
             else if (token == BOOLEAN)
             {
-                *aux = 26;
+                *regla = 26;
                 static int res[2] = { _T, -1 };
                 return res;
             }
 	        else if (token == INT)
             {
-                *aux = 26;
+                *regla = 26;
                 static int res[2] = { _T, -1 };
                 return res;
             }
 	        else if (token == STRING)
             {
-                *aux = 26;
+                *regla = 26;
                 static int res[2] = { _T, -1 };
                 return res;
             }
@@ -380,24 +380,24 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == PARENT_DCH)
             {
-                *aux = 29;
+                *regla = 29;
                 return lambda;
             }
             else if (token == BOOLEAN)
             {
-                *aux = 28;
+                *regla = 28;
                 static int res[4] = { _K, ID, _T, -1 };
                 return res;
             }
 	        else if (token == INT)
             {
-                *aux = 28;
+                *regla = 28;
                 static int res[4] = { _K, ID, _T, -1 };
                 return res;
             }
 	        else if (token == STRING)
             {
-                *aux = 28;
+                *regla = 28;
                 static int res[4] = { _K, ID, _T, -1 };
                 return res;
             }
@@ -410,12 +410,12 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == PARENT_DCH)
             {
-                *aux = 31;
+                *regla = 31;
                 return lambda;
             }
             else if (token == COMA)
             {
-                *aux = 30;
+                *regla = 30;
                 static int res[5] = { _K, ID, _T, COMA, -1 };
                 return res;
             }
@@ -428,49 +428,49 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == FOR)
             {
-                *aux = 32;
+                *regla = 32;
                 static int res[3] = { _C, _B, -1 };
                 return res;
             }
             else if (token == ID)
             {
-                *aux = 32;
+                *regla = 32;
                 static int res[3] = { _C, _B, -1 };
                 return res;
             }
             else if (token == IF)
             {
-                *aux = 32;
+                *regla = 32;
                 static int res[3] = { _C, _B, -1 };
                 return res;
             }
             else if (token == INPUT)
             {
-                *aux = 32;
+                *regla = 32;
                 static int res[3] = { _C, _B, -1 };
                 return res;
             }
             else if (token == LET)
             {
-                *aux = 32;
+                *regla = 32;
                 static int res[3] = { _C, _B, -1 };
                 return res;
             }
             else if (token == PRINT)
             {
-                *aux = 32;
+                *regla = 32;
                 static int res[3] = { _C, _B, -1 };
                 return res;
             }
             else if (token == RETURN)
             {
-                *aux = 32;
+                *regla = 32;
                 static int res[3] = { _C, _B, -1 };
                 return res;
             }
             else if (token == LLAVE_DCH)
             {
-                *aux = 33;
+                *regla = 33;
                 return lambda;
             }
             else
@@ -482,31 +482,31 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == OP_NEG)
             {
-                *aux = 34;
+                *regla = 34;
                 static int res[3] = { _Y, _R, -1 };
                 return res;
             }
             else if (token == PARENT_IZQ)
             {
-                *aux = 34;
+                *regla = 34;
                 static int res[3] = { _Y, _R, -1 };
                 return res;
             }
             else if (token == CADENA)
             {
-                *aux = 34;
+                *regla = 34;
                 static int res[3] = { _Y, _R, -1 };
                 return res;
             }
             else if (token == CTE_ENTERA)
             {
-                *aux = 34;
+                *regla = 34;
                 static int res[3] = { _Y, _R, -1 };
                 return res;
             }
             else if (token == ID)
             {
-                *aux = 34;
+                *regla = 34;
                 static int res[3] = { _Y, _R, -1 };
                 return res;
 	        }
@@ -519,23 +519,23 @@ int *tabla_LL1(int s, int token, int *aux)
         {
 	        if (token == OP_NEQ)
             {
-                *aux = 35;
+                *regla = 35;
                 static int res[4] = { _Y, _R, OP_NEQ, -1 };
                 return res;
             }
             else if (token == PARENT_DCH)
             {
-                *aux = 36;
+                *regla = 36;
                 return lambda;
             }
             else if (token == COMA)
             {
-                *aux = 36;
+                *regla = 36;
                 return lambda;
             }
             else if (token == PUNTO_COMA)
             {
-                *aux = 36;
+                *regla = 36;
                 return lambda;
             }
             else
@@ -547,31 +547,31 @@ int *tabla_LL1(int s, int token, int *aux)
         {
 	        if (token == OP_NEG)
             {
-                *aux = 37;
+                *regla = 37;
                 static int res[3] = { _Z, _U, -1 };
                 return res;
             }
             else if (token == PARENT_IZQ)
             {
-                *aux = 37;
+                *regla = 37;
                 static int res[3] = { _Z, _U, -1 };
                 return res;
             }
             else if (token == CADENA)
             {
-                *aux = 37;
+                *regla = 37;
                 static int res[3] = { _Z, _U, -1 };
                 return res;
             }
             else if (token == CTE_ENTERA)
             {
-                *aux = 37;
+                *regla = 37;
                 static int res[3] = { _Z, _U, -1 };
                 return res;
             }
             else if (token == ID)
             {
-                *aux = 37;
+                *regla = 37;
                 static int res[3] = { _Z, _U, -1 };
                 return res;
 	        }
@@ -584,28 +584,28 @@ int *tabla_LL1(int s, int token, int *aux)
         {
 	        if (token == OP_NEQ)
             {
-                *aux = 39;
+                *regla = 39;
                	return lambda;
             }
             else if (token == OP_MODULO)
             {
-                *aux = 38;
+                *regla = 38;
                 static int res[4] = { _Z, _U, OP_MODULO, -1 };
                 return res;
             }
             else if (token == PARENT_DCH)
             {
-                *aux = 39;
+                *regla = 39;
                 return lambda;
             }
 	        else if (token == COMA)
             {
-                *aux = 39;
+                *regla = 39;
                 return lambda;
             }
             else if (token == PUNTO_COMA)
             {
-                *aux = 39;
+                *regla = 39;
                 return lambda;
             }
             else
@@ -617,31 +617,31 @@ int *tabla_LL1(int s, int token, int *aux)
         {
 	        if (token == OP_NEG)
             {
-                *aux = 40;
+                *regla = 40;
                 static int res[3] = { _V, OP_NEG, -1 };
                 return res;
             }
             else if (token == PARENT_IZQ)
             {
-                *aux = 41;
+                *regla = 41;
                 static int res[2] = { _V, -1 };
                 return res;
             }
             else if (token == CADENA)
             {
-                *aux = 41;
+                *regla = 41;
                 static int res[2] = { _V, -1 };
                 return res;
             }
             else if (token == CTE_ENTERA)
             {
-                *aux = 41;
+                *regla = 41;
                 static int res[2] = { _V, -1 };
                 return res;
             }
             else if (token == ID)
             {
-                *aux = 41;
+                *regla = 41;
                 static int res[2] = { _V, -1 };
                 return res;
 	        }
@@ -654,25 +654,25 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == PARENT_IZQ)
             {
-                *aux = 43;
+                *regla = 43;
                 static int res[4] = { PARENT_DCH, _E, PARENT_IZQ, -1 };
                 return res;
             }
             else if (token == CADENA)
             {
-                *aux = 45;
+                *regla = 45;
                 static int res[2] = { CADENA, -1 };
                 return res;
             }
             else if (token == CTE_ENTERA)
             {
-                *aux = 44;
+                *regla = 44;
                 static int res[2] = { CTE_ENTERA, -1 };
                 return res;
             }
             else if (token == ID)
             {
-                *aux = 42;
+                *regla = 42;
                 static int res[3] = { _J, ID, -1 };
                 return res;
             }
@@ -685,33 +685,33 @@ int *tabla_LL1(int s, int token, int *aux)
         {
             if (token == OP_NEQ)
             {
-                *aux = 47;
+                *regla = 47;
                 return lambda;
             }
             else if (token == OP_MODULO)
             {
-                *aux = 47;
+                *regla = 47;
                 return lambda;
             }
             else if (token == PARENT_IZQ)
             {
-                *aux = 46;
+                *regla = 46;
                 static int res[4] = { PARENT_DCH, _L, PARENT_IZQ, -1 };
                 return res;
             }
             else if (token == PARENT_DCH)
             {
-                *aux = 47;
+                *regla = 47;
                 return lambda;
             }
             else if (token == COMA)
             {
-                *aux = 47;
+                *regla = 47;
                 return lambda;
 	        }
 	        else if (token == PUNTO_COMA)
             {
-                *aux = 47;
+                *regla = 47;
                 return lambda;
 	        }
             else
