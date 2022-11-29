@@ -88,7 +88,7 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea) {
 FILE *gen_error_sintactico(int cod_error, FILE *fp, int linea, int token, int simb) {
     if (cod_error == 100)
     {
-        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el token %d. La secuencia de tokens no es aceptada por la gramática\n", cod_error, linea, token);
+        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el token %d. La secuencia de tokens no es aceptada por la gramática.\n", cod_error, linea, token);
     }
     else
     {
