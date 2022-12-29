@@ -180,7 +180,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                             /* Si está en la ts gen token (ID, pos_ts) */
                             token->id = ID;
                             token->valor = pos_ts;
-                            token->lexema = NULL;
+                            token->lexema = lexema;
                             fprintf(fp2, "<%d, %d>\n", token->id, token->valor);    
                         }
                         else
@@ -189,7 +189,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                             crear_entrada(id_tabla, lexema);
                             token->id = ID;
                             token->valor = buscar_posicion_entrada(id_tabla, lexema);
-                            token->lexema = NULL;
+                            token->lexema = lexema;
                             fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
                             escribir_tabla(id_tabla, ts_file);
                         }

@@ -1,0 +1,5 @@
+Error Sintáctico 101 en la línea 1: No se esperaba el identificador 'lasb'.
+Error Léxico 65. Línea 1:
+/*
+Carácter '*' no esperado, se esperaba el carácter '/'.
+

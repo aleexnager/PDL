@@ -35,7 +35,7 @@ int an_st(FILE *input_file, int id_tabla)
             }
             else
             {
-                gen_error_sintactico(100, fp_error, linea, token->id, -1);
+                gen_error_sintactico(100, fp_error, linea, token);
                 break;
             }
         }
@@ -55,7 +55,7 @@ int an_st(FILE *input_file, int id_tabla)
             }
             else
             {
-                gen_error_sintactico(101, fp_error, linea, token->id, simb);
+                gen_error_sintactico(101, fp_error, linea, token);
                 break;
             }
         }

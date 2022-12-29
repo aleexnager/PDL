@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "header.h"
+#include "ts2006.h"
 
 FILE *gen_error(FILE *fp, int cod_error, int linea, char c, char *buf_linea) {
     if (fp == NULL) exit(1);
@@ -85,14 +86,14 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea) {
         return fp;
 }
 
-FILE *gen_error_sintactico(int cod_error, FILE *fp, int linea, int token, int simb) {
-    if (cod_error == 100)
-    {
-        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el token %d. La secuencia de tokens no es aceptada por la gramática.\n", cod_error, linea, token);
-    }
+FILE *gen_error_sintactico(int cod_error, FILE *fp, int linea, token_t *token) {
+    if (token->valor == -1)
+        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el lexema\'%s\'.\n", 100, linea, token->lexema);        
+    else if (token->id == ID)
+        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el identificador \'%s\'.\n", 101, linea, token->lexema);
     else
-    {
-        fprintf(fp, "Error Sintáctico %d en la línea %d: No se puede aplicar ninguna regla dado el simbolo no terminal %d y el token %d.\n", cod_error, linea, simb, token);
-    }
+        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el valor \'%d\'.\n", 102, linea, token->valor);
+
+    return fp;
 }
 
