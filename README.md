@@ -15,7 +15,7 @@
 
 ## Manual de usuario:
 [Manual de usuario](/docs/TS2006%20-%20Manual%20de%20usuario.pdf)  
-Para hacer uso del Makefile es importante crear; `bin, build, lib`
+Para hacer uso del Makefile es importante crear los directorios; `bin, build, lib`
 ```
 $ mkdir bin build lib
 ```
