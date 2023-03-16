@@ -15,18 +15,18 @@
 
 ## Manual de usuario:
 [Manual de usuario](/docs/TS2006%20-%20Manual%20de%20usuario.pdf)  
-Para hacer uso del Makefile es importante crear los directorios; `bin, build, lib`
+Para hacer uso del Makefile es importante crear los directorios; `bin, build, lib`.
 ```
 $ mkdir bin build lib
 ```
 
 ## Ejecución:
-Con el script program.sh podemos ejecutar el programa con cualquier fichero del directorio `./data/input`
+Con el script program.sh podemos ejecutar el programa con cualquier fichero del directorio `./data/input`.
 ```
 $ ./program.sh file
 ```
 ## Ver los resultados de la ejecución
-Con el script cat.sh podremos ver cualquiera de los ficheros del directorio `./data/output/`
+Con el script cat.sh podremos ver cualquiera de los ficheros del directorio `./data/output/`.
 ```
 $ ./cat.sh token.txt
 $ ./cat.sh ts.txt
