@@ -14,7 +14,8 @@
 - ***Tabla de Símbolos***
 
 ## Manual de usuario:
-[Manual de usuario](/docs/TS2006%20-%20Manual%20de%20usuario.pdf)
+[Manual de usuario](/docs/TS2006%20-%20Manual%20de%20usuario.pdf)  
+Para hacer uso del Makefile es importante crear; `bin, build, lib`
 ```
 $ mkdir bin build lib
 ```
@@ -30,4 +31,5 @@ Con el script cat.sh podremos ver cualquiera de los ficheros del directorio `./d
 $ ./cat.sh token.txt
 $ ./cat.sh ts.txt
 $ ./cat.sh error.txt
+$ ./cat.sh parse.txt
 ```
