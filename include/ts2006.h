@@ -14,7 +14,7 @@
 // 1. GESTIóN DE TABLAS
 
 // Crear una tabla. Obtendremos un id
-int crear_tabla();
+int crear_tabla(void);
 
 // Destruir una tabla
 int destruir_tabla(int id_tabla);
@@ -31,7 +31,7 @@ int crear_entrada(int id_tabla, char *lexema);
 int asignar_tipo_entrada(int id_tabla, char *lexema, char *tipo);
 
 // Consultar el tipo de entrada de una entrada
-char* consultar_tipo_entrada(int id_tabla, char *lexema);
+char *consultar_tipo_entrada(int id_tabla, char *lexema);
 
 // Determinar si existe una entrada
 int existe_entrada(int id_tabla, char *lexema);
@@ -54,7 +54,7 @@ int asignar_valor_atributo_cadena(int id_tabla, char *lexema, char *alias_at, ch
 int consultar_valor_atributo_entero(int id_tabla, char *lexema, char *alias_at);
 
 // Consultar el valor de un atributo cadena
-char* consultar_valor_atributo_cadena(int id_tabla, char *lexema, char *alias_at);
+char *consultar_valor_atributo_cadena(int id_tabla, char *lexema, char *alias_at);
 
 // Determinar si existe un atributo
 int existe_atributo(int id_tabla, char *lexema, char *alias_at);
@@ -67,14 +67,14 @@ int escribir_tabla(int id_tabla, char *nombre_fichero);
 // 5. GESTI�N DE ERRORES
 
 // Obtener el ID del ultimo error que ha ocurrido
-int consultar_id_ultimo_error();
+int consultar_id_ultimo_error(void);
 
 // Obtener la descripcion del ultimo error que ha ocurrido
-char* consultar_descripcion_ultimo_error();
+char *consultar_descripcion_ultimo_error(void);
 
 // Resetear la variable interna que almacena
 // el �ltimo error que ha ocurrido
-void resetear_ultimo_error();
+void resetear_ultimo_error(void);
 
 // 6. FUNCIONES ALTERNATIVAS
 // Basicamente tienen la misma funcionalidad
@@ -84,7 +84,7 @@ void resetear_ultimo_error();
 // El usuario solo introduce y recibe enteros, pero a�n as�,
 // ahora habr� que tener mucho m�s cuidado de no consultar
 // posiciones de memoria incorrectas
-// Adem�s, ser�a extremadamente peligroso intentar liberar 
+// Adem�s, ser�a extremadamente peligroso intentar liberar
 // o destruir la memoria
 // de estas posiciones de forma directa.
 
@@ -92,7 +92,7 @@ void resetear_ultimo_error();
 int asignar_tipo_entrada2(int posicion, char *tipo);
 
 // Consultar el tipo de entrada de una entrada (por posici�n)
-char* consultar_tipo_entrada2(int posicion);
+char *consultar_tipo_entrada2(int posicion);
 
 // Crear un atributo para almacenar enteros (por posici�n)
 int crear_atributo_entero2(int posicion, char *alias_at, int valor);
@@ -110,7 +110,7 @@ int asignar_valor_atributo_cadena2(int posicion, char *alias_at, char *valor);
 int consultar_valor_atributo_entero2(int posicion, char *alias_at);
 
 // Consultar el valor de un atributo cadena (por posici�n)
-char* consultar_valor_atributo_cadena2(int posicion, char *alias_at);
+char *consultar_valor_atributo_cadena2(int posicion, char *alias_at);
 
 // Determinar si existe un atributo (por posici�n)
 int existe_atributo2(int posicion, char *alias_at);
@@ -119,6 +119,4 @@ int existe_atributo2(int posicion, char *alias_at);
 // (devuelve la posici�n si existe,y sino 0)
 int buscar_posicion_entrada(int id_tabla, char *lexema);
 
-
 #endif
-

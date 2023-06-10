@@ -1,10 +1,14 @@
 CONTENIDO ACTUAL DE LA TABLA # 1 :
 ---------------------------------------------------
-* LEXEMA : 'hsabdf' (tipo de entrada no definido)
+* LEXEMA : 'aux' (tipo de entrada no definido)
   ATRIBUTOS :
    <no se han definido atributos para este lexema>
 ---------------------------------------------------
-* LEXEMA : 'lasb' (tipo de entrada no definido)
+* LEXEMA : 'a' (tipo de entrada no definido)
+  ATRIBUTOS :
+   <no se han definido atributos para este lexema>
+---------------------------------------------------
+* LEXEMA : 'b' (tipo de entrada no definido)
   ATRIBUTOS :
    <no se han definido atributos para este lexema>
 ---------------------------------------------------
