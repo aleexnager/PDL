@@ -79,9 +79,11 @@
 #define _V 43
 #define _J 44
 #define _N 45
-#define _$ 46
+#define _M 46
+#define _FIN_CADENA 47
 
-typedef struct token {
+typedef struct token
+{
     int id;
     int valor;
     char *lexema;
@@ -99,7 +101,7 @@ FILE *gen_error_int(FILE *fp, int linea, int c, char *buf_linea);
 FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea);
 FILE *gen_error_sintactico(int cod_error, FILE *fp, int linea, token_t *token);
 
-int es_pal_res(const char* lexema);
+int es_pal_res(const char *lexema);
 
 FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *buf);
 int an_st(FILE *input_file, int id_table);

@@ -2,10 +2,14 @@
 #include "header.h"
 #include "ts2006.h"
 #include "lifo.h"
+#include "lifo_aux.h"
 
 // Funciones push(char c), pop(void), peek(void) y print(void)
 // provienen de la librería lifo.h. Modelan una estructura de datos
 // LIFO para implementar la pila de trabajo del analiador sintáctico.
+
+// La librería lifo.h representa la pila P (sintáctico)
+// La librería lifo_aux.h representa la pila AUX (semántico)
 
 int an_st(FILE *input_file, int id_tabla)
 {
@@ -14,17 +18,17 @@ int an_st(FILE *input_file, int id_tabla)
     FILE *fp_error = fopen("./data/output/error.txt", "a");
     int regla, simb, i, linea = 1;
     char buf[1024];
-    int *res = (int *) malloc(16*sizeof(int));
-    token_t *token = (token_t *) malloc(sizeof(token_t));
+    int *res = (int *)malloc(16 * sizeof(int));
+    token_t *token = (token_t *)malloc(sizeof(token_t));
 
     fprintf(parse, "Descendente ");
     memset(buf, 0, 1024);
     fp = an_lex(fp, id_tabla, token, &linea, buf);
 
-    push(_$);
+    push(_FIN_CADENA);
     push(_P);
 
-    while ((simb = peek()) != _$)
+    while ((simb = peek()) != _FIN_CADENA)
     {
         if (es_terminal(simb))
         {
