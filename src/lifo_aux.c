@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 struct lifo_aux *top_aux = NULL;
+int aux_stack_size = 0;
 
 void push_aux(token_t *data)
 {
@@ -14,18 +15,20 @@ void push_aux(token_t *data)
     else
         new->next = top_aux;
 
+    ++aux_stack_size;
     top_aux = new;
 }
 
 token_t *pop_aux(void)
 {
     if (top_aux == NULL)
-        exit(-1);
+        return NULL;
 
     struct lifo_aux *item = top_aux;
     token_t *data = top_aux->data;
     top_aux = top_aux->next;
     free(item);
+    --aux_stack_size;
     return data;
 }
 
@@ -45,4 +48,9 @@ void print_aux(void)
         cur = cur->next;
     }
     printf("\n");
+}
+
+int size_aux(void)
+{
+    return aux_stack_size;
 }

@@ -2,7 +2,15 @@
 #include "lifo.h"
 #include "lifo_aux.h"
 
-void reglas_semanticas(int n_regla, int *despl, int *zona_decl)
+int es_regla_semantica(int n_regla)
+{
+    if (n_regla >= 100)
+        return 1;
+    else
+        return 0;
+}
+
+void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
 {
     int i;
     switch (n_regla)

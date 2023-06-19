@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 struct lifo *top = NULL;
+int stack_size = 0;
 
 void push(token_t *data)
 {
@@ -15,6 +16,7 @@ void push(token_t *data)
     else
         new->next = top;
 
+    ++stack_size;
     top = new;
 }
 
@@ -27,6 +29,7 @@ token_t *pop(void)
     token_t *data = top->data;
     top = top->next;
     free(item);
+    --stack_size;
     return data;
 }
 
@@ -46,4 +49,9 @@ void print(void)
         cur = cur->next;
     }
     printf("\n");
+}
+
+int size(void)
+{
+    return stack_size;
 }

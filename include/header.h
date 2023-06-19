@@ -106,12 +106,13 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea);
 FILE *gen_error_sintactico(int cod_error, FILE *fp, int linea, token_t *token);
 
 int es_pal_res(const char *lexema);
+int es_terminal(int simb);
+int es_regla_semantica(int n_regla);
 
 FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *buf);
 int an_st(FILE *input_file, int id_table);
 
 int *tabla_LL1(int s, int token, int *regla);
-
-int es_terminal(int simb);
+void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl);
 
 #endif
