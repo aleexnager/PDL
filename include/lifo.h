@@ -1,14 +1,16 @@
 #ifndef _lifo_included_
 
+#include "header.h"
+
 struct lifo
 {
-    int data;
+    token_t *data;
     struct lifo *next;
 };
 
-void push(int data);
-int pop(void);
-int peek(void);
+void push(token_t *data);
+token_t *pop(void);
+token_t *peek(void);
 void print(void);
 
 #endif

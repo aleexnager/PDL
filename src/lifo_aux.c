@@ -2,42 +2,42 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct lifo_aux *top2 = NULL;
+struct lifo_aux *top_aux = NULL;
 
-void push2(int data)
+void push_aux(token_t *data)
 {
-    struct lifo_aux *new = (struct lifo_aux *) malloc(sizeof(struct lifo_aux));
+    struct lifo_aux *new = (struct lifo_aux *)malloc(sizeof(struct lifo_aux));
     new->data = data;
-    new->next = top2;
-    if (top2 == NULL)
+    new->next = top_aux;
+    if (top_aux == NULL)
         new->next = NULL;
     else
-        new->next = top2;
-    
-    top2 = new;
+        new->next = top_aux;
+
+    top_aux = new;
 }
 
-int pop2()
+token_t *pop_aux(void)
 {
-    if (top2 == NULL)
+    if (top_aux == NULL)
         exit(-1);
-    
-    struct lifo_aux *item = top2;
-    int data = top2->data;
-    top2 = top2->next;
+
+    struct lifo_aux *item = top_aux;
+    token_t *data = top_aux->data;
+    top_aux = top_aux->next;
     free(item);
     return data;
 }
 
-int peek2()
+token_t *peek_aux(void)
 {
-    return top2->data;
+    return top_aux->data;
 }
 
-void print2()
+void print_aux(void)
 {
     struct lifo_aux *cur;
-    cur = top2;
+    cur = top_aux;
     printf("Stack:\n");
     while (cur != NULL)
     {

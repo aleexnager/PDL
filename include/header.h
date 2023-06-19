@@ -58,29 +58,30 @@
 //* terminales de la gramática de contexto
 //* libre.
 
-#define _P 25
-#define _B 26
-#define _T 27
-#define _S 28
-#define _W 29
-#define _L 30
-#define _Q 31
-#define _X 32
-#define _F 33
-#define _H 34
-#define _A 35
-#define _K 36
-#define _C 37
-#define _E 38
-#define _Y 39
-#define _R 40
-#define _Z 41
-#define _U 42
-#define _V 43
-#define _J 44
-#define _N 45
-#define _M 46
-#define _FIN_CADENA 47
+#define _P_PRIMA 25
+#define _P 26
+#define _B 27
+#define _T 28
+#define _S 29
+#define _W 30
+#define _L 31
+#define _Q 32
+#define _X 33
+#define _F 34
+#define _H 35
+#define _A 36
+#define _K 37
+#define _C 38
+#define _E 39
+#define _Y 40
+#define _R 41
+#define _Z 42
+#define _U 43
+#define _V 44
+#define _J 45
+#define _N 46
+#define _M 47
+#define _FIN_CADENA 48
 
 typedef struct token
 {
