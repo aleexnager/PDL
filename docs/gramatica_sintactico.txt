@@ -1,0 +1,62 @@
+//// Prueba 1
+//// Prueba clásica para la factorización
+
+Terminales = { if ( ) let id ; int boolean string for { } = %= % print input return function , != ! ent cad }
+
+NoTerminales = { PP B T S W L Q X F H A K C E Y R Z U V J P N M }
+
+Axioma = PP
+
+//// El lenguaje que se genera el a+ b+ c+
+Producciones = {
+	PP -> P						//// 1
+	P -> B P 					//// 2
+	P -> F P 					//// 3
+	P -> lambda					//// 4
+	B -> if ( E ) S					//// 5
+	B -> let id T ;					//// 6
+	B -> for ( M ; E ; M ) { C }			//// 7
+	B -> S						//// 8
+	M -> id N E					//// 9
+	M -> lambda					//// 10
+	N -> %=						//// 11
+	N -> =						//// 12
+	T -> int					//// 13		
+	T -> boolean					//// 14
+	T -> string					//// 15
+	S -> print E ; 					//// 16
+	S -> input id ;					//// 17
+	S -> return X ;					//// 18
+	S -> id W					//// 19
+	W -> N E ;					//// 20
+	W -> ( L ) ;					//// 21
+	L -> E Q 					//// 22
+	L -> lambda					//// 23
+	Q -> , E Q 					//// 24
+	Q -> lambda					//// 25
+	X -> E						//// 26
+	X -> lambda					//// 27
+	F -> function id H ( A ) { C }			//// 28
+	H -> T						//// 29
+	H -> lambda					//// 30
+	A -> T id K					//// 31
+	A -> lambda					//// 32
+	K -> , T id K 					//// 33
+	K -> lambda					//// 34
+	C -> B C 					//// 35
+	C -> lambda					//// 36
+	E -> R Y					//// 37
+	Y -> != R Y					//// 38
+	Y -> lambda					//// 39
+	R -> U Z					//// 40
+	Z -> % U Z					//// 41
+	Z -> lambda					//// 42
+	U -> ! V					//// 43
+	U -> V						//// 44
+	V -> id J 					//// 45
+	V -> ( E )  					//// 46
+	V -> ent 					//// 47
+	V -> cad					//// 48
+	J -> ( L )					//// 49
+	J -> lambda					//// 50
+}

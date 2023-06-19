@@ -16,23 +16,30 @@ int an_st(FILE *input_file, int id_tabla)
     FILE *fp = input_file;
     FILE *parse = fopen("./data/output/parse.txt", "w");
     FILE *fp_error = fopen("./data/output/error.txt", "a");
-    int regla, simb, i, linea = 1;
+    int regla, i, despl, linea = 1;
     char buf[1024];
     int *res = (int *)malloc(16 * sizeof(int));
     token_t *token = (token_t *)malloc(sizeof(token_t));
+    token_t *simb = (token_t *)malloc(sizeof(token_t));
+    token_t *aux;
 
     fprintf(parse, "Descendente ");
     memset(buf, 0, 1024);
     fp = an_lex(fp, id_tabla, token, &linea, buf);
 
-    push(_FIN_CADENA);
-    push(_P);
+    token_t *fin_cadena = (token_t *)malloc(sizeof(token_t));
+    fin_cadena->id = _FIN_CADENA;
+    push(fin_cadena);
 
-    while ((simb = peek()) != _FIN_CADENA)
+    token_t *programa = (token_t *)malloc(sizeof(token_t));
+    programa->id = _P_PRIMA;
+    push(programa);
+
+    while ((simb = peek())->id != _FIN_CADENA)
     {
-        if (es_terminal(simb))
+        if (es_terminal(simb->id))
         {
-            if (simb == token->id)
+            if (simb->id == token->id)
             {
                 pop();
                 fp = an_lex(fp, id_tabla, token, &linea, buf);
@@ -45,7 +52,7 @@ int an_st(FILE *input_file, int id_tabla)
         }
         else
         {
-            if ((res = tabla_LL1(simb, token->id, &regla)) != NULL)
+            if ((res = tabla_LL1(simb->id, token->id, &regla)) != NULL)
             {
                 // extraer simb de la pila y meter res en la pila
                 fprintf(parse, "%d ", regla);
@@ -53,7 +60,9 @@ int an_st(FILE *input_file, int id_tabla)
                 i = 0;
                 while (res[i] != -1)
                 {
-                    push(res[i]);
+                    aux = (token_t *)malloc(sizeof(token_t));
+                    aux->id = res[i];
+                    push(aux);
                     ++i;
                 }
             }
@@ -64,5 +73,6 @@ int an_st(FILE *input_file, int id_tabla)
             }
         }
     }
+
     return 0;
 }
