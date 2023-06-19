@@ -10,7 +10,7 @@
 
 int es_terminal(int simb)
 {
-    if (simb == _P_PRIMA || simb == _P || simb == _B || simb == _T || simb == _S || simb == _W ||
+    /*if (simb == _P_PRIMA || simb == _P || simb == _B || simb == _T || simb == _S || simb == _W ||
         simb == _L || simb == _Q || simb == _X || simb == _F || simb == _H ||
         simb == _A || simb == _K || simb == _C || simb == _E || simb == _Y ||
         simb == _R || simb == _Z || simb == _U || simb == _V || simb == _J ||
@@ -18,6 +18,11 @@ int es_terminal(int simb)
         return 0;
     else
         return 1;
+    */
+    if (simb < 25)
+        return 1;
+    else
+        return 0;
 }
 
 //* La variale regla nos permite guardar en la dirección de memoria a la que apunta regla

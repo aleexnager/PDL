@@ -12,5 +12,6 @@ void push(token_t *data);
 token_t *pop(void);
 token_t *peek(void);
 void print(void);
+int size(void);
 
 #endif

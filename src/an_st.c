@@ -16,7 +16,7 @@ int an_st(FILE *input_file, int id_tabla)
     FILE *fp = input_file;
     FILE *parse = fopen("./data/output/parse.txt", "w");
     FILE *fp_error = fopen("./data/output/error.txt", "a");
-    int regla, i, despl, linea = 1;
+    int regla, i, despl, zona_decl, linea = 1;
     char buf[1024];
     int *res = (int *)malloc(16 * sizeof(int));
     token_t *token = (token_t *)malloc(sizeof(token_t));
@@ -41,7 +41,7 @@ int an_st(FILE *input_file, int id_tabla)
         {
             if (simb->id == token->id)
             {
-                pop();
+                push_aux(pop());
                 fp = an_lex(fp, id_tabla, token, &linea, buf);
             }
             else
@@ -50,13 +50,17 @@ int an_st(FILE *input_file, int id_tabla)
                 break;
             }
         }
+        else if (es_regla_semantica(simb->id))
+        {
+            ejecutar_regla_semantica(simb->id, &despl, &zona_decl);
+            pop();
+        }
         else
         {
             if ((res = tabla_LL1(simb->id, token->id, &regla)) != NULL)
             {
-                // extraer simb de la pila y meter res en la pila
                 fprintf(parse, "%d ", regla);
-                pop();
+                push_aux(pop());
                 i = 0;
                 while (res[i] != -1)
                 {
@@ -74,5 +78,8 @@ int an_st(FILE *input_file, int id_tabla)
         }
     }
 
-    return 0;
+    if (size_aux() == 1 && peek_aux()->id == _P)
+        return 0;
+    else
+        return -1;
 }
