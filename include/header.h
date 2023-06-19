@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+#define TRUE 1
+#define FALSE 0
+
 // Definiciones para los tokens
 
 #define ID 1
