@@ -41,7 +41,7 @@ void print_aux(void)
     printf("Stack:\n");
     while (cur != NULL)
     {
-        printf("%d\n-\n", cur->data);
+        printf("%d\n-\n", cur->data->id);
         cur = cur->next;
     }
     printf("\n");

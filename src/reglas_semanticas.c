@@ -2,32 +2,43 @@
 #include "lifo.h"
 #include "lifo_aux.h"
 
-void reglas_semanticas(int n_regla, int *despl)
+void reglas_semanticas(int n_regla, int *despl, int *zona_decl)
 {
     switch (n_regla)
     {
     case 100:
     {
         *despl = 0;
-        pop_aux();
     }
     case 101:
     {
+        pop_aux();
     }
     case 102:
     {
+        // B.tipo := if E.tipo = logico then S.tipo else tipo_error; Pop(5)
     }
     case 103:
     {
+        *zona_decl = TRUE;
     }
     case 104:
     {
+        *zona_decl = FALSE;
     }
     case 105:
     {
+        /* B.tipo := if AnadirTipo(id.pos, T.tipo) then
+                     tipo_ok
+                     else tipo_error; Pop(11)
+        */
     }
     case 106:
     {
+        /* B.tipo := if E.tipo = logico then
+                     C.tipo
+                     else tipo_error; Pop(11)
+        */
     }
     case 107:
     {
