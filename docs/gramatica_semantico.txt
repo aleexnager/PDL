@@ -63,8 +63,11 @@
 	     id {AnadirTipo(id.pos, funcion),
 		 TSL := CreaTabla(), despl = 0}:134
 	     H {AnadirParam(id.pos, H.tipo, "TipoRetorno")}:135
-             ( {A.cont := 0; A.pos := id.pos}:136 A ) {
-		{C.tipo := H.tipo}:137 C {LiberaTablaTSL()}:138
+             ( {A.cont := 0;
+			 	A.pos := id.pos;
+				AsignarParam(0, "NumParams")}:136
+		 A ) {
+			{C.tipo := H.tipo}:137 C {LiberaTablaTSL()}:138
 	     } {Pop(9)}:139												//// 28
 	H -> T {H.tipo := T.tipo; Pop(1)}:140							//// 29
 	H -> lambda {H.tipo := vacio}:141								//// 30

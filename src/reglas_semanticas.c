@@ -389,6 +389,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     {
         get_top()->data->valor = 1;
         strcpy(get_top()->data->lexema2, get_aux_top()->next->next->data->lexema);
+        crear_atributo_entero(id_tabla, get_top()->data->lexema2, "NumParams", 0);
         break;
     }
     case 137:
@@ -428,6 +429,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         asignar_tipo_entrada(*id_tabla_aux, get_aux_top()->data->lexema, get_aux_top()->next->data->lexema);
         crear_atributo_entero(*id_tabla_aux, get_aux_top()->data->lexema, "despl", *despl_aux);
         crear_atributo_cadena(id_tabla, get_aux_top()->next->next->data->lexema2, nombre, get_aux_top()->next->data->lexema);
+        asignar_valor_atributo_entero(id_tabla, get_aux_top()->next->next->data->lexema2, "NumParams", get_aux_top()->next->next->data->valor);
         escribir_tabla(id_tabla, ts_file_2);
         escribir_tabla(*id_tabla_aux, ts_file_aux_2);
 
@@ -455,6 +457,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         asignar_tipo_entrada(*id_tabla_aux, get_aux_top()->data->lexema, get_aux_top()->next->data->lexema);
         crear_atributo_entero(*id_tabla_aux, get_aux_top()->data->lexema, "despl", *despl_aux);
         crear_atributo_cadena(id_tabla, get_aux_top()->next->next->next->data->lexema2, nombre, get_aux_top()->next->data->lexema);
+        asignar_valor_atributo_entero(id_tabla, get_aux_top()->next->next->next->data->lexema2, "NumParams", get_aux_top()->next->next->next->data->valor);
         escribir_tabla(id_tabla, ts_file_2);
         escribir_tabla(*id_tabla_aux, ts_file_aux_2);
 
