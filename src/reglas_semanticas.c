@@ -5,9 +5,9 @@
 int es_regla_semantica(int n_regla)
 {
     if (n_regla >= 100)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)

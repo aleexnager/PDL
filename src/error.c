@@ -3,6 +3,91 @@
 #include "header.h"
 #include "ts2006.h"
 
+char *id_to_string(int id)
+{
+    char *res = malloc(24);
+    switch (id)
+    {
+    case (ID):
+        res = "id";
+        break;
+    case (CTE_ENTERA):
+        res = "constante entera";
+        break;
+    case (CADENA):
+        res = "cadena";
+        break;
+    case (OP_MODULO):
+        res = "%";
+        break;
+    case (OP_MOD_ASIG):
+        res = "%=";
+        break;
+    case (OP_NEQ):
+        res = "!=";
+        break;
+    case (OP_NEG):
+        res = "!";
+        break;
+    case (OP_ASIG):
+        res = "=";
+        break;
+    case (COMA):
+        res = ",";
+        break;
+    case (PUNTO_COMA):
+        res = ";";
+        break;
+    case (PARENT_IZQ):
+        res = "(";
+        break;
+    case (PARENT_DCH):
+        res = ")";
+        break;
+    case (LLAVE_IZQ):
+        res = "{";
+        break;
+    case (LLAVE_DCH):
+        res = "}";
+        break;
+    case (BOOLEAN):
+        res = "boolean";
+        break;
+    case (FOR):
+        res = "for";
+        break;
+    case (FUNCTION):
+        res = "fuction";
+        break;
+    case (IF):
+        res = "if";
+        break;
+    case (INPUT):
+        res = "input";
+        break;
+    case (INT):
+        res = "int";
+        break;
+    case (LET):
+        res = "let";
+        break;
+    case (PRINT):
+        res = "print";
+        break;
+    case (RETURN):
+        res = "return";
+        break;
+    case (STRING):
+        res = "string";
+        break;
+    default:
+        res = NULL;
+        break;
+    }
+
+    return res;
+}
+
 FILE *gen_error(FILE *fp, int cod_error, int linea, char c, char *buf_linea)
 {
     if (fp == NULL)
@@ -93,12 +178,14 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea)
 
 FILE *gen_error_sintactico(int cod_error, FILE *fp, int linea, token_t *token)
 {
-    if (token->valor == -1)
-        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el lexema \'%s\'.\n", 100, linea, token->lexema);
+    if (token->valor != -1)
+        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el valor \'%d\'.\n", 100, linea, token->valor);
     else if (token->id == ID)
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el identificador \'%s\'.\n", 101, linea, token->lexema);
+    else if (token->lexema != "")
+        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba la cadena \'%s\'.\n", 102, linea, token->lexema);
     else
-        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el valor \'%d\'.\n", 102, linea, token->valor);
+        fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el símbolo \'%s\'.\n", 103, linea, id_to_string(token->id));
 
     return fp;
 }
