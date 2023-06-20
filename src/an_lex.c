@@ -7,6 +7,7 @@
 
 char *token_file = "./data/output/token.txt";
 char *ts_file = "./data/output/ts.txt";
+char *ts_aux_file = "./data/output/ts_aux.txt";
 char *error_file = "./data/output/error.txt";
 
 FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *buf)
@@ -190,7 +191,10 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         token->valor = buscar_posicion_entrada(id_tabla, lexema);
                         strcpy(token->lexema, lexema);
                         fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
-                        escribir_tabla(id_tabla, ts_file);
+                        if (id_tabla == 1)
+                            escribir_tabla(id_tabla, ts_file);
+                        else
+                            escribir_tabla(id_tabla, ts_aux_file);
                     }
                     memset(buf, 0, 1024);
                     fseek(input_file, -1, SEEK_CUR);

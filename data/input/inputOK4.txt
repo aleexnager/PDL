@@ -1,2 +1,6 @@
-let a int;
-input a;
+function mod int(int a, int b)
+{
+    return a%b;
+}
+
+// mod(2,3);

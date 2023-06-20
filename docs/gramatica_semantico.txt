@@ -10,7 +10,7 @@
 		  AnadirTipo(id.pos, T.tipo) then tipo_ok
 		  else tipo_error; Pop(4)}:105								//// 6
 	B -> for ( M1 ; E ; M2 ) { C } {B.tipo := if
-		  E.tipo = logico && M1.tipo = tithen C.tipo
+		  E.tipo = logico && M1.tipo = tipo_ok && M2.tipo = tipo_ok then C.tipo
                   else tipo_error, Pop(11)}:106						//// 7
 	B -> {S.tipo := B.tipo}:107 S {B.tipo := S.tipo; Pop(1)}:108	//// 8
 	M -> id N E {M.tipo = if
@@ -28,14 +28,17 @@
                   else tipo_error; Pop(3)}:116						//// 16
 	S -> input id ;	{S.tipo := if
                   BuscaTipo(id.pos) = cadena || entero
-                  then tipo_ok else tipo_error; Pop(3)}:117			//// 17
+                  then tipo_ok
+				  else if BuscaTipo(id.pos) = logico
+				  then tipo_error
+				  else AnadirTipo(id.pos, entero); Pop(3)}:117			//// 17
 	S -> return X ; {S.tipo := if
 		  X.tipo != tipo_error then tipo_ok
 		  else tipo_error; Pop(3)}:118								//// 18
 	S -> id {W.pos := id.pos}:119 W {S.tipo := W.tipo; Pop(2)}:120	//// 19
 	W -> N E ; {W.tipo := if N.tipo = E.tipo = entero
 		  then tipo_ok
-		  else if N.tipo = tipo_ok
+		  else if BuscaTipo(W.pos) = E.tipo
 		  then tipo_ok
 		  else tipo_error; Pop(3)}:121								//// 20
 	W -> ({L.pos := W.pos}:122 L ) ; {W.tipo := L.tipo; Pop(4)}:123	//// 21
@@ -57,7 +60,7 @@
 	X -> E {X.tipo := E.tipo; Pop(1)}:131							//// 26
 	X -> lambda {X.tipo := tipo_ok}:132								//// 27
 	F -> function {zona_decl := true}:133
-	     id {AnadirTipo(id.pos, tipo_funcion),
+	     id {AnadirTipo(id.pos, funcion),
 		 TSL := CreaTabla(), despl = 0}:134
 	     H {AnadirParam(id.pos, H.tipo, "TipoRetorno")}:135
              ( {A.cont := 0; A.pos := id.pos}:136 A ) {
@@ -72,7 +75,7 @@
 			else despl += 64;
 		   K.pos := A.pos;
 		   K.cont := A.cont + 1}:142 K {Pop(3)}:143					//// 31
-	A -> lambda {}													//// 32
+	A -> lambda { // crear nueva regla para añadir la cantidad de params }													//// 32
 	K -> , T id {AnadirTipoTSL(id.pos, T.tipo);
 		     AsignarParam(K.pos, K.cont);
 		     if T.tipo = entero || logico
@@ -80,7 +83,7 @@
 			  else despl += 64;
 		   K1.pos := K.pos;
 		   K1.cont := K.cont + 1}:144 K1 {Pop(4)}:145				//// 33
-	K -> lambda {}													//// 34
+	K -> lambda { // crear nueva regla para añadir la cantidad de params }												//// 34
 	C -> {B.tipo := C.tipo}:146 B
 	     {C1.tipo := C.tipo}:147 C1 {Pop(2)}:148 											//// 35
 	C -> lambda {}													//// 36

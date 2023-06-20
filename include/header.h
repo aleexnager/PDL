@@ -115,6 +115,6 @@ FILE *an_lex(FILE *inputfile, int id_tabla, token_t *token, int *linea, char *bu
 int an_st(FILE *input_file, int id_table);
 
 int *tabla_LL1(int s, int token, int *regla);
-void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_decl, FILE *fp_error);
+void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int *despl, int *despl_aux, int *zona_decl, FILE *fp_error);
 
 #endif
