@@ -37,7 +37,7 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
 
         for (i = 0; i < 5; ++i)
             pop_aux();
-
+      
         break;
     }
     case 103:
@@ -146,6 +146,7 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 119:
     {
+        break;
     }
     case 120:
     {
@@ -163,6 +164,7 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 122:
     {
+        break;
     }
     case 123:
     {
@@ -217,6 +219,7 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     case 133:
     {
         *zona_decl = TRUE;
+        break;
     }
     case 134:
     {
@@ -267,6 +270,7 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 144:
     {
+        break;
     }
     case 145:
     {
