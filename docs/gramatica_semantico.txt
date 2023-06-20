@@ -10,8 +10,9 @@
 		  AnadirTipo(id.pos, T.tipo) then tipo_ok
 		  else tipo_error; Pop(4)}:105								//// 6
 	B -> for ( M1 ; E ; M2 ) { C } {B.tipo := if
-		  E.tipo = logico && M1.tipo = tipo_ok && M2.tipo = tipo_ok then C.tipo
-                  else tipo_error, Pop(11)}:106						//// 7
+		  E.tipo = logico && M1.tipo = tipo_ok && M2.tipo = tipo_ok
+		  then tipo_ok
+          else tipo_error, Pop(11)}:106								//// 7
 	B -> {S.tipo := B.tipo}:107 S {B.tipo := S.tipo; Pop(1)}:108	//// 8
 	M -> id N E {M.tipo = if
 		  BuscaTipo(id.pos) = E.tipo = N.tipo = entero
@@ -33,7 +34,8 @@
 				  then tipo_error
 				  else AnadirTipo(id.pos, entero); Pop(3)}:117			//// 17
 	S -> return X ; {S.tipo := if
-		  X.tipo != tipo_error then tipo_ok
+		  !ExisteTSL() then tipo_error
+		  else if X.tipo != tipo_error then tipo_ok
 		  else tipo_error; Pop(3)}:118								//// 18
 	S -> id {W.pos := id.pos}:119 W {S.tipo := W.tipo; Pop(2)}:120	//// 19
 	W -> N E ; {W.tipo := if N.tipo = E.tipo = entero
@@ -63,8 +65,11 @@
 	     id {AnadirTipo(id.pos, funcion),
 		 TSL := CreaTabla(), despl = 0}:134
 	     H {AnadirParam(id.pos, H.tipo, "TipoRetorno")}:135
-             ( {A.cont := 0; A.pos := id.pos}:136 A ) {
-		{C.tipo := H.tipo}:137 C {LiberaTablaTSL()}:138
+             ( {A.cont := 0;
+			 	A.pos := id.pos;
+				AsignarParam(0, "NumParams")}:136
+		 A ) {
+			{C.tipo := H.tipo}:137 C {LiberaTablaTSL()}:138
 	     } {Pop(9)}:139												//// 28
 	H -> T {H.tipo := T.tipo; Pop(1)}:140							//// 29
 	H -> lambda {H.tipo := vacio}:141								//// 30
