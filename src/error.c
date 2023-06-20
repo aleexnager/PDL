@@ -189,3 +189,9 @@ FILE *gen_error_sintactico(FILE *fp, int linea, token_t *token)
 
     return fp;
 }
+
+FILE *gen_error_semantico(FILE *fp, int linea, token_t *token)
+{
+    fprintf(fp, "Error semántico\n");
+    return fp;
+}

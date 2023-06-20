@@ -12,7 +12,7 @@ int es_regla_semantica(int n_regla)
         return FALSE;
 }
 
-void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_decl)
+void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_decl, FILE *fp_error)
 {
     int i;
     switch (n_regla)
@@ -32,12 +32,13 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
         if (strcmp(get_aux_top()->next->next->data->lexema, "logico") == TRUE)
             strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "logico");
         else
-            // gen error
+        {
             strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "tipo_error");
-
+            // gen_error_semantico(fp_error, linea, token)
+        }
         for (i = 0; i < 5; ++i)
             pop_aux();
-      
+
         break;
     }
     case 103:
@@ -55,7 +56,10 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
         if (asignar_tipo_entrada(id_tabla, get_aux_top()->next->next->data->lexema, get_aux_top()->next->data->lexema))
             strcpy(get_aux_top()->next->next->next->next->data->lexema, "tipo_ok");
         else
+        {
             strcpy(get_aux_top()->next->next->next->next->data->lexema, "tipo_error");
+        }
+
         for (i = 0; i < 4; ++i)
             pop_aux();
 
