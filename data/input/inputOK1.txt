@@ -4,11 +4,9 @@ let aux boolean;
 
 // buen comentario!
 
-if (!b%b) print b;
+if (!aux) print b;
 
 for (b = 0; aux; b=b%b)
 {
     aux = aux != aux;
 }
-
-return aux;
