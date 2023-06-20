@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "header.h"
 #include "ts2006.h"
+#include "header.h"
 #include "lifo.h"
 #include "lifo_aux.h"
 

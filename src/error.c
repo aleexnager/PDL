@@ -182,7 +182,7 @@ FILE *gen_error_sintactico(FILE *fp, int linea, token_t *token)
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el valor \'%d\'.\n", 100, linea, token->valor);
     else if (token->id == ID)
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el identificador \'%s\'.\n", 101, linea, token->lexema);
-    else if (strcmp(token->lexema, "") == FALSE)
+    else if (strcmp(token->lexema, "") != 0)
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba la cadena \'%s\'.\n", 102, linea, token->lexema);
     else
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el símbolo \'%s\'.\n", 103, linea, id_to_string(token->id));

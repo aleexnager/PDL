@@ -7,6 +7,10 @@ CONTENIDO ACTUAL DE LA TABLA # 1 :
    + TipoParam1 : 'entero'
    + TipoParam2 : 'entero'
 ---------------------------------------------------
+* LEXEMA : 'm' (tipo de entrada 'entero')
+  ATRIBUTOS :
+   + despl : 66
+---------------------------------------------------
 * LEXEMA : 's' (tipo de entrada 'cadena')
   ATRIBUTOS :
    + despl : 2

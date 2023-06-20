@@ -1,7 +1,7 @@
 let a int;
 let b boolean;
 
-for (;b;)
+for (a = 0; b; a=a%a)
 {
-    print a;
+    b = b != b;
 }
