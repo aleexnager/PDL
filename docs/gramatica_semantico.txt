@@ -68,7 +68,7 @@
 	H -> lambda {H.tipo := vacio}:141								//// 30
 	A -> T id {AnadirTipoTSL(id.pos, T.tipo);
 		   AsignarParam(A.pos, A.cont);
-		   if (T.tipo = entero || logico
+		   if T.tipo = entero || logico
 			then despl += 1
 			else despl += 64;
 		   K.pos := A.pos;
@@ -76,7 +76,7 @@
 	A -> lambda {}													//// 32
 	K -> , T id {AnadirTipoTSL(id.pos, T.tipo);
 		     AsignarParam(K.pos, K.cont);
-		     if (T.tipo = entero || logico
+		     if T.tipo = entero || logico
 			  then despl += 1
 			  else despl += 64;
 		   K1.pos := K.pos;

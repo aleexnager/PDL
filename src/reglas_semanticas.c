@@ -1,6 +1,8 @@
 #include "header.h"
 #include "lifo.h"
 #include "lifo_aux.h"
+#include "ts2006.h"
+#include <string.h>
 
 int es_regla_semantica(int n_regla)
 {
@@ -10,7 +12,7 @@ int es_regla_semantica(int n_regla)
         return FALSE;
 }
 
-void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
+void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_decl)
 {
     int i;
     switch (n_regla)
@@ -27,8 +29,15 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     }
     case 102:
     {
+        if (strcmp(get_aux_top()->next->next->data->lexema, "logico") == TRUE)
+            strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "logico");
+        else
+            // gen error
+            strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "tipo_error");
+
         for (i = 0; i < 5; ++i)
             pop_aux();
+      
         break;
     }
     case 103:
@@ -43,14 +52,20 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     }
     case 105:
     {
+        if (asignar_tipo_entrada(id_tabla, get_aux_top()->next->next->data->lexema, get_aux_top()->next->data->lexema))
+            strcpy(get_aux_top()->next->next->next->next->data->lexema, "tipo_ok");
+        else
+            strcpy(get_aux_top()->next->next->next->next->data->lexema, "tipo_error");
         for (i = 0; i < 4; ++i)
             pop_aux();
+
         break;
     }
     case 106:
     {
         for (i = 0; i < 11; ++i)
             pop_aux();
+
         break;
     }
     case 107:
@@ -66,6 +81,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 110:
@@ -74,26 +90,31 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     }
     case 111:
     {
+        strcpy(get_aux_top()->next->data->lexema, "entero");
         pop_aux();
         break;
     }
     case 112:
     {
+        strcpy(get_aux_top()->next->data->lexema, "tipo_ok");
         pop_aux();
         break;
     }
     case 113:
     {
+        strcpy(get_aux_top()->next->data->lexema, "entero");
         pop_aux();
         break;
     }
     case 114:
     {
+        strcpy(get_aux_top()->next->data->lexema, "logico");
         pop_aux();
         break;
     }
     case 115:
     {
+        strcpy(get_aux_top()->next->data->lexema, "cadena");
         pop_aux();
         break;
     }
@@ -101,18 +122,26 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 117:
     {
+        if (strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema), "cadena") == TRUE || strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema), "entero") == TRUE)
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
+        else
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 118:
     {
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 119:
@@ -123,12 +152,14 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 2; ++i)
             pop_aux();
+
         break;
     }
     case 121:
     {
         for (i = 0; i < 2; ++i)
             pop_aux();
+
         break;
     }
     case 122:
@@ -139,6 +170,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 4; ++i)
             pop_aux();
+
         break;
     }
     case 124:
@@ -153,6 +185,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 2; ++i)
             pop_aux();
+
         break;
     }
     case 127:
@@ -167,6 +200,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 130:
@@ -180,6 +214,11 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     }
     case 132:
     {
+        break;
+    }
+    case 133:
+    {
+        *zona_decl = TRUE;
         break;
     }
     case 134:
@@ -206,6 +245,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 9; ++i)
             pop_aux();
+
         break;
     }
     case 140:
@@ -225,6 +265,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 144:
@@ -235,6 +276,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 4; ++i)
             pop_aux();
+
         break;
     }
     case 146:
@@ -245,6 +287,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 2; ++i)
             pop_aux();
+
         break;
     }
     case 148:
@@ -255,6 +298,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 2; ++i)
             pop_aux();
+
         break;
     }
     case 150:
@@ -265,6 +309,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 152:
@@ -275,6 +320,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 2; ++i)
             pop_aux();
+
         break;
     }
     case 154:
@@ -285,12 +331,14 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 156:
     {
         for (i = 0; i < 2; ++i)
             pop_aux();
+
         break;
     }
     case 157:
@@ -306,21 +354,26 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 2; ++i)
             pop_aux();
+
         break;
     }
     case 160:
     {
+        strcpy(get_aux_top()->next->next->next->data->lexema, get_aux_top()->next->data->lexema);
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     case 161:
     {
+        strcpy(get_aux_top()->next->data->lexema, "entero");
         pop_aux();
         break;
     }
     case 162:
     {
+        strcpy(get_aux_top()->next->data->lexema, "cadena");
         pop_aux();
         break;
     }
@@ -332,6 +385,7 @@ void ejecutar_regla_semantica(int n_regla, int *despl, int *zona_decl)
     {
         for (i = 0; i < 3; ++i)
             pop_aux();
+
         break;
     }
     default:

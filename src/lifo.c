@@ -33,6 +33,11 @@ token_t *pop(void)
     return data;
 }
 
+struct lifo *get_top(void)
+{
+    return top;
+}
+
 token_t *peek(void)
 {
     return top->data;

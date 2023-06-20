@@ -176,13 +176,13 @@ FILE *gen_error_string(FILE *fp, int linea, char *lexema, char *buf_linea)
     return fp;
 }
 
-FILE *gen_error_sintactico(int cod_error, FILE *fp, int linea, token_t *token)
+FILE *gen_error_sintactico(FILE *fp, int linea, token_t *token)
 {
     if (token->valor != -1)
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el valor \'%d\'.\n", 100, linea, token->valor);
     else if (token->id == ID)
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el identificador \'%s\'.\n", 101, linea, token->lexema);
-    else if (token->lexema != "")
+    else if (strcmp(token->lexema, "") == FALSE)
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba la cadena \'%s\'.\n", 102, linea, token->lexema);
     else
         fprintf(fp, "Error Sintáctico %d en la línea %d: No se esperaba el símbolo \'%s\'.\n", 103, linea, id_to_string(token->id));

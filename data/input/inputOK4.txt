@@ -1,5 +1,1 @@
-function fun int () {
-  return 7;
-}
-
-return fun();
+let a int;
