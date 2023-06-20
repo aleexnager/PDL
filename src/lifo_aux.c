@@ -37,6 +37,11 @@ token_t *peek_aux(void)
     return top_aux->data;
 }
 
+struct lifo_aux *get_aux_top(void)
+{
+    return top_aux;
+}
+
 void print_aux(void)
 {
     struct lifo_aux *cur;

@@ -11,6 +11,7 @@ struct lifo
 void push(token_t *data);
 token_t *pop(void);
 token_t *peek(void);
+struct lifo *get_top(void);
 void print(void);
 int size(void);
 

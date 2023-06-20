@@ -42,6 +42,7 @@ int an_st(FILE *input_file, int id_tabla)
             if (simb->id == token->id)
             {
                 push_aux(pop());
+                memset(token, 0, sizeof(token_t));
                 fp = an_lex(fp, id_tabla, token, &linea, buf);
             }
             else
@@ -52,7 +53,7 @@ int an_st(FILE *input_file, int id_tabla)
         }
         else if (es_regla_semantica(simb->id))
         {
-            ejecutar_regla_semantica(simb->id, &despl, &zona_decl);
+            // ejecutar_regla_semantica(id_tabla, simb->id, &despl, &zona_decl);
             pop();
         }
         else
@@ -66,6 +67,11 @@ int an_st(FILE *input_file, int id_tabla)
                 {
                     aux = (token_t *)malloc(sizeof(token_t));
                     aux->id = res[i];
+                    if (aux->id == ID)
+                    {
+                        strcpy(aux->lexema, token->lexema);
+                    }
+
                     push(aux);
                     ++i;
                 }

@@ -97,7 +97,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                     if (lexema_length < 65)
                     {
                         token->id = CADENA;
-                        token->lexema = lexema;
+                        strcpy(token->lexema, lexema);
                         token->valor = -1;
                         fprintf(fp2, "<%d, \'%s\'>\n", token->id, token->lexema);
                     }
@@ -166,7 +166,6 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                 {
                     int pos_ts;
                     int id_pal_res = es_pal_res(lexema);
-
                     if (id_pal_res > -1)
                     {
                         /* Si es palabra reservada gen token (lexema, -) */
@@ -180,7 +179,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         /* Si está en la ts gen token (ID, pos_ts) */
                         token->id = ID;
                         token->valor = pos_ts;
-                        token->lexema = lexema;
+                        strcpy(token->lexema, lexema);
                         fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
                     }
                     else
@@ -189,7 +188,7 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         crear_entrada(id_tabla, lexema);
                         token->id = ID;
                         token->valor = buscar_posicion_entrada(id_tabla, lexema);
-                        token->lexema = lexema;
+                        strcpy(token->lexema, lexema);
                         fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
                         escribir_tabla(id_tabla, ts_file);
                     }
