@@ -20,6 +20,7 @@ int an_st(FILE *input_file, int id_tabla)
     char buf[1024];
     int *res = (int *)malloc(16 * sizeof(int));
     token_t *token = (token_t *)malloc(sizeof(token_t));
+    token->lexema = (char *)malloc(64 * sizeof(char));
     token_t *simb = (token_t *)malloc(sizeof(token_t));
     token_t *aux;
 
@@ -41,19 +42,25 @@ int an_st(FILE *input_file, int id_tabla)
         {
             if (simb->id == token->id)
             {
-                push_aux(pop());
-                memset(token, 0, sizeof(token_t));
+                aux = (token_t *)malloc(sizeof(token_t));
+                aux = pop();
+
+                if (aux->id == ID)
+                    strcpy(aux->lexema, token->lexema);
+
+                push_aux(aux);
+                token->lexema = malloc(64);
                 fp = an_lex(fp, id_tabla, token, &linea, buf);
             }
             else
             {
-                gen_error_sintactico(100, fp_error, linea, token);
+                gen_error_sintactico(fp_error, linea, token);
                 break;
             }
         }
         else if (es_regla_semantica(simb->id))
         {
-            // ejecutar_regla_semantica(id_tabla, simb->id, &despl, &zona_decl);
+            ejecutar_regla_semantica(id_tabla, simb->id, &despl, &zona_decl);
             pop();
         }
         else
@@ -66,19 +73,15 @@ int an_st(FILE *input_file, int id_tabla)
                 while (res[i] != -1)
                 {
                     aux = (token_t *)malloc(sizeof(token_t));
+                    aux->lexema = malloc(64);
                     aux->id = res[i];
-                    if (aux->id == ID)
-                    {
-                        strcpy(aux->lexema, token->lexema);
-                    }
-
                     push(aux);
                     ++i;
                 }
             }
             else
             {
-                gen_error_sintactico(101, fp_error, linea, token);
+                gen_error_sintactico(fp_error, linea, token);
                 break;
             }
         }

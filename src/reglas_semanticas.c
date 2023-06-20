@@ -29,12 +29,12 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 102:
     {
-        /*if (strcmp(get_aux_top()->next->next->data->lexema, "logico") == TRUE)
+        if (strcmp(get_aux_top()->next->next->data->lexema, "logico") == TRUE)
             strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "logico");
         else
             // gen error
             strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "tipo_error");
-*/
+
         for (i = 0; i < 5; ++i)
             pop_aux();
 
@@ -52,13 +52,10 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 105:
     {
-        printf("%s\n", get_aux_top()->next->next->data->lexema);
-        printf("%d\n", asignar_tipo_entrada(id_tabla, get_aux_top()->next->next->data->lexema, get_aux_top()->next->data->lexema));
-        if (1)
+        if (asignar_tipo_entrada(id_tabla, get_aux_top()->next->next->data->lexema, get_aux_top()->next->data->lexema))
             strcpy(get_aux_top()->next->next->next->next->data->lexema, "tipo_ok");
         else
             strcpy(get_aux_top()->next->next->next->next->data->lexema, "tipo_error");
-
         for (i = 0; i < 4; ++i)
             pop_aux();
 
@@ -105,7 +102,7 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 113:
     {
-        // strcpy(get_aux_top()->next->data->lexema, "entero");
+        strcpy(get_aux_top()->next->data->lexema, "entero");
         pop_aux();
         break;
     }
@@ -130,16 +127,10 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 117:
     {
-        char *aux = consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema);
-        printf("%s\n", aux);
-        if (strcmp(aux, "cadena") == TRUE || strcmp(aux, "entero") == TRUE)
-        {
+        if (strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema), "cadena") == TRUE || strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema), "entero") == TRUE)
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
-        }
         else
-        {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
-        }
 
         for (i = 0; i < 3; ++i)
             pop_aux();
@@ -222,6 +213,10 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     case 132:
     {
         break;
+    }
+    case 133:
+    {
+        *zona_decl = TRUE;
     }
     case 134:
     {
