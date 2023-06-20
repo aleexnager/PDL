@@ -10,13 +10,12 @@
 		  AnadirTipo(id.pos, T.tipo) then tipo_ok
 		  else tipo_error; Pop(4)}:105								//// 6
 	B -> for ( M1 ; E ; M2 ) { C } {B.tipo := if
-		  E.tipo = logico then C.tipo
+		  E.tipo = logico && M1.tipo = tithen C.tipo
                   else tipo_error, Pop(11)}:106						//// 7
 	B -> {S.tipo := B.tipo}:107 S {B.tipo := S.tipo; Pop(1)}:108	//// 8
 	M -> id N E {M.tipo = if
 		  BuscaTipo(id.pos) = E.tipo = N.tipo = entero
 		  then tipo_ok
-		  else if BuscaTipo(id.pos) = E.tipo then tipo_ok
 		  else tipo_error; Pop(3)}:109								//// 9
 	M -> lambda {M.tipo := tipo_ok}:110								//// 10
 	N -> %=	{N.tipo := entero; Pop(1)}:111							//// 11
@@ -34,16 +33,16 @@
 		  X.tipo != tipo_error then tipo_ok
 		  else tipo_error; Pop(3)}:118								//// 18
 	S -> id {W.pos := id.pos}:119 W {S.tipo := W.tipo; Pop(2)}:120	//// 19
-	W -> N E ; {W.tipo := if N.tipo = tipo_ok
+	W -> N E ; {W.tipo := if N.tipo = E.tipo = entero
 		  then tipo_ok
-		  else if N.tipo = entero = E.tipo
-			then tipo_ok
+		  else if N.tipo = tipo_ok
+		  then tipo_ok
 		  else tipo_error; Pop(3)}:121								//// 20
 	W -> ({L.pos := W.pos}:122 L ) ; {W.tipo := L.tipo; Pop(4)}:123	//// 21
-	L -> {E.cont := 1}:124 E {Q.pos := L.pos; Q.tipo := E.cont
-		  Q.cont := L.tipo}:125
+	L -> {E.cont := 1}:124 E {Q.pos := L.pos; Q.tipo := L.tipo
+		  Q.cont := E.cont}:125
 	     Q {L.tipo := if
-	  	  E.tipo = BuscaParam(L.pos, E.valor)
+	  	  E.tipo = BuscaParam(L.pos, E.cont)
 		  && Q.tipo = tipo_ok then tipo_ok
 		  else tipo_error; Pop(2)}:126								//// 22
 	L -> lambda {}													//// 23
@@ -51,7 +50,7 @@
 	     {Q1.pos := Q.pos;
 	      Q1.cont := E.cont;
 	      Q1.tipo := Q.tipo}:128
-	     Q1 {Q.tipo := if E.tipo = BuscarParam(Q.pos, E.cont)
+	     Q1 {Q.tipo := if E.tipo = BuscaParam(Q.pos, E.cont)
 		  && Q1.tipo = tipo_ok then tipo_ok
 		  else tipo_error; Pop(3)}:129								//// 24
 	Q -> lambda {Q.tipo := tipo_ok}:130								//// 25
@@ -82,37 +81,37 @@
 		   K1.pos := K.pos;
 		   K1.cont := K.cont + 1}:144 K1 {Pop(4)}:145				//// 33
 	K -> lambda {}													//// 34
-	C -> {B.tipo := C.tipo; C1.tipo := C.tipo}:146 B
-	     C1 {Pop(2)}:147 											//// 35
+	C -> {B.tipo := C.tipo}:146 B
+	     {C1.tipo := C.tipo}:147 C1 {Pop(2)}:148 											//// 35
 	C -> lambda {}													//// 36
-	E -> R {Y.tipo := R.tipo}:148 Y {E.tipo := if
+	E -> R {Y.tipo := R.tipo}:149 Y {E.tipo := if
 		Y.tipo = logico then logico
-		else R.tipo; Pop(2)}:149									//// 37
+		else R.tipo; Pop(2)}:150									//// 37
 	Y -> != R {Y1.tipo := if
              R.tipo = Y.tipo = entero then logico
-	     else tipo_error}:150 Y1 {Y.tipo = Y1.tipo; Pop(3)}:151		//// 38
+	     else tipo_error}:151 Y1 {Y.tipo = Y1.tipo; Pop(3)}:152		//// 38
 	Y -> lambda {}													//// 39
-	R -> U {Z.tipo := U.tipo}:152 Z {R.tipo := if
+	R -> U {Z.tipo := U.tipo}:153 Z {R.tipo := if
 	     Z.tipo = entero then entero
-             else Z.tipo; Pop(2)}:153								//// 40
+             else Z.tipo; Pop(2)}:154								//// 40
 	Z -> % U {Z1.tipo := if
 	     U.tipo = Z.tipo = entero then entero
-	     else tipo_error}:154 Z1 {Z.tipo = Z1.tipo; Pop(3)}:155		//// 41
+	     else tipo_error}:155 Z1 {Z.tipo = Z1.tipo; Pop(3)}:156		//// 41
 	Z -> lambda {}													//// 42
 	U -> ! V {U.tipo := if V.tipo = logico
-	     then logico else tipo_error; Pop(2)}:156					//// 43
-	U -> V {U.tipo := V.tipo; Pop(1)}:157							//// 44
+	     then logico else tipo_error; Pop(2)}:157					//// 43
+	U -> V {U.tipo := V.tipo; Pop(1)}:158							//// 44
 	V -> id {J.pos := id.pos; J.tipo :=
 	     if BuscaTipo(id.pos) = null then entero
-	     else BuscaTipo(id.pos)}:158
+	     else BuscaTipo(id.pos)}:159
 	     J {V.tipo := if
-	     BuscaTipo(id.pos) = null then entero
-	     else BuscaTipo(id.pos); Pop(2)}:159 						//// 45
-	V -> ( E ) {V.tipo := E.tipo; Pop(3)}:160 						//// 46
-	V -> ent {V.tipo := entero; Pop(1)}:161							//// 47
-	V -> cad {V.tipo := cadena; Pop(1)}:162							//// 48
-	J -> ( {L.pos := J.pos; L.tipo := J.tipo}:163 L )
+	     BuscaTipo(J.pos) = null then entero
+	     else BuscaTipo(id.pos); Pop(2)}:160						//// 45
+	V -> ( E ) {V.tipo := E.tipo; Pop(3)}:161						//// 46
+	V -> ent {V.tipo := entero; Pop(1)}:162						//// 47
+	V -> cad {V.tipo := cadena; Pop(1)}:163							//// 48
+	J -> ( {L.pos := J.pos; L.tipo := J.tipo}:164 L )
 	     {J.tipo := if
 	     L.tipo = tipo_ok then ConsultarTipoRetorno(J.pos)
-	     else tipo_error; Pop(3)}:164								//// 49
+	     else tipo_error; Pop(3)}:165								//// 49
 	J -> lambda {}													//// 50

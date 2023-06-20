@@ -21,6 +21,7 @@ int an_st(FILE *input_file, int id_tabla)
     int *res = (int *)malloc(16 * sizeof(int));
     token_t *token = (token_t *)malloc(sizeof(token_t));
     token->lexema = (char *)malloc(64 * sizeof(char));
+    token->lexema2 = (char *)malloc(64 * sizeof(char));
     token_t *simb = (token_t *)malloc(sizeof(token_t));
     token_t *aux;
 
@@ -49,7 +50,8 @@ int an_st(FILE *input_file, int id_tabla)
                     strcpy(aux->lexema, token->lexema);
 
                 push_aux(aux);
-                token->lexema = malloc(64);
+                token->lexema = (char *)malloc(64 * sizeof(char));
+                token->lexema2 = (char *)malloc(64 * sizeof(char));
                 fp = an_lex(fp, id_tabla, token, &linea, buf);
             }
             else
@@ -73,7 +75,8 @@ int an_st(FILE *input_file, int id_tabla)
                 while (res[i] != -1)
                 {
                     aux = (token_t *)malloc(sizeof(token_t));
-                    aux->lexema = malloc(64);
+                    aux->lexema = (char *)malloc(64 * sizeof(char));
+                    aux->lexema2 = (char *)malloc(64 * sizeof(char));
                     aux->id = res[i];
                     push(aux);
                     ++i;

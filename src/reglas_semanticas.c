@@ -29,12 +29,11 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 102:
     {
-        if (strcmp(get_aux_top()->next->next->data->lexema, "logico") == TRUE)
+        if (strcmp(get_aux_top()->next->next->data->lexema, "logico") == 0)
             strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "logico");
         else
         {
             strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "tipo_error");
-            // gen_error_semantico(fp_error, linea, token)
         }
         for (i = 0; i < 5; ++i)
             pop_aux();
@@ -67,6 +66,9 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 106:
     {
+        if (strcmp(get_top()->next->next->next->next->next->next->data->lexema, "logico") == 0 && strcmp(get_top()->next->next->next->next->next->next->next->next->data->lexema, "entero") == 0 && strcmp(get_top()->next->next->next->next->data->lexema, "entero") == 0)
+            strcpy(get_aux_top()->next->next->next->next->next->next->next->next->next->next->next->data->lexema, get_top()->next->data->lexema);
+
         for (i = 0; i < 11; ++i)
             pop_aux();
 
@@ -74,15 +76,23 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 107:
     {
+        strcpy(get_top()->data->lexema, get_aux_top()->data->lexema);
         break;
     }
     case 108:
     {
+        strcpy(get_aux_top()->next->data->lexema, get_aux_top()->data->lexema);
         pop_aux();
         break;
     }
     case 109:
     {
+        char *aux = consultar_tipo_entrada(id_tabla, get_aux_top()->next->next->data->lexema);
+        if (strcmp(aux, "entero") == 0 && strcmp(get_aux_top()->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->data->lexema, "entero") == 0)
+            strcpy(get_aux_top()->next->next->next->data->lexema, "entero");
+        else
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+
         for (i = 0; i < 3; ++i)
             pop_aux();
 
@@ -90,6 +100,7 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 110:
     {
+        strcpy(get_aux_top()->next->data->lexema, "tipo_ok"); // ns si lambda esta en la pila
         break;
     }
     case 111:
@@ -124,6 +135,14 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 116:
     {
+        if (strcmp(get_aux_top()->next->data->lexema, "entero") == 0 || strcmp(get_aux_top()->next->next->data->lexema, "cadena") == 0)
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
+        }
+        else
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+        }
         for (i = 0; i < 3; ++i)
             pop_aux();
 
@@ -131,10 +150,14 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 117:
     {
-        if (strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema), "cadena") == TRUE || strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema), "entero") == TRUE)
+        if (strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema), "cadena") == 0 || strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema), "entero") == 0)
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
         else
+        {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+            gen_error_semantico(fp_error, 0, NULL);
+            exit(1);
+        }
 
         for (i = 0; i < 3; ++i)
             pop_aux();
@@ -143,6 +166,14 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 118:
     {
+        if (strcmp(get_aux_top()->next->data->lexema, "tipo_error") != 0)
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
+        }
+        else
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+        }
         for (i = 0; i < 3; ++i)
             pop_aux();
 
@@ -150,10 +181,13 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 119:
     {
+        strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema); // los que no sean id.pos a lexema2
+
         break;
     }
     case 120:
     {
+        strcpy(get_aux_top()->next->next->data->lexema, get_aux_top()->data->lexema);
         for (i = 0; i < 2; ++i)
             pop_aux();
 
@@ -161,17 +195,29 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 121:
     {
-        for (i = 0; i < 2; ++i)
+        if (strcmp(get_aux_top()->next->next->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->data->lexema, "entero") == 0)
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
+        }
+        else if (strcmp(get_aux_top()->next->next->data->lexema, "tipo_ok") == 0)
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
+        }
+        for (i = 0; i < 3; ++i)
             pop_aux();
 
         break;
     }
     case 122:
     {
+        strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema2);
+
         break;
     }
     case 123:
     {
+        strcpy(get_aux_top()->next->next->next->data->lexema, get_aux_top()->next->next->data->lexema);
+
         for (i = 0; i < 4; ++i)
             pop_aux();
 
@@ -179,14 +225,33 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 124:
     {
+        get_top()->data->valor = 1;
+
         break;
     }
     case 125:
     {
+        strcpy(get_top()->data->lexema2, get_aux_top()->next->data->lexema2);
+        strcpy(get_top()->data->lexema, get_aux_top()->data->lexema);
+        get_top()->data->valor = get_aux_top()->data->valor;
+
         break;
     }
     case 126:
     {
+        char consulta[64];
+        sprintf(consulta, "Param%d", get_aux_top()->next->data->valor);
+        // TODO: je ne sais pas
+        if (strcmp(get_aux_top()->next->data->lexema, consultar_valor_atributo_cadena(id_tabla, get_aux_top()->next->next->data->lexema2, consulta)) == 0 && strcmp(get_aux_top()->data->lexema, "tipo_ok") == 0)
+        {
+            strcpy(get_aux_top()->next->data->lexema, "tipo_ok");
+        }
+        else
+        {
+            strcpy(get_aux_top()->next->data->lexema, "tipo_error");
+            // TODO: error
+        }
+
         for (i = 0; i < 2; ++i)
             pop_aux();
 
@@ -194,14 +259,31 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 127:
     {
+        get_top()->data->valor = get_aux_top()->data->valor++;
+
         break;
     }
     case 128:
     {
+        strcpy(get_top()->data->lexema2, get_aux_top()->next->data->lexema2);
+        get_top()->data->valor = get_aux_top()->data->valor;
+        strcpy(get_top()->data->lexema, get_aux_top()->next->data->lexema);
+
         break;
     }
     case 129:
     {
+        char consulta[64];
+        sprintf(consulta, "Param%d", get_aux_top()->next->data->valor);
+        if (strcmp(get_aux_top()->next->data->lexema, consultar_valor_atributo_cadena(id_tabla, get_aux_top()->next->next->data->lexema2, consulta)) == 0 && strcmp(get_aux_top()->data->lexema, "tipo_ok") == 0)
+        {
+            strcpy(get_aux_top()->next->next->data->lexema, "tipo_ok");
+        }
+        else
+        {
+            strcpy(get_aux_top()->next->next->data->lexema, "tipo_error");
+        }
+
         for (i = 0; i < 3; ++i)
             pop_aux();
 
@@ -254,6 +336,7 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 140:
     {
+
         pop_aux();
         break;
     }
@@ -285,83 +368,83 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
     }
     case 146:
     {
+        strcpy(get_top()->data->lexema, get_aux_top()->data->lexema);
         break;
     }
     case 147:
     {
-        for (i = 0; i < 2; ++i)
-            pop_aux();
-
+        strcpy(get_top()->data->lexema, get_aux_top()->next->data->lexema);
         break;
     }
     case 148:
     {
-        break;
-    }
-    case 149:
-    {
         for (i = 0; i < 2; ++i)
             pop_aux();
 
         break;
     }
+    case 149:
+    {
+        strcpy(get_top()->data->lexema, get_aux_top()->data->lexema);
+        break;
+    }
     case 150:
     {
+        if (strcmp(get_aux_top()->data->lexema, "logico") == 0)
+            strcpy(get_aux_top()->next->next->data->lexema, "logico");
+        else
+            strcpy(get_aux_top()->next->next->data->lexema, get_aux_top()->next->data->lexema);
+
+        for (i = 0; i < 2; ++i)
+            pop_aux();
+
         break;
     }
     case 151:
     {
-        for (i = 0; i < 3; ++i)
-            pop_aux();
+        if (strcmp(get_aux_top()->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->next->data->lexema, "entero") == 0)
+            strcpy(get_top()->data->lexema, "logico");
+        else
+            strcpy(get_top()->data->lexema, "tipo_error");
 
         break;
     }
     case 152:
     {
-        break;
-    }
-    case 153:
-    {
-        for (i = 0; i < 2; ++i)
-            pop_aux();
+        strcpy(get_aux_top()->next->next->next->next->data->lexema, get_aux_top()->next->data->lexema);
 
-        break;
-    }
-    case 154:
-    {
-        break;
-    }
-    case 155:
-    {
         for (i = 0; i < 3; ++i)
             pop_aux();
 
         break;
     }
+    case 153:
+    {
+        strcpy(get_top()->data->lexema, get_aux_top()->data->lexema);
+        break;
+    }
+    case 154:
+    {
+        if (strcmp(get_aux_top()->data->lexema, "entero") == 0)
+            strcpy(get_aux_top()->next->next->data->lexema, "entero");
+        else
+            strcpy(get_aux_top()->next->next->data->lexema, get_aux_top()->data->lexema);
+
+        for (i = 0; i < 2; ++i)
+            pop_aux();
+
+        break;
+    }
+    case 155:
+    {
+        if (strcmp(get_aux_top()->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->next->data->lexema, "entero"))
+            strcpy(get_top()->data->lexema, "entero");
+        else
+            strcpy(get_top()->data->lexema, "entero");
+
+        break;
+    }
     case 156:
-    {
-        for (i = 0; i < 2; ++i)
-            pop_aux();
-
-        break;
-    }
-    case 157:
-    {
-        pop_aux();
-        break;
-    }
-    case 158:
-    {
-        break;
-    }
-    case 159:
-    {
-        for (i = 0; i < 2; ++i)
-            pop_aux();
-
-        break;
-    }
-    case 160:
     {
         strcpy(get_aux_top()->next->next->next->data->lexema, get_aux_top()->next->data->lexema);
         for (i = 0; i < 3; ++i)
@@ -369,24 +452,81 @@ void ejecutar_regla_semantica(int id_tabla, int n_regla, int *despl, int *zona_d
 
         break;
     }
+    case 157:
+    {
+        if (strcmp(get_aux_top()->data->lexema, "logico") == 0)
+            strcpy(get_aux_top()->next->next->data->lexema, "logico");
+        else
+            strcpy(get_aux_top()->next->next->data->lexema, "tipo_error");
+
+        for (i = 0; i < 2; ++i)
+            pop_aux();
+
+        break;
+    }
+    case 158:
+    {
+        strcpy(get_aux_top()->next->data->lexema, get_aux_top()->data->lexema);
+        pop_aux();
+        break;
+    }
+    case 159:
+    {
+        char *tipo_entrada;
+        strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema);
+        if ((tipo_entrada = consultar_tipo_entrada(id_tabla, get_aux_top()->data->lexema)) == NULL)
+            strcpy(get_top()->data->lexema, "entero");
+        else
+            strcpy(get_top()->data->lexema, tipo_entrada);
+
+        break;
+    }
+    case 160:
+    {
+        char *tipo_entrada_2;
+        if ((tipo_entrada_2 = consultar_tipo_entrada(id_tabla, get_aux_top()->data->lexema2)) == NULL)
+            strcpy(get_aux_top()->next->next->data->lexema, "entero");
+        else
+            strcpy(get_aux_top()->next->next->data->lexema, tipo_entrada_2);
+
+        for (i = 0; i < 2; ++i)
+            pop_aux();
+
+        break;
+    }
     case 161:
+    {
+        strcpy(get_aux_top()->next->next->next->data->lexema, get_aux_top()->next->data->lexema);
+        for (i = 0; i < 3; ++i)
+            pop_aux();
+
+        break;
+    }
+    case 162:
     {
         strcpy(get_aux_top()->next->data->lexema, "entero");
         pop_aux();
         break;
     }
-    case 162:
+    case 163:
     {
         strcpy(get_aux_top()->next->data->lexema, "cadena");
         pop_aux();
         break;
     }
-    case 163:
-    {
-        break;
-    }
     case 164:
     {
+        strcpy(get_top()->data->lexema2, get_aux_top()->next->data->lexema2);
+        strcpy(get_top()->data->lexema, get_aux_top()->next->data->lexema);
+        break;
+    }
+    case 165:
+    {
+        if (strcmp(get_aux_top()->next->data->lexema, "tipo_ok") == 0)
+            strcpy(get_aux_top()->next->next->next->data->lexema, consultar_valor_atributo_cadena(id_tabla, get_aux_top()->next->next->next->data->lexema2, "TipoRetorno"));
+        else
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+
         for (i = 0; i < 3; ++i)
             pop_aux();
 
