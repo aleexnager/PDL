@@ -91,6 +91,7 @@ typedef struct token
     int id;
     int valor;
     char *lexema;
+    char *lexema2;
 } token_t;
 
 int esc1(char c);
