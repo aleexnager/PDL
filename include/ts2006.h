@@ -61,7 +61,7 @@ int existe_atributo(int id_tabla, char *lexema, char *alias_at);
 
 // 4. GESTI�N DE FICHEROS
 
-// Escribir el contenido de una tabla en fichero
+// escrbir el contenido de una tabla en fichero
 int escribir_tabla(int id_tabla, char *nombre_fichero);
 
 // 5. GESTI�N DE ERRORES

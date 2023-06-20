@@ -221,7 +221,13 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     }
     case 118:
     {
-        if (strcmp(get_aux_top()->next->data->lexema, "tipo_error") != 0)
+        if (existe_tabla(2) == 1)
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+            gen_error_semantico(fp_error, 0, NULL);
+            exit(1);
+        }
+        else if (strcmp(get_aux_top()->next->data->lexema, "tipo_error") != 0)
         {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
         }

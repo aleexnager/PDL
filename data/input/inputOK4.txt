@@ -1,6 +1,9 @@
+let i int;
+let is_mod boolean;
+let s string;
+
 function mod int(int a, int b)
 {
-    return a%b;
+    return a;
 }
 
-// mod(2,3);
