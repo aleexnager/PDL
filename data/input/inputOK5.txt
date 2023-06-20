@@ -1,3 +1,7 @@
 let a int;
+let b boolean;
 
-if (!a) input a;
+for (;b;)
+{
+    print a;
+}

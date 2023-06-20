@@ -16,7 +16,7 @@ int an_st(FILE *input_file, int id_tabla)
     FILE *fp = input_file;
     FILE *parse = fopen("./data/output/parse.txt", "w");
     FILE *fp_error = fopen("./data/output/error.txt", "a");
-    int regla, i, despl, zona_decl, linea = 1;
+    int regla, i, despl, despl_aux, zona_decl, linea = 1, id_tabla_aux = -1;
     char buf[1024];
     int *res = (int *)malloc(16 * sizeof(int));
     token_t *token = (token_t *)malloc(sizeof(token_t));
@@ -52,7 +52,14 @@ int an_st(FILE *input_file, int id_tabla)
                 push_aux(aux);
                 token->lexema = (char *)malloc(64 * sizeof(char));
                 token->lexema2 = (char *)malloc(64 * sizeof(char));
-                fp = an_lex(fp, id_tabla, token, &linea, buf);
+                if (id_tabla_aux == -1)
+                {
+                    fp = an_lex(fp, id_tabla, token, &linea, buf);
+                }
+                else
+                {
+                    fp = an_lex(fp, id_tabla_aux, token, &linea, buf);
+                }
             }
             else
             {
@@ -62,8 +69,8 @@ int an_st(FILE *input_file, int id_tabla)
         }
         else if (es_regla_semantica(simb->id))
         {
-            ejecutar_regla_semantica(id_tabla, simb->id, &despl, &zona_decl, fp_error);
             pop();
+            ejecutar_regla_semantica(id_tabla, &id_tabla_aux, simb->id, &despl, &despl_aux, &zona_decl, fp_error);
         }
         else
         {

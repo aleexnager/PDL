@@ -1,6 +1,8 @@
 CONTENIDO ACTUAL DE LA TABLA # 1 :
 ---------------------------------------------------
-* LEXEMA : 'a' (tipo de entrada no definido)
+* LEXEMA : 'mod' (tipo de entrada 'funcion')
   ATRIBUTOS :
-   <no se han definido atributos para este lexema>
+   + TipoRetorno : 'entero'
+   + TipoParam1 : 'entero'
+   + TipoParam2 : 'entero'
 ---------------------------------------------------

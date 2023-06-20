@@ -1,0 +1,10 @@
+CONTENIDO ACTUAL DE LA TABLA # 2 :
+---------------------------------------------------
+* LEXEMA : 'a' (tipo de entrada 'entero')
+  ATRIBUTOS :
+   + despl : 0
+---------------------------------------------------
+* LEXEMA : 'b' (tipo de entrada 'entero')
+  ATRIBUTOS :
+   + despl : 1
+---------------------------------------------------
