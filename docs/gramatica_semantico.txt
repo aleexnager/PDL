@@ -77,7 +77,8 @@
 			then despl += 1
 			else despl += 64;
 		   K.pos := A.pos;
-		   K.cont := A.cont + 1}:142 K {Pop(3)}:143					//// 31
+		   K.cont := A.cont + 1;
+		   AsignarParam(A.cont, "NumParams")}:142 K {Pop(3)}:143					//// 31
 	A -> lambda { // crear nueva regla para añadir la cantidad de params }													//// 32
 	K -> , T id {AnadirTipoTSL(id.pos, T.tipo);
 		     AsignarParam(K.pos, K.cont);
@@ -85,7 +86,8 @@
 			  then despl += 1
 			  else despl += 64;
 		   K1.pos := K.pos;
-		   K1.cont := K.cont + 1}:144 K1 {Pop(4)}:145				//// 33
+		   K1.cont := K.cont + 1;
+		   AsignarParam(K.cont, "NumParams")}:144 K1 {Pop(4)}:145				//// 33
 	K -> lambda { // crear nueva regla para añadir la cantidad de params }												//// 34
 	C -> {B.tipo := C.tipo}:146 B
 	     {C1.tipo := C.tipo}:147 C1 {Pop(2)}:148 											//// 35
