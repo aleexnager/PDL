@@ -9,7 +9,7 @@
 	     T ; {B.tipo := if
 		  AnadirTipo(id.pos, T.tipo) then tipo_ok
 		  else tipo_error; Pop(4)}:106								//// 6
-	B -> for ( M1 ; E ; M2 ) { {C.tipo := vacio}:107
+	B -> for ( M1 ; E ; M2 ) { {C.tipo := vacio; C.pos := B.pos}:107
 		  C } {B.tipo := if
 		  E.tipo = logico && M1.tipo = tipo_ok && M2.tipo = tipo_ok
 		  then tipo_ok

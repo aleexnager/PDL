@@ -124,6 +124,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     case 107:
     {
         strcpy(get_top()->data->lexema, "vacio");
+        strcpy(get_top()->data->lexema2, get_aux_top()->next->next->next->next->next->next->next->next->next->data->lexema2);
         break;
     }
     case 108:
@@ -151,8 +152,25 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     case 111:
     {
 
-        tipo = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->next->next->data->lexema);
-        if (strcmp(tipo, "entero") == 0 && strcmp(get_aux_top()->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->data->lexema, "entero") == 0)
+        if ((tipo = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->next->next->data->lexema)) == NULL)
+        {
+            if ((tipo = consultar_tipo_entrada(id_tabla, get_aux_top()->next->next->data->lexema)) == NULL)
+            {
+                strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+                char explicacion[256];
+                sprintf(explicacion, "La variable \'%s\' no está definida en el programa.", get_aux_top()->next->next->data->lexema);
+                gen_error_semantico(fp_error, 211, linea, explicacion);
+            }
+            else if (strcmp(tipo, "entero") == 0 && strcmp(get_aux_top()->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->data->lexema, "entero") == 0)
+            {
+                strcpy(get_aux_top()->next->next->next->data->lexema, "entero");
+            }
+            else
+            {
+                strcpy(get_aux_top()->next->next->next->data->lexema, tipo);
+            }
+        }
+        else if (strcmp(tipo, "entero") == 0 && strcmp(get_aux_top()->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->data->lexema, "entero") == 0)
             strcpy(get_aux_top()->next->next->next->data->lexema, "entero");
         else if (consultar_tipo_entrada(id_tabla, get_aux_top()->next->next->data->lexema))
         {
