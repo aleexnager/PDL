@@ -183,6 +183,13 @@ FILE *an_lex(FILE *input_file, int id_tabla, token_t *token, int *linea, char *b
                         strcpy(token->lexema, lexema);
                         fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
                     }
+                    else if ((pos_ts = buscar_posicion_entrada(1, lexema)) != 0)
+                    {
+                        token->id = ID;
+                        token->valor = pos_ts;
+                        strcpy(token->lexema, lexema);
+                        fprintf(fp2, "<%d, %d>\n", token->id, token->valor);
+                    }
                     else
                     {
                         /* si no está en la ts insertar() y gen token (ID, pos_ts) */
