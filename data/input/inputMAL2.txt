@@ -1,4 +1,4 @@
-/* hsabdf lasb
+// hsabdf lasb
 let mivar int = 0;
 
 let s1 string="test"

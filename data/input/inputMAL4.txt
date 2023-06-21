@@ -1,9 +1,11 @@
+let true boolean;
+
 function mod int(int a, int b)
 {
-    return a % a;
+    return true;
 }
 
 let z int;
 let v int;
 
-mod(2);
+mod(z, v);

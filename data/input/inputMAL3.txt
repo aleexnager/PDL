@@ -1,9 +1,10 @@
 // test: esto es un test para ":"
 // test: esto es un test para ':'
-let a int = 0;
-let b int = 1;
-a+b;
-// / hola mundo '/'
 
-let s string = '!=, %=, ==, ++, abc';
-s = "1-6%3";
+let b int;
+
+if ( 
+    if (
+        !b
+    ) return b;
+)
