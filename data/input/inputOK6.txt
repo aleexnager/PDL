@@ -1,0 +1,6 @@
+let a int;
+
+function get_a int ()
+{
+    return a;
+}

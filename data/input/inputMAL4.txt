@@ -1,4 +1,4 @@
-function mod int(int a)
+function mod int(int a, int b)
 {
     return a % a;
 }

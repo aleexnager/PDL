@@ -1,6 +1,11 @@
 CONTENIDO ACTUAL DE LA TABLA # 1 :
 ---------------------------------------------------
-* LEXEMA : 'fun' (tipo de entrada 'funcion')
+* LEXEMA : 'get_a' (tipo de entrada 'funcion')
   ATRIBUTOS :
-   + TipoRetorno : 'vacio'
+   + TipoRetorno : 'entero'
+   + NumParams : 0
+---------------------------------------------------
+* LEXEMA : 'a' (tipo de entrada 'entero')
+  ATRIBUTOS :
+   + despl : 0
 ---------------------------------------------------

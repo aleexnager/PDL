@@ -154,9 +154,14 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         tipo = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->next->next->data->lexema);
         if (strcmp(tipo, "entero") == 0 && strcmp(get_aux_top()->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->data->lexema, "entero") == 0)
             strcpy(get_aux_top()->next->next->next->data->lexema, "entero");
+        else if (consultar_tipo_entrada(id_tabla, get_aux_top()->next->next->data->lexema))
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "entero");
+        }
         else
+        {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
-
+        }
         for (i = 0; i < 3; ++i)
             pop_aux();
 
@@ -217,11 +222,27 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         char *tipo = (char *)malloc(32 * sizeof(char));
         if ((tipo = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->next->data->lexema)) == NULL)
         {
-            crear_entrada(id_tabla, get_aux_top()->next->data->lexema);
-            asignar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema, "entero");
-            crear_atributo_entero(id_tabla, get_aux_top()->next->data->lexema, "despl", *despl);
-            *despl += 1;
-            escribir_tabla(id_tabla, ts_file_2);
+            if ((tipo = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->next->data->lexema)) == NULL)
+            {
+                crear_entrada(id_tabla, get_aux_top()->next->data->lexema);
+                asignar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema, "entero");
+                crear_atributo_entero(id_tabla, get_aux_top()->next->data->lexema, "despl", *despl);
+                *despl += 1;
+                escribir_tabla(id_tabla, ts_file_2);
+            }
+            else
+            {
+                if (strcmp(tipo, "cadena") == 0 || strcmp(tipo, "entero") == 0)
+                    strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
+                else if (strcmp(tipo, "logico") == 0)
+                {
+                    strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+                    char explicacion[256];
+                    sprintf(explicacion, "La variable \'%s\' declarada como tipo \'logico\' no permite aceptar input del usuario.", get_aux_top()->next->data->lexema);
+                    gen_error_semantico(fp_error, 201, linea, explicacion);
+                    exit(1);
+                }
+            }
         }
         else if (strcmp(tipo, "cadena") == 0 || strcmp(tipo, "entero") == 0)
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
@@ -320,6 +341,10 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
         }
+        else if (strcmp(consultar_tipo_entrada(id_tabla, get_aux_top()->next->next->next->data->lexema2), get_aux_top()->next->data->lexema) == 0)
+        {
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
+        }
         else
         {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
@@ -336,6 +361,15 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     case 124:
     {
         if (consultar_tipo_entrada(id_tabla_actual, get_aux_top()->next->data->lexema2) == NULL)
+        {
+            strcpy(get_aux_top()->next->data->lexema, "tipo_error");
+            char explicacion[256];
+            sprintf(explicacion, "La función con identificador \'%s\' no está declarada.",
+                    get_aux_top()->next->data->lexema2);
+            gen_error_semantico(fp_error, 206, linea, explicacion);
+            exit(1);
+        }
+        else if (consultar_tipo_entrada(id_tabla, get_aux_top()->next->data->lexema2) == NULL)
         {
             strcpy(get_aux_top()->next->data->lexema, "tipo_error");
             char explicacion[256];
@@ -472,7 +506,8 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     {
         get_top()->data->valor = 1;
         strcpy(get_top()->data->lexema2, get_aux_top()->next->next->data->lexema);
-        crear_atributo_entero(id_tabla, get_top()->data->lexema2, "NumParams", 0);
+        crear_atributo_entero(id_tabla, get_aux_top()->next->next->data->lexema, "NumParams", 0);
+        escribir_tabla(id_tabla, ts_file_2);
         break;
     }
     case 139:
@@ -695,7 +730,12 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         char *tipo_entrada;
         strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema);
         if ((tipo_entrada = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->data->lexema)) == NULL)
-            strcpy(get_top()->data->lexema, "entero");
+        {
+            if ((tipo_entrada = consultar_tipo_entrada(id_tabla, get_aux_top()->data->lexema)) == NULL)
+                strcpy(get_top()->data->lexema, "entero");
+            else
+                strcpy(get_top()->data->lexema, tipo_entrada);
+        }
         else
         {
             strcpy(get_top()->data->lexema, tipo_entrada);
