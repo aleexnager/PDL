@@ -4,7 +4,9 @@ let s string;
 
 function mod int(int a, int b)
 {
-    return 7;
+    let bool boolean;
+    if (bool) return a % b;
+    return a;
 }
 
 let c int;

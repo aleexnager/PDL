@@ -1,1 +1,0 @@
-Error Semántico 206 en la línea 9: La función con identificador 'suma' no está declarada.

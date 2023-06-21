@@ -1,9 +1,9 @@
-function mod int(int a, int b)
+function mod int(int a)
 {
-    return a%b;
+    return a % a;
 }
 
-let z string;
+let z int;
 let v int;
 
-suma(v, z);
+mod(2);
