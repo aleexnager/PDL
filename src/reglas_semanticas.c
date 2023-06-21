@@ -160,6 +160,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
                 char explicacion[256];
                 sprintf(explicacion, "La variable \'%s\' no está definida en el programa.", get_aux_top()->next->next->data->lexema);
                 gen_error_semantico(fp_error, 211, linea, explicacion);
+                exit(1);
             }
             else if (strcmp(tipo, "entero") == 0 && strcmp(get_aux_top()->data->lexema, "entero") == 0 && strcmp(get_aux_top()->next->data->lexema, "entero") == 0)
             {
