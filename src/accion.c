@@ -143,8 +143,8 @@ int mt_afd_accion(int estado_actual, char c)
         if (isascii(c))
         {
             sig_accion = 65;
-            break;
         }
+        break;
     case 2:
         if (isascii(c))
         {
