@@ -4,7 +4,12 @@ let s string;
 
 function mod int(int a, int b)
 {
-    input m;
+    return 7;
 }
 
-mod(0,1);
+let c int;
+let d int;
+c = 0;
+d = 1;
+
+print mod(c, d);

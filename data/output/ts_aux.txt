@@ -1,9 +1,5 @@
 CONTENIDO ACTUAL DE LA TABLA # 2 :
 ---------------------------------------------------
-* LEXEMA : 'm' (tipo de entrada no definido)
-  ATRIBUTOS :
-   <no se han definido atributos para este lexema>
----------------------------------------------------
 * LEXEMA : 'a' (tipo de entrada 'entero')
   ATRIBUTOS :
    + despl : 0

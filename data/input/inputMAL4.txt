@@ -1,0 +1,9 @@
+function mod int(int a, int b)
+{
+    return a%b;
+}
+
+let z string;
+let v int;
+
+suma(v, z);
