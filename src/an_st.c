@@ -70,7 +70,7 @@ int an_st(FILE *input_file, int id_tabla)
         else if (es_regla_semantica(simb->id))
         {
             pop();
-            ejecutar_regla_semantica(id_tabla, &id_tabla_aux, simb->id, &despl, &despl_aux, &zona_decl, fp_error);
+            ejecutar_regla_semantica(id_tabla, &id_tabla_aux, simb->id, &despl, &despl_aux, &zona_decl, linea, fp_error);
         }
         else
         {

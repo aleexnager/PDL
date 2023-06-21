@@ -14,7 +14,7 @@
 		  E.tipo = logico && M1.tipo = tipo_ok && M2.tipo = tipo_ok
 		  then tipo_ok
           else tipo_error, Pop(11)}:107								//// 7
-	B -> {S.tipo := B.tipo}:108 S {B.tipo := S.tipo; Pop(1)}:109	//// 8
+	B -> {S.tipo := B.tipo; S.pos := B.pos}:108 S {B.tipo := S.tipo; Pop(1)}:109	//// 8
 	M -> id N E {M.tipo = if
 		  BuscaTipo(id.pos) = E.tipo = N.tipo = entero
 		  then tipo_ok
@@ -36,15 +36,17 @@
 				  else AnadirTipo(id.pos, entero); Pop(3)}:118			//// 17
 	S -> return X ; {S.tipo := if
 		  !ExisteTSL() then tipo_error
-		  else if X.tipo != tipo_error then tipo_ok
-		  else tipo_error; Pop(3)}:119								//// 18
+		  else if X.tipo != BuscaParam(S.pos, "TipoRetorno") then tipo_error
+		  else tipo_ok; Pop(3)}:119								//// 18
 	S -> id {W.pos := id.pos}:120 W {S.tipo := W.tipo; Pop(2)}:121	//// 19
 	W -> N E ; {W.tipo := if N.tipo = E.tipo = entero
 		  then tipo_ok
 		  else if BuscaTipo(W.pos) = E.tipo
 		  then tipo_ok
 		  else tipo_error; Pop(3)}:122								//// 20
-	W -> ({L.pos := W.pos}:123 L ) ; {W.tipo := L.tipo; Pop(4)}:124	//// 21
+	W -> ({W.tipo := if BuscaTipo(W.pos) == null
+			then tipo_error else tipo_ok;
+			L.pos := W.pos; L.tipo := tipo_ok}:123 L ) ; {W.tipo := L.tipo; Pop(4)}:124	//// 21
 	L -> {E.cont := 1}:125 E {Q.pos := L.pos; Q.tipo := L.tipo
 		  Q.cont := E.cont}:126
 	     Q {L.tipo := if
@@ -61,7 +63,7 @@
 		  else tipo_error; Pop(3)}:130								//// 24
 	Q -> lambda {Q.tipo := tipo_ok}:131								//// 25
 	X -> E {X.tipo := E.tipo; Pop(1)}:132							//// 26
-	X -> lambda {X.tipo := tipo_ok}:133 							//// 27
+	X -> lambda {X.tipo := vacio}:133 							//// 27
 	F -> function {zona_decl := true}:134
 	     id {AnadirTipo(id.pos, funcion),
 		 TSL := CreaTabla(), despl = 0}:135
@@ -70,7 +72,7 @@
 			 	A.pos := id.pos;
 				AsignarParam(0, "NumParams")}:137
 		 A ) {
-			{C.tipo := H.tipo}:138 C {LiberaTablaTSL()}:139
+			{C.tipo := H.tipo; C.pos := id.pos}:138 C {LiberaTablaTSL()}:139
 	     } {Pop(9)}:140												//// 28
 	H -> T {H.tipo := T.tipo; Pop(1)}:141							//// 29
 	H -> lambda {H.tipo := vacio}:142								//// 30
@@ -92,7 +94,7 @@
 		   K1.cont := K.cont + 1;
 		   AsignarParam(K.cont, "NumParams")}:145 K1 {Pop(4)}:146				//// 33
 	K -> lambda { // crear nueva regla para añadir la cantidad de params }												//// 34
-	C -> {B.tipo := C.tipo}:147 B
+	C -> {B.tipo := C.tipo; B.pos := C.pos}:147 B
 	     {C1.tipo := C.tipo}:148 C1 {Pop(2)}:149 											//// 35
 	C -> lambda {}													//// 36
 	E -> R {Y.tipo := R.tipo}:150 Y {E.tipo := if
@@ -104,7 +106,7 @@
 	Y -> lambda {}													//// 39
 	R -> U {Z.tipo := U.tipo}:154 Z {R.tipo := if
 	     Z.tipo = entero then entero
-             else Z.tipo; Pop(2)}:155								//// 40
+             else U.tipo; Pop(2)}:155								//// 40
 	Z -> % U {Z1.tipo := if
 	     U.tipo = Z.tipo = entero then entero
 	     else tipo_error}:156 Z1 {Z.tipo = Z1.tipo; Pop(3)}:157		//// 41

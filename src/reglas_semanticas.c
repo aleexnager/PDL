@@ -15,7 +15,7 @@ int es_regla_semantica(int n_regla)
         return FALSE;
 }
 
-void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int *despl, int *despl_aux, int *zona_decl, FILE *fp_error)
+void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int *despl, int *despl_aux, int *zona_decl, int linea, FILE *fp_error)
 {
     int id_tabla_actual;
     int i;
@@ -45,8 +45,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         else
         {
             strcpy(get_aux_top()->next->next->next->next->next->data->lexema, "tipo_error");
-            printf("Error1");
-            gen_error_semantico(fp_error, 0, NULL);
+            gen_error_semantico(fp_error, 200, linea, "El fragmento de código encerrado entre los paréntesis de una sentencia \'if\' debe ser de tipo \'logico\'.");
             exit(1);
         }
 
@@ -135,6 +134,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     case 108:
     {
         strcpy(get_top()->data->lexema, get_aux_top()->data->lexema);
+        strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema2);
         break;
     }
     case 109:
@@ -199,6 +199,8 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         else
         {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+            gen_error_semantico(fp_error, 204, linea, "Solo se permite la utilización de la sentencia \'print\' con datos o variables de tipo \'entero\' o \'cadena\'.");
+            exit(1);
         }
         for (i = 0; i < 3; ++i)
             pop_aux();
@@ -221,8 +223,9 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         else if (strcmp(tipo, "logico") == 0)
         {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
-            printf("Error2");
-            gen_error_semantico(fp_error, 0, NULL);
+            char explicacion[256];
+            sprintf(explicacion, "La variable \'%s\' declarada como tipo \'logico\' no permite aceptar input del usuario.", get_aux_top()->next->data->lexema);
+            gen_error_semantico(fp_error, 201, linea, explicacion);
             exit(1);
         }
         else
@@ -239,17 +242,23 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         if (existe_tabla(2) == 1)
         {
             strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
-            printf("Error3");
-            gen_error_semantico(fp_error, 0, NULL);
+            gen_error_semantico(fp_error, 202, linea, "La sentencia \'return\' debe de estar contenida en una función.");
             exit(1);
         }
-        else if (strcmp(get_aux_top()->next->data->lexema, "tipo_error") != 0)
+        else if (strcmp(get_aux_top()->next->data->lexema, consultar_valor_atributo_cadena(id_tabla, get_aux_top()->next->next->next->data->lexema2, "TipoRetorno")) != 0)
         {
-            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+            char explicacion[512];
+            sprintf(explicacion, "El dato devuelto del tipo \'%s\' no se corresponde con el tipo de retorno de la función \'%s\'. Debe de devolver un dato del tipo \'%s\'.",
+                    get_aux_top()->next->data->lexema,
+                    get_aux_top()->next->next->next->data->lexema2,
+                    consultar_valor_atributo_cadena(id_tabla, get_aux_top()->next->next->next->data->lexema2, "TipoRetorno"));
+            gen_error_semantico(fp_error, 205, linea, explicacion);
+            exit(1);
         }
         else
         {
-            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
         }
         for (i = 0; i < 3; ++i)
             pop_aux();
@@ -258,7 +267,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     }
     case 120:
     {
-        strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema); // los que no sean id.pos a lexema2
+        strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema);
         break;
     }
     case 121:
@@ -290,13 +299,22 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     }
     case 123:
     {
-        strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema2);
-
+        if (consultar_tipo_entrada(id_tabla_actual, get_aux_top()->next->data->lexema2) == NULL)
+        {
+            strcpy(get_aux_top()->next->data->lexema, "tipo_error");
+            char explicacion[256];
+            sprintf(explicacion, "La función con identificador \'%s\' no está declarada.",
+                    get_aux_top()->next->data->lexema2);
+            gen_error_semantico(fp_error, 206, linea, explicacion);
+            exit(1);
+        }
+        strcpy(get_top()->data->lexema2, get_aux_top()->next->data->lexema2);
+        strcpy(get_top()->data->lexema, "tipo_ok");
         break;
     }
     case 124:
     {
-        strcpy(get_aux_top()->next->next->next->data->lexema, get_aux_top()->next->next->data->lexema);
+        strcpy(get_aux_top()->next->next->next->next->data->lexema, get_aux_top()->next->next->data->lexema);
 
         for (i = 0; i < 4; ++i)
             pop_aux();
@@ -306,30 +324,33 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     case 125:
     {
         get_top()->data->valor = 1;
-
         break;
     }
     case 126:
     {
         strcpy(get_top()->data->lexema2, get_aux_top()->next->data->lexema2);
-        strcpy(get_top()->data->lexema, get_aux_top()->data->lexema);
+        strcpy(get_top()->data->lexema, get_aux_top()->next->data->lexema);
         get_top()->data->valor = get_aux_top()->data->valor;
-
         break;
     }
     case 127:
     {
-        char consulta[64];
-        sprintf(consulta, "TipoParam%d", get_aux_top()->next->data->valor);
-        // TODO: je ne sais pas
-        if (strcmp(get_aux_top()->next->data->lexema, consultar_valor_atributo_cadena(id_tabla_actual, get_aux_top()->next->next->data->lexema2, consulta)) == 0 && strcmp(get_aux_top()->data->lexema, "tipo_ok") == 0)
+        char consulta_1[64];
+        sprintf(consulta_1, "TipoParam%d", get_aux_top()->next->data->valor);
+        if (strcmp(get_aux_top()->next->data->lexema, consultar_valor_atributo_cadena(id_tabla_actual, get_aux_top()->next->next->data->lexema2, consulta_1)) == 0 && strcmp(get_aux_top()->data->lexema, "tipo_ok") == 0)
         {
-            strcpy(get_aux_top()->next->data->lexema, "tipo_ok");
+            strcpy(get_aux_top()->next->next->data->lexema, "tipo_ok");
         }
         else
         {
-            strcpy(get_aux_top()->next->data->lexema, "tipo_error");
-            // TODO: error
+            strcpy(get_aux_top()->next->next->data->lexema, "tipo_error");
+            char explicacion[256];
+            sprintf(explicacion, "El parámtero número %d de la llamada a la función \'%s\' debe ser de tipo \'%s\'.",
+                    get_aux_top()->next->data->valor,
+                    get_aux_top()->next->next->data->lexema2,
+                    consultar_valor_atributo_cadena(id_tabla_actual, get_aux_top()->next->next->data->lexema2, consulta_1));
+            gen_error_semantico(fp_error, 203, linea, explicacion);
+            exit(1);
         }
 
         for (i = 0; i < 2; ++i)
@@ -339,29 +360,35 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     }
     case 128:
     {
-        get_top()->data->valor = get_aux_top()->data->valor++;
-
+        get_top()->data->valor = get_aux_top()->next->data->valor + 1;
         break;
     }
     case 129:
     {
-        strcpy(get_top()->data->lexema2, get_aux_top()->next->data->lexema2);
+        strcpy(get_top()->data->lexema2, get_aux_top()->next->next->data->lexema2);
         get_top()->data->valor = get_aux_top()->data->valor;
-        strcpy(get_top()->data->lexema, get_aux_top()->next->data->lexema);
+        strcpy(get_top()->data->lexema, get_aux_top()->next->next->data->lexema);
 
         break;
     }
     case 130:
     {
-        char consulta[64];
-        sprintf(consulta, "TipoParam%d", get_aux_top()->next->data->valor);
-        if (strcmp(get_aux_top()->next->data->lexema, consultar_valor_atributo_cadena(id_tabla_actual, get_aux_top()->next->next->data->lexema2, consulta)) == 0 && strcmp(get_aux_top()->data->lexema, "tipo_ok") == 0)
+        char consulta_2[64];
+        sprintf(consulta_2, "TipoParam%d", get_aux_top()->next->data->valor);
+        if (strcmp(get_aux_top()->next->data->lexema, consultar_valor_atributo_cadena(id_tabla_actual, get_aux_top()->next->next->next->data->lexema2, consulta_2)) == 0 && strcmp(get_aux_top()->data->lexema, "tipo_ok") == 0)
         {
-            strcpy(get_aux_top()->next->next->data->lexema, "tipo_ok");
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_ok");
         }
         else
         {
-            strcpy(get_aux_top()->next->next->data->lexema, "tipo_error");
+            strcpy(get_aux_top()->next->next->next->data->lexema, "tipo_error");
+            char explicacion[256];
+            sprintf(explicacion, "El parámtero número %d de la llamada a la función \'%s\' debe ser de tipo \'%s\'.",
+                    get_aux_top()->next->data->valor,
+                    get_aux_top()->next->next->next->data->lexema2,
+                    consultar_valor_atributo_cadena(id_tabla_actual, get_aux_top()->next->next->next->data->lexema2, consulta_2));
+            gen_error_semantico(fp_error, 203, linea, explicacion);
+            exit(1);
         }
 
         for (i = 0; i < 3; ++i)
@@ -371,8 +398,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     }
     case 131:
     {
-        strcpy(get_aux_top()->next->data->lexema, "tipo_ok");
-
+        strcpy(get_aux_top()->data->lexema, "tipo_ok");
         break;
     }
     case 132:
@@ -384,7 +410,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     }
     case 133:
     {
-        strcpy(get_aux_top()->next->data->lexema, "tipo_ok");
+        strcpy(get_aux_top()->next->data->lexema, "vacio");
 
         break;
     }
@@ -417,7 +443,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     case 138:
     {
         strcpy(get_top()->data->lexema, get_aux_top()->next->next->next->data->lexema);
-
+        strcpy(get_top()->data->lexema2, get_aux_top()->next->next->next->next->next->data->lexema);
         break;
     }
     case 139:
@@ -502,6 +528,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     case 147:
     {
         strcpy(get_top()->data->lexema, get_aux_top()->data->lexema);
+        strcpy(get_top()->data->lexema2, get_aux_top()->data->lexema2);
         break;
     }
     case 148:
@@ -558,10 +585,14 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     }
     case 155:
     {
-        if (strcmp(get_aux_top()->data->lexema, "entero") == 0)
+        if (get_aux_top()->data->lexema == NULL)
+        {
+            strcpy(get_aux_top()->next->next->data->lexema, get_aux_top()->next->data->lexema);
+        }
+        else if (strcmp(get_aux_top()->data->lexema, "entero") == 0)
+        {
             strcpy(get_aux_top()->next->next->data->lexema, "entero");
-        else
-            strcpy(get_aux_top()->next->next->data->lexema, get_aux_top()->data->lexema);
+        }
 
         for (i = 0; i < 2; ++i)
             pop_aux();
@@ -622,7 +653,9 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
         if ((tipo_entrada_2 = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->data->lexema2)) == NULL)
             strcpy(get_aux_top()->next->next->data->lexema, "entero");
         else
+        {
             strcpy(get_aux_top()->next->next->data->lexema, tipo_entrada_2);
+        }
 
         for (i = 0; i < 2; ++i)
             pop_aux();
