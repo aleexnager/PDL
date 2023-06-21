@@ -6,7 +6,7 @@ let aux boolean;
 
 if (!aux) print b;
 
-for (b = 0; aux; b=b%b)
+for (b = 0; aux; b = 0%2)
 {
-    aux = aux != aux;
+    aux = b != a;
 }

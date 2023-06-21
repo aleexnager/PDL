@@ -1,21 +1,6 @@
 CONTENIDO ACTUAL DE LA TABLA # 1 :
 ---------------------------------------------------
-* LEXEMA : 'mod' (tipo de entrada 'funcion')
+* LEXEMA : 'fun' (tipo de entrada 'funcion')
   ATRIBUTOS :
-   + TipoRetorno : 'entero'
-   + NumParams : 2
-   + TipoParam1 : 'entero'
-   + TipoParam2 : 'entero'
----------------------------------------------------
-* LEXEMA : 'v' (tipo de entrada 'entero')
-  ATRIBUTOS :
-   + despl : 64
----------------------------------------------------
-* LEXEMA : 'suma' (tipo de entrada no definido)
-  ATRIBUTOS :
-   <no se han definido atributos para este lexema>
----------------------------------------------------
-* LEXEMA : 'z' (tipo de entrada 'cadena')
-  ATRIBUTOS :
-   + despl : 0
+   + TipoRetorno : 'vacio'
 ---------------------------------------------------
