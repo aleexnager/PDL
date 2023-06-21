@@ -1,0 +1,1 @@
+Error Semántico 200 en la línea 4: El fragmento de código encerrado entre los paréntesis de una sentencia 'if' debe ser de tipo 'logico'.

@@ -1,8 +1,8 @@
-let int a = h;;
+/*mal comentario1*/
+let a int = h;;
 let M int   = true;
 for (int i = 0; i M; f++)
 print("mal");}
 
-/*mal comentario1*/
 /mal comentario2
 {)

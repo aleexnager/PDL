@@ -734,7 +734,9 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
             if ((tipo_entrada = consultar_tipo_entrada(id_tabla, get_aux_top()->data->lexema)) == NULL)
                 strcpy(get_top()->data->lexema, "entero");
             else
+            {
                 strcpy(get_top()->data->lexema, tipo_entrada);
+            }
         }
         else
         {
@@ -746,7 +748,7 @@ void ejecutar_regla_semantica(int id_tabla, int *id_tabla_aux, int n_regla, int 
     case 162:
     {
         char *tipo_entrada_2;
-        if ((tipo_entrada_2 = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->data->lexema2)) == NULL)
+        if ((tipo_entrada_2 = consultar_tipo_entrada(id_tabla_actual, get_aux_top()->data->lexema2)) == NULL && consultar_tipo_entrada(id_tabla, get_aux_top()->data->lexema2) == NULL)
             strcpy(get_aux_top()->next->next->data->lexema, "entero");
         else
         {
