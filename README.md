@@ -2,7 +2,7 @@
 
 ## Compilador programado en C
 
-### Autores:
+## Autores:
 - Alejandro Náger Fernández-Calvo (a.nager@alumnos.upm.es)
 - Diego Vignerón Olmos (d.vigneron@alumnos.upm.es)
 - Marco Ciccalè Baztán (m.ciccale@alumnos.upm.es)
