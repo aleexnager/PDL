@@ -1,3 +1,6 @@
+>[!WARNING]\
+>El plagio o intento de copia de este material en el proyecto de la asignatura de Procesadores de Lenguajes (PdL) supondrá un suspenso inmediato. Este contenido es únicamente informativo y de uso didáctico, los autores de este proyecto no nos hacemos responsables del mal uso que se le pueda dar al contenido de este repositorio. ([LICENSE](/LICENSE))
+
 # Compilador de JavaScript-PdL
 
 ## Compilador programado en C
